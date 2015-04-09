@@ -8,6 +8,33 @@ $navbar-default-color: $mid-grey;
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+// Stlying for boxes / links in navigation bar
+.nav_styling {
+  background-color: #FFFFFF;
+  color: #434343;
+  border-color: #434343;
+  font-weight: bold;
+}
+
+.nav_styling:hover {
+  background-color: #FFFFFF;
+  color: #BE5555;
+  border-color: #434343;
+  font-weight: bold;
+}
+
+.linkbox_styling {
+  background-color: #BE5555;
+  color: #FFFFFF;
+  border-color: #BE5555;
+  font-weight: bold;
+}
+
+.linkbox_styling:hover {
+  background-color: #FFFFFF;
+  color: #BE5555;
+}
+
 #logo {
   background-color: #FFFFFF;
   border-color: #434343;
