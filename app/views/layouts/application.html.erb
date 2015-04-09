@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TuringTrust</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+
+  <header class="navbar navbar-fixed-top navbar-default">
+    <div class="container">
+      <%= link_to "Turing Trust","" , class: "btn btn-lg btn-success", id: "logo" %>
+      <div class="nav_item">
+        <%= link_to "Wipe", "", class: "btn btn-default btn-warning" %>
+      </div>
+      <div class="nav_item">
+        <%= link_to "Ship", "", class: "btn btn-default btn-warning" %>
+      </div>
+      <div class="nav_item">
+        <%= link_to "Receive", "", class: "btn btn-default btn-warning" %>
+      </div>
+    </div>
+  </header>
+  
+  <div class="container">
+    <%= yield %>
+    <div class="footer">
+      <p>&copy; The Turing Trust 2015</p>
+    </div>
+    
+  </div>
+</body>
+</html>
