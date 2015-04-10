@@ -36,7 +36,7 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-group :development, test do
+group :development, :test do
   # Use mysql2 as the database for Active Record
   gem 'mysql2'
   gem 'pry'
