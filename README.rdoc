@@ -1,5 +1,41 @@
 == README
 
+Testing specs for computers:
+manufacturer: string
+computer_type: string
+model_no: string
+serial_no: string
+date: date
+action_taken: text
+donor: text
+specification: text
+product_key: text
+initials_flag: string
+
+-manufacturer must be between 5 and 50 characters
+-computer_type must be present
+-computer_type must be between 2 and 50 characters
+-model_no must be between 5 and 50 characters
+-serial_no must be present
+-serial_no must be between 5 and 50 characters
+-date must be present
+-date must be 10 characters
+-action_taken must be between 5 and 250 characters
+-donor must be between 5 and 50 characters
+-specification must be between 5 and 250 characters
+-product_key must be between 5 and 50 characters
+-initials_flag must be 1 character (y/n)
+-
+
+Testing specs for staffs:
+staff_name: string
+staff_email: string
+
+-staff_name must be present
+-staff_name must be between 2 and 50 characters
+-staff_email must be present 
+-staff_email must be between 5 and 50 characters
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
@@ -26,3 +62,4 @@ Things you may want to cover:
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
+

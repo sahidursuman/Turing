@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150410155600) do
+ActiveRecord::Schema.define(version: 20150411171212) do
 
   create_table "computers", force: true do |t|
     t.string   "manufacturer"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20150410155600) do
     t.string   "initials_flag"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "staff_id"
   end
 
   create_table "staffs", force: true do |t|
