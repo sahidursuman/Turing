@@ -44,7 +44,8 @@ class ComputersController < ApplicationController
     def computer_params
       params.require(:computer).permit(:manufacturer, :computer_type, :specification, 
                                        :donor, :model_no, :serial_no, :product_key, 
-                                       :action_taken, :data, :date, :initials_flag)
+                                       :action_taken, :data, :date, :initials_flag, 
+                                       :picture)
     end
   
 end

@@ -9,12 +9,16 @@
       </section>
     </div>
     
-    <div class="col-md-8 well">
+    <div class="col-md-6 well">
       <h4><%= link_to computer.serial_no, computer_path(computer) %></h4>
       <p><%= computer.manufacturer %> <%= computer.computer_type %> donated by <%= computer.donor %></p>
       <p>
         <span class="quiet"><small>Created <%= time_ago_in_words(computer.created_at) %> ago</small></span>
       </p>
+    </div>
+    
+    <div class="col-md-4">
+      <%= image_tag(computer.picture.url, size: "250x150", class: "picture_style") if computer.picture? %>
     </div>
     
   </div>
