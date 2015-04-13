@@ -20,7 +20,7 @@ class ComputerTest < ActiveSupport::TestCase
     assert_not @computer.valid?
   end
 
-  test "manufacturer should be > 5" do
+  test "manufacturer should be > 2" do
     @computer.manufacturer = "a"
     assert_not @computer.valid?
   end

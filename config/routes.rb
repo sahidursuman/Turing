@@ -3,6 +3,20 @@ Rails.application.routes.draw do
   root 'pages#home'
   
   get '/home', to: 'pages#home'
+  
+  resources :computers
+
+end
+
+#  The following routes are the manual equivalent of resources:
+#  get '/computers', to: 'computers#index'
+#  get 'computers/new', to: 'computers#new', as: 'new_computer'
+#  post '/computers', to: 'computers#create'
+#  get '/computers/:id/edit', to: 'computers#edit', as: 'edit_computer'
+#  patch '/computers/:id', to: 'computers#update'
+#  get 'computers/:id', to: 'computers#show', as: 'computer'
+#  delete 'computers/:id', to: 'computers#destroy'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -57,4 +71,3 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-end

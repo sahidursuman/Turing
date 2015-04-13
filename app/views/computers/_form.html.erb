@@ -1,0 +1,32 @@
+<%= render "shared/errors", obj: @computer %>
+
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2">
+    <%= form_for @computer do |f| %>
+    
+      <%= f.label :manufacturer %>
+      <%= f.text_field :manufacturer %>
+      <%= f.label :computer_type %>
+      <%= f.text_field :computer_type %>
+      <%= f.label :specification %>
+      <%= f.text_area :specification %>
+      <%= f.label :donor %>
+      <%= f.text_field :donor %>
+      <%= f.label :model_no %>
+      <%= f.text_field :model_no %>
+      <%= f.label :serial_no %>
+      <%= f.text_field :serial_no %>
+      <%= f.label :product_key %>
+      <%= f.text_field :product_key %>
+      <%= f.label :action_taken %>
+      <%= f.text_area :action_taken, rows: 3%>
+      <%= f.label :date %>
+      <%= f.text_field :date %>
+      <%= f.label :initials_flag %>
+      <%= f.text_field :initials_flag %>
+
+
+      <%= f.submit(@computer.new_record? ? "Submit Details" : "Submit Edited Details", class: "btn btn-success") %>
+    <% end %>
+  </div>
+</div>

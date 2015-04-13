@@ -12,7 +12,7 @@ specification: text
 product_key: text
 initials_flag: string
 
--manufacturer must be between 5 and 50 characters
+-manufacturer must be between 2 and 50 characters
 -computer_type must be present
 -computer_type must be between 2 and 50 characters
 -model_no must be between 5 and 50 characters

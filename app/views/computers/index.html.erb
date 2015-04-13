@@ -1,0 +1,22 @@
+<%= render "shared/page_title", title: "Computer Index" %>
+
+<% @computers.each do |computer| %>
+  <div class="row">
+    
+    <div class="col-md-2">
+      <section class="staff_info center">
+<!-- This is where to put a gravitar/avatar/photo if wanted -->
+      </section>
+    </div>
+    
+    <div class="col-md-8 well">
+      <h4><%= link_to computer.serial_no, computer_path(computer) %></h4>
+      <p><%= computer.manufacturer %> <%= computer.computer_type %> donated by <%= computer.donor %></p>
+      <p>
+        <span class="quiet"><small>Created <%= time_ago_in_words(computer.created_at) %> ago</small></span>
+      </p>
+    </div>
+    
+  </div>
+  <hr/>
+<% end %>

@@ -1,7 +1,7 @@
 class Computer < ActiveRecord::Base
   belongs_to :staff
   validates :staff_id, presence: true
-  validates :manufacturer, length: { minimum: 5, maximum: 50 }
+  validates :manufacturer, length: { minimum: 2, maximum: 50 }
   validates :computer_type, presence: true, length: { minimum: 2, maximum: 50 }
   validates :model_no, length: { minimum: 5, maximum: 50 }
   validates :serial_no, presence: true, length: { minimum: 5, maximum: 50 }
