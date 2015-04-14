@@ -5,17 +5,27 @@ Rails.application.routes.draw do
   get '/home', to: 'pages#home'
   
   resources :computers
-
+  
+  resources :staffs, except: [:new]
+  
+  # Rename new_staff route to register
+  get '/register', to: 'staffs#new'
+  
+  # Login and Logout of sessions
+  get '/login', to: 'logins#new'
+  post '/login', to: 'logins#create'
+  get '/logout', to: 'logins#destroy'
+  
 end
 
-#  The following routes are the manual equivalent of resources:
-#  get '/computers', to: 'computers#index'
-#  get 'computers/new', to: 'computers#new', as: 'new_computer'
-#  post '/computers', to: 'computers#create'
-#  get '/computers/:id/edit', to: 'computers#edit', as: 'edit_computer'
-#  patch '/computers/:id', to: 'computers#update'
-#  get 'computers/:id', to: 'computers#show', as: 'computer'
-#  delete 'computers/:id', to: 'computers#destroy'
+  #  The following routes are the manual equivalent of resources:
+  #  get '/computers', to: 'computers#index'
+  #  get 'computers/new', to: 'computers#new', as: 'new_computer'
+  #  post '/computers', to: 'computers#create'
+  #  get '/computers/:id/edit', to: 'computers#edit', as: 'edit_computer'
+  #  patch '/computers/:id', to: 'computers#update'
+  #  get 'computers/:id', to: 'computers#show', as: 'computer'
+  #  delete 'computers/:id', to: 'computers#destroy'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

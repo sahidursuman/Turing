@@ -1,11 +1,15 @@
 class ComputersController < ApplicationController
+  before_action :set_computer, only: [:edit, :update, :show]
+  before_action :require_user, except: [:show, :index]
+  before_action :require_same_user, only: [:edit, :update]
   
   def index
-    @computers = Computer.all
+    # Pagination of computers
+    @computers = Computer.paginate(page: params[:page], per_page: 10)
   end
   
   def show
-    @computer = Computer.find(params[:id])
+
   end
   
   def new
@@ -14,8 +18,7 @@ class ComputersController < ApplicationController
   
   def create
     @computer = Computer.new(computer_params)
-    @computer.staff = Staff.find(2)
-    
+    @computer.staff = current_user
     if @computer.save
       flash[:success] = "You're computer's details have been submitted successfully!"
       redirect_to computers_path
@@ -25,11 +28,10 @@ class ComputersController < ApplicationController
   end
   
   def edit
-    @computer = Computer.find(params[:id])
+    
   end
   
   def update
-    @computer = Computer.find(params[:id])
     if @computer.update(computer_params)
       flash[:success] = "The computer's details have been updated successfully!"
       redirect_to computer_path(@computer)
@@ -47,5 +49,16 @@ class ComputersController < ApplicationController
                                        :action_taken, :data, :date, :initials_flag, 
                                        :picture)
     end
-  
+    
+    def set_computer
+      @computer = Computer.find(params[:id])
+    end
+    
+    def require_same_user
+      if current_user != @computer.staff
+        flash[:danger] = "You may only edit your own computer's details"
+        redirect_to computer_path(@computer)
+      end
+    end
+    
 end

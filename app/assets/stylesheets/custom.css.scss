@@ -36,6 +36,19 @@ $navbar-default-color: $mid-grey;
   color: #BE5555;
 }
 
+.nav_item {
+  margin-left: 25px;
+  float: left;
+  margin-top: 23px;
+  
+}
+
+.nav_item_right {;
+  float: left;
+  margin-top: 23px;
+  margin-right: 0px;
+}
+
 // Styling of the Turing Trust Logo in navbar
 #logo {
   background-color: #FFFFFF;
@@ -62,13 +75,6 @@ $navbar-default-color: $mid-grey;
   border-radius: 0px;
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
-}
-
-.nav_item {
-  margin-left: 25px;
-  float: left;
-  margin-top: 20px;
-  
 }
 
 // General Styling
@@ -114,6 +120,11 @@ h2 {
   background-color: #EDEDED;
 }
 
+// Get rid of bullet points for unordered lists
+ul {
+  list-style-type: none
+}
+
 // Styling of new computers input components
 input, textarea, select, .uneditable-input {
   border: 1px solid #D2D2D2;
@@ -140,5 +151,10 @@ span.picture {
 }
 
 .picture_style {
-  
+  // Set just to leave a class in the code for later styling
+}
+
+// Vertically align in center
+.vcenter {
+    margin-top: 61px;
 }

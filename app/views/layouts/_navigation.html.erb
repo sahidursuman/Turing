@@ -1,14 +1,49 @@
-<header class="navbar navbar-fixed-top navbar-default">
+<header class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
+    
     <%= link_to "Turing Trust", root_path , class: "btn btn-lg btn-success nav_styling", id: "logo" %>
-    <div class="nav_item">
-      <%= link_to "New Computer", new_computer_path , class: "btn btn-default btn-warning nav-btn nav_styling" %>
-    </div>
-    <div class="nav_item">
-      <%= link_to "Ship", "", class: "btn btn-default btn-warning nav_styling" %>
-    </div>
-    <div class="nav_item">
-      <%= link_to "Receive", "", class: "btn btn-default btn-warning nav_styling" %>
-    </div>
+    
+    <!-- Only allows logged in users to follow the ne computer link -->
+    <% if logged_in? %>
+    
+      <div class="nav_item">
+        <%= link_to "New Computer", new_computer_path , class: "btn btn-default btn-warning nav-btn nav_styling" %>
+      </div>
+    
+      <div class="nav_item">
+        <%= link_to "Ship", "", class: "btn btn-default nav_styling" %>
+      </div>
+    
+      <div class="nav_item">
+        <%= link_to "Receive", "", class: "btn btn-default nav_styling" %>
+      </div>
+      
+    <!-- Creates drop down and pulls Log In and Log Out to RHS --> 
+      
+      <ul class="nav_item_right navbar-right">
+        <li class="dropdown">
+          
+          <%= link_to '#', class: "btn btn-default nav_styling dropdown-toggle", "data-toggle" => "dropdown" do %>
+            <%= current_user.staff_name %> <b class="caret"></b>
+          <% end %>
+          
+          <ul class="dropdown-menu">
+            <li><%= link_to "View Profile", staff_path(current_user) %></li>
+            <li><%= link_to "Edit Profile", edit_staff_path(current_user) %></li>
+            <li class="divider"></li>
+            <li><%= link_to "Log Out", logout_path %></li>
+          </ul>
+        </li>
+      </ul>
+      
+    <!-- Else if not logged in display login option on navbar --> 
+    <% else %>
+    
+      <div class="nav_item_right navbar-right">
+        <%= link_to "Log In", login_path , class: "btn btn-default nav_styling" %>
+      </div>
+      
+    <% end %>
+  
   </div>
 </header>

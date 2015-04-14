@@ -11,6 +11,7 @@ class Computer < ActiveRecord::Base
   validates :specification, length: { minimum: 5, maximum: 250 }
   validates :product_key, length: { minimum: 5, maximum: 50 }
   validates :initials_flag, inclusion: { in: %w(y n) }, length: { is: 1 }
+  default_scope -> { order(updated_at: :desc) }
   mount_uploader :picture, PictureUploader
 # %w(foo bar) is a shortcut for ["foo", "bar"]
 

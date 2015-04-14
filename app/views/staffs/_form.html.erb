@@ -1,0 +1,21 @@
+<%= render "shared/errors", obj: @staff %>
+
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2">
+    <%= form_for @staff do |f| %>
+    
+      <%= f.label :staff_name %>
+      <%= f.text_field :staff_name %>
+      
+      <%= f.label :staff_email %>
+      <%= f.email_field :staff_email %>
+      
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.submit(@staff.new_record? ? "Submit Profile" : "Submit Edited Profile", class: "btn btn-success") %>
+    <% end %>
+  </div>
+</div>
+
+</script>
