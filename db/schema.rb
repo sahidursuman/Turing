@@ -11,7 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150413140759) do
+ActiveRecord::Schema.define(version: 20150415092023) do
+
+  create_table "computer_wipes", force: true do |t|
+    t.integer "wipe_id"
+    t.integer "computer_id"
+  end
 
   create_table "computers", force: true do |t|
     t.string   "manufacturer"
@@ -30,12 +35,27 @@ ActiveRecord::Schema.define(version: 20150413140759) do
     t.string   "picture"
   end
 
+  create_table "staff_types", force: true do |t|
+    t.integer "type_id"
+    t.integer "staff_id"
+  end
+
   create_table "staffs", force: true do |t|
     t.string   "staff_name"
     t.string   "staff_email"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"
+  end
+
+  create_table "types", force: true do |t|
+    t.string "department"
+  end
+
+  create_table "wipes", force: true do |t|
+    t.date   "date_wiped"
+    t.text   "wiped_using"
+    t.string "wiped_by"
   end
 
 end

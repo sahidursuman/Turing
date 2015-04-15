@@ -1,5 +1,14 @@
 <%= render "shared/page_title", title: "Computer Index" %>
 
+<ul class="nav nav-tabs">
+  <li class="active">
+    <%= link_to "Computers", computers_path %>
+  </li>
+  <li>
+    <%= link_to "Staff", staffs_path %>
+  </li>
+</ul>
+
 <%= will_paginate %>
 
 <% @computers.each do |computer| %>

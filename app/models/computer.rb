@@ -1,5 +1,7 @@
 class Computer < ActiveRecord::Base
   belongs_to :staff
+  has_many :computer_wipes
+  has_many :wipes, through: :computer_wipes
   validates :staff_id, presence: true
   validates :manufacturer, length: { minimum: 2, maximum: 50 }
   validates :computer_type, presence: true, length: { minimum: 2, maximum: 50 }

@@ -1,5 +1,7 @@
 class Staff < ActiveRecord::Base
   has_many :computers
+  has_many :staff_types
+  has_many :types, through: :staff_types
   before_save { self.staff_email = staff_email.downcase }
   validates :staff_name, presence: true, length: { minimum: 5, maximum: 50}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
