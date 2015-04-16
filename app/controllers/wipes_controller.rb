@@ -1,5 +1,5 @@
 class WipesController < ApplicationController
-  before_action :require_user, except: [:show]
+  before_action :require_user#, except: [:show]
   
   def show
     @wipe = Wipe.find(params[:id])
