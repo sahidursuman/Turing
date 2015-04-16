@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   post '/login', to: 'logins#create'
   get '/logout', to: 'logins#destroy'
   
+  resources :types, only: [:new, :create, :show]
+  resources :wipes, only: [:new, :create, :show]
+  
 end
 
   #  The following routes are the manual equivalent of resources:

@@ -1,0 +1,19 @@
+<%= render 'shared/page_title', title: "Wipe a New Computer" %>
+
+<%= render "shared/errors", obj: @wipe %>
+
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2">
+    <%= form_for @wipe do |f| %>
+    
+      <%= f.label :date_wiped %>
+      <%= f.date_field :date_wiped %>
+       <%= f.label :wiped_using %>
+      <%= f.text_area :wiped_using %>
+       <%= f.label :wiped_by %>
+      <%= f.text_field :wiped_by %>
+
+      <%= f.submit "Submit Details", class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>

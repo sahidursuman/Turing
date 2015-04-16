@@ -1,4 +1,4 @@
-<%= render "shared/page_title", title: "Staff Index" %>
+<%= render "shared/page_title", title: "Wiped by " + @wipe.wiped_by  %>
 
 <ul class="nav nav-tabs">
   <li>
@@ -11,19 +11,24 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3 center">
-    <%= will_paginate %>
+    <%= will_paginate @computers %>
   </div>
 </div>
 
-<% @staffs.each do |staff| %>
+<% @wipe.computers.each do |computer| %>
   <div class="row">
     <div class="col-md-6 col-md-offset-3 left">
       <p>
-        <h5><strong><%= staff.staff_name %></strong>, contact at <%= staff.staff_email %>, department of <%= render staff.types %></h5>
+        <h5><strong><%= computer.manufacturer + " " + computer.computer_type + " wiped by " + @wipe.wiped_by %></strong></h5>
       </p>
-      <%= link_to "Go to Staff Profile", staff_path(staff) %>
+      <%= link_to "Go to Staff Profile", computer_path(computer) %>
     </div>
   </div>
 <% end %>
 
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 center">
+    <%= will_paginate @computers %>
+  </div>
+</div>
 <!-- To come back to, as currently a department title is generated for each staff member -->

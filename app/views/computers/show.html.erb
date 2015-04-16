@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col-md-4 pull-right center">
-    <h5>Wiped by <%= @computer.staff.staff_name %></h5>
+    <h5>Created by <%= @computer.staff.staff_name %></h5>
     <%= link_to "Back to Staff Page", staff_path(@computer.staff) %>
     <!-- Include Gravitar / avatar / photo if wanted -->
   </div> 
@@ -24,11 +24,18 @@
       Model No: <%= @computer.model_no %> <br>
       Serial No: <%= @computer.serial_no %> <br>
       Action Taken: <%= @computer.action_taken %> <br>
-      Specification: <%= simple_format(@computer.specification) %> <br>
+      <!--Specification: <%# simple_format(@computer.specification) %> <br>-->
+      Specification: <%= @computer.specification %> <br>
       Manufacturer: <%= @computer.manufacturer %> <br>
       Product Key: <%= @computer.product_key %> <br>
       Donor: <%= @computer.donor %> <br>
       Initials: <%= @computer.initials_flag %>
+
+      <% if @computer.wipes.any? %>
+        <br><br>
+        <p><%= render @computer.wipes %></p>
+      <% end %>
+      
     </div>
   </div>
 </div>

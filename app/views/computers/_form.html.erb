@@ -25,6 +25,23 @@
       <%= f.label :initials_flag %>
       <%= f.text_field :initials_flag %>
       
+      <strong>Wiping Details</strong><br><br>
+   
+      <%= f.collection_check_boxes :wipe_ids, Wipe.all, :id, :wiped_by do |x| %>
+        <% x.label(class: "checkbox-inline input_checkbox") {x.check_box(class: "checkbox") + x.text} %>
+      <% end %>
+      <br><br>
+      
+      <%= f.collection_check_boxes :wipe_ids, Wipe.all, :id, :wiped_using do |x| %>
+        <% x.label(class: "checkbox-inline input_checkbox") {x.check_box(class: "checkbox") + x.text} %>
+      <% end %>
+      <br><br>
+      
+      <%= f.collection_check_boxes :wipe_ids, Wipe.all, :id, :date_wiped do |x| %>
+          <% x.label(class: "checkbox-inline input_checkbox") {x.check_box(class: "checkbox") + x.text} %>
+      <% end %>
+      <br><br>
+      
       <span class="picture">
         <!-- Creates file field and whitelist -->
         <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>

@@ -1,0 +1,15 @@
+<%= render 'shared/page_title', title: "Create a New Staff Department" %>
+
+<%= render "shared/errors", obj: @type %>
+
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2">
+    <%= form_for @type do |f| %>
+    
+      <%= f.label :department %>
+      <%= f.text_field :department %>
+
+      <%= f.submit "Create Department", class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>

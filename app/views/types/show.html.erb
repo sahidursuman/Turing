@@ -1,4 +1,4 @@
-<%= render "shared/page_title", title: "Staff Index" %>
+<%= render "shared/page_title", title: @type.department + " Staff" %>
 
 <ul class="nav nav-tabs">
   <li>
@@ -11,11 +11,11 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3 center">
-    <%= will_paginate %>
+    <%= will_paginate @staffs %>
   </div>
 </div>
 
-<% @staffs.each do |staff| %>
+<% @type.staffs.each do |staff| %>
   <div class="row">
     <div class="col-md-6 col-md-offset-3 left">
       <p>
@@ -26,4 +26,9 @@
   </div>
 <% end %>
 
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 center">
+    <%= will_paginate @staffs %>
+  </div>
+</div>
 <!-- To come back to, as currently a department title is generated for each staff member -->

@@ -34,6 +34,7 @@ $navbar-default-color: $mid-grey;
 .linkbox_styling:hover {
   background-color: #FFFFFF;
   color: #BE5555;
+  border-color: #BE5555;
 }
 
 .nav_item {
@@ -49,6 +50,13 @@ $navbar-default-color: $mid-grey;
   margin-right: 0px;
 }
 
+.nav_ul_item {
+  padding-left: 20px;
+  float: left;
+  margin-top: 23px;
+  
+}
+
 // Styling of the Turing Trust Logo in navbar
 #logo {
   background-color: #FFFFFF;
@@ -56,7 +64,7 @@ $navbar-default-color: $mid-grey;
   margin-top: 10px;
   margin-bottom: 10px;
   float: left;
-  margin-right: 10px;
+  margin-right: 0px;
   font-size: 2em;
   color: #434343;
   text-transform: uppercase;
@@ -135,6 +143,10 @@ input, textarea, select, .uneditable-input {
 
 input {
   height: auto !important;
+}
+
+.input_checkbox input {
+  width: auto !important;
 }
 
 // Picture Styling
