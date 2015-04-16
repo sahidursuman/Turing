@@ -2,6 +2,8 @@ class ComputersController < ApplicationController
   before_action :set_computer, only: [:edit, :update, :show]
   before_action :require_user, except: [:show, :index]
   before_action :require_same_user, only: [:edit, :update]
+  before_action :admin_user, only: :destroy
+  
   
   def index
     # Pagination of computers
@@ -40,6 +42,12 @@ class ComputersController < ApplicationController
     end
   end
   
+  def destroy
+    Computer.find(params[:id]).destroy
+    flash[:success] = "The computer's details have been successfully deleted."
+    redirect_to computers_path
+  end
+  
   private
   
     # Whitelisting variables
@@ -55,10 +63,14 @@ class ComputersController < ApplicationController
     end
     
     def require_same_user
-      if current_user != @computer.staff
+      if current_user != @computer.staff and !current_user.admin?
         flash[:danger] = "You may only edit your own computer's details"
         redirect_to computer_path(@computer)
       end
+    end
+    
+    def admin_user
+      redirect_to computers_path unless current_user.admin?
     end
     
 end
