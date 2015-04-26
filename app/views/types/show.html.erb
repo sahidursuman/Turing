@@ -28,7 +28,18 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3 center">
+    <% if logged_in? and current_user.admin? %>
+      <br>
+      <%= link_to "Delete Department", @type, method: :delete, data: {confirm: "Delete this department?" }, class: "btn btn-danger" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 center">
     <%= will_paginate @staffs %>
   </div>
 </div>
+
+
 <!-- To come back to, as currently a department title is generated for each staff member -->

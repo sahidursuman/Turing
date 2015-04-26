@@ -1,8 +1,10 @@
 class ComputersController < ApplicationController
   before_action :set_computer, only: [:edit, :update, :show]
-  before_action :require_user#, except: [:show, :index]
+  before_action :require_user, except: [:new, :create]
   before_action :require_same_user, only: [:edit, :update]
   before_action :admin_user, only: :destroy
+  
+  layout :new_layout, only: [:new, :update]
   
   def index
     # Pagination of computers
@@ -24,7 +26,7 @@ class ComputersController < ApplicationController
       flash[:success] = "You're computer's details have been submitted successfully!"
       redirect_to computers_path
     else
-      render :new
+      render :new, layout: new_layout
     end
   end
   
@@ -66,6 +68,10 @@ class ComputersController < ApplicationController
         flash[:danger] = "You may only edit your own computer's details"
         redirect_to computer_path(@computer)
       end
+    end
+    
+    def new_layout
+      logged_in? ? "application" : "donate"
     end
     
 end

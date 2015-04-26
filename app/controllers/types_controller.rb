@@ -1,5 +1,6 @@
 class TypesController < ApplicationController
   before_action :require_user#, except: [:show]
+  before_action :admin_user, except: :show
   
   def show
     @type = Type.find(params[:id])
@@ -18,6 +19,12 @@ class TypesController < ApplicationController
     else
       render 'new'
     end
+  end
+  
+  def destroy
+    Type.find(params[:id]).destroy
+    flash[:success] = "The department has been successfully deleted."
+    redirect_to staffs_path
   end
   
   private

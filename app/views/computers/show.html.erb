@@ -1,19 +1,16 @@
-<%= render "shared/page_title", title: @computer.serial_no %>
+<%= render "shared/page_title", title: "Serial No. " + @computer.serial_no %>
 
 <div class="row">
   <div class="col-md-4 pull-right center">
     <h5>Created by <%= @computer.staff.staff_name %></h5>
-    <%= link_to "Back to Staff Page", staff_path(@computer.staff) %>
+    <h5><%= link_to "Back to Staff Page", staff_path(@computer.staff) %></h5>
+    <h5><% if logged_in? and current_user.admin? %>
+      <%= link_to "[Delete Computer]", @computer, method: :delete, data: {confirm: "Delete this computer's details?" } %>
+    <% end %></h5>
     <!-- Include Gravitar / avatar / photo if wanted -->
   </div> 
   
   <div class="col-md-8">
-    <% if logged_in? and (@computer.staff == current_user || current_user.admin? ) %>
-      <%= link_to "Edit these details", edit_computer_path(@computer), class: "btn btn-success pull-right" %>
-    <% end %>
-    <% if logged_in? and current_user.admin? %>
-      <%= link_to "Delete Computer", @computer, method: :delete, data: {confirm: "Delete this computer's details?" } %>
-    <% end %>
     <h3><%= @computer.manufacturer %> <%= @computer.computer_type %> donated by <%= @computer.donor %></h3>
     <div class="show_computer">
       <%= image_tag(@computer.picture.url, class: "picture_style") if @computer.picture? %>
@@ -40,7 +37,14 @@
       <% end %>
       
     </div>
+    
+      <h5>
+        <%= link_to "Return to computer index", computers_path, class: "btn btn-warning btn-small pull-right" %>
+        <% if logged_in? and (@computer.staff == current_user || current_user.admin? ) %>
+          <%= link_to "Edit these details", edit_computer_path(@computer), class: "btn btn-success pull-left" %>
+        <% end %>
+      </h5>
+      
   </div>
 </div>
 
-<h5><%= link_to "Return to computer index", computers_path, class: "btn btn-warning btn-small" %></h5>

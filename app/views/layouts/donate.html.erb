@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The Turing Trust Donations</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body class="donate_body">
+
+  <header class="donate_header">
+    <div class="container">
+      <h1>
+        Transform someone's future with The Turing Trust
+      </h1>
+    </div>
+  </header>
+  
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">  
+        <h3>
+          Help us to take your unwanted IT equipment easily by filling out this form!
+          It's quick and relatively painless and will help us keep track of your 
+          donation from your home all the way to Ghana. Once it's filled in, we'll 
+          email you with details on how to get your donation safely to us.
+        </h3>
+      </div>
+    </div>
+    
+    <%= render 'layouts/messages' %>
+    <%= yield %>
+    <%= render 'layouts/footer' %>
+  
+  </div>
+  
+</body>
+</html>

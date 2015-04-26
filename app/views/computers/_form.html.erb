@@ -5,23 +5,23 @@
     <%= form_for(@computer, html: { multipart: true }) do |f| %>
     
       <%= f.label :manufacturer %>
-      <%= f.text_field :manufacturer %>
+      <%= f.text_field :manufacturer, :placeholder => "Toshiba" %>
       <%= f.label :computer_type %>
-      <%= f.text_field :computer_type %>
+      <%= f.text_field :computer_type, :placeholder => "Laptop"%>
       <%= f.label :specification %>
-      <%= f.text_area :specification %>
+      <%= f.text_area :specification, :placeholder => "Intel Celeron 1.1GHz, 256MB RAM 20GB HDD" %>
       <%= f.label :donor %>
-      <%= f.text_field :donor %>
+      <%= f.text_field :donor, :placeholder => "Mr. John Smith" %>
       <%= f.label :model_no %>
-      <%= f.text_field :model_no %>
+      <%= f.text_field :model_no, :placeholder => "Satellite S1800-712" %>
       <%= f.label :serial_no %>
-      <%= f.text_field :serial_no %>
+      <%= f.text_field :serial_no, :placeholder => "43564391D" %>
       <%= f.label :product_key %>
-      <%= f.text_field :product_key %>
+      <%= f.text_field :product_key, :placeholder => "Windows XP Professional QD464-ASF5F-VCF45-BV334-23DFS"%>
       <%= f.label :action_taken %>
       <%= f.text_area :action_taken, rows: 3%>
       <%= f.label :date %>
-      <%= f.text_field :date %>
+      <%= f.date_field :date %>
       <%= f.label :initials_flag %>
       <%= f.text_field :initials_flag %>
       

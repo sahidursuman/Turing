@@ -2,6 +2,9 @@
 
 <div class="row">
   <div class="col-md-4 col-md-offset-4 center">
+    <% if logged_in? and current_user.admin? %>
+      <%= link_to "Delete Staff Member", @staff, method: :delete, data: {confirm: "Delete this staff member's details?" }, class: "btn btn-danger" %>
+    <% end %>
     <!-- Include Gravitar / avatar / photo if wanted -->
   </div> 
 </div>

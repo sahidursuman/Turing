@@ -35,5 +35,9 @@ class ApplicationController < ActionController::Base
     redirect_to computers_path unless current_user.admin?
   end
   
+  #def wipe_staff
+  #  redirect_to computers_path unless current_user.admin? or current_user.types.department = "Wiping"
+  #end
+  
 end
 

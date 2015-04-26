@@ -45,7 +45,7 @@ class ComputerTest < ActiveSupport::TestCase
     assert_not @computer.valid?
   end
   
-  test "model_no should be > 5" do
+  test "model_no should be > 2" do
     @computer.model_no = "a"
     assert_not @computer.valid?
   end
@@ -60,7 +60,7 @@ class ComputerTest < ActiveSupport::TestCase
     assert_not @computer.valid?
   end
   
-  test "serial_no should be > 5" do
+  test "serial_no should be > 2" do
     @computer.serial_no = "a"
     assert_not @computer.valid?
   end
@@ -80,7 +80,7 @@ class ComputerTest < ActiveSupport::TestCase
     assert_not @computer.valid?
   end
   
-  test "action_taken should be > 5" do
+  test "action_taken should be > 2" do
     @computer.action_taken = "a"
     assert_not @computer.valid?
   end
@@ -90,7 +90,7 @@ class ComputerTest < ActiveSupport::TestCase
     assert_not @computer.valid?
   end
   
-  test "donor should be > 5" do
+  test "donor should be > 2" do
     @computer.donor = "a"
     assert_not @computer.valid?
   end
@@ -100,7 +100,7 @@ class ComputerTest < ActiveSupport::TestCase
     assert_not @computer.valid?
   end
   
-  test "specification should be > 5" do
+  test "specification should be > 2" do
     @computer.specification = "a"
     assert_not @computer.valid?
   end
@@ -110,7 +110,7 @@ class ComputerTest < ActiveSupport::TestCase
     assert_not @computer.valid?
   end
   
-  test "product_key should be > 5" do
+  test "product_key should be > 2" do
     @computer.product_key = "a"
     assert_not @computer.valid?
   end

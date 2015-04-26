@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   post '/login', to: 'logins#create'
   get '/logout', to: 'logins#destroy'
   
-  resources :types, only: [:new, :create, :show]
+  resources :types, only: [:new, :create, :show, :destroy]
   resources :wipes, only: [:new, :create, :show]
   
 end

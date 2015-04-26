@@ -2,6 +2,7 @@ class StaffsController < ApplicationController
   before_action :set_staff, only: [:edit, :update, :show]
   before_action :require_user#, except [:show, :index]
   before_action :require_same_user, only: [:edit, :update]
+  before_action :admin_user, only: :destroy
   
   def index
     @staffs = Staff.paginate(page: params[:page], per_page: 10)
@@ -40,6 +41,12 @@ class StaffsController < ApplicationController
     end
   end
   
+  def destroy
+    Staff.find(params[:id]).destroy
+    flash[:success] = "The staff member's details have been successfully deleted."
+    redirect_to staffs_path
+  end
+  
   private
   
     def staff_params
@@ -51,7 +58,7 @@ class StaffsController < ApplicationController
     end
   
     def require_same_user
-      if current_user != @staff
+      if current_user != @staff and !current_user.admin?
         flash[:danger] = "You may only edit your own profile"
         redirect_to root_path
       end

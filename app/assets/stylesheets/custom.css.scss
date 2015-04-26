@@ -85,6 +85,21 @@ $navbar-default-color: $mid-grey;
   -moz-border-radius: 0px;
 }
 
+// Styling for Donations Page
+
+.donate_body {
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+.donate_header {
+  background-color: #BE5555;
+  color: #FFFFFF;
+  border-color: #BE5555;
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
 // General Styling
 body{
   padding-top: 80px;

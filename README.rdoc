@@ -15,15 +15,15 @@ initials_flag: string
 -manufacturer must be between 2 and 50 characters
 -computer_type must be present
 -computer_type must be between 2 and 50 characters
--model_no must be between 5 and 50 characters
+-model_no must be between 2 and 50 characters
 -serial_no must be present
--serial_no must be between 5 and 50 characters
+-serial_no must be between 2 and 50 characters
 -date must be present
 -date must be 10 characters
--action_taken must be between 5 and 250 characters
--donor must be between 5 and 50 characters
--specification must be between 5 and 250 characters
--product_key must be between 5 and 50 characters
+-action_taken must be between 2 and 250 characters
+-donor must be between 2 and 50 characters
+-specification must be between 2 and 250 characters
+-product_key must be between 2 and 50 characters
 -initials_flag must be 1 character (y/n)
 -
 

@@ -24,7 +24,7 @@
     </div>
     
     <div class="col-md-6 well">
-      <h4><%= link_to computer.serial_no, computer_path(computer) %></h4>
+      <h4><%= link_to "Serial No. " + computer.serial_no, computer_path(computer) %></h4>
       <p><%= computer.manufacturer %> <%= computer.computer_type %> donated by <%= computer.donor %></p>
       <% if computer.wipes.any? %>
         <p><%= render computer.wipes %></p>
