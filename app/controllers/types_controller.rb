@@ -1,6 +1,6 @@
 class TypesController < ApplicationController
   before_action :require_user#, except: [:show]
-  before_action :admin_user, except: :show
+  before_action :admin_user#, except: :show
   
   def show
     @type = Type.find(params[:id])

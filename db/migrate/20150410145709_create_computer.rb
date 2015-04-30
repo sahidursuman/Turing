@@ -5,12 +5,10 @@ class CreateComputer < ActiveRecord::Migration
       t.string :computer_type
       t.string :model_no
       t.string :serial_no
-      t.date :date
-      t.text :action_taken
       t.text :donor
       t.text :specification
       t.text :product_key
-      t.string :initials_flag
+      t.string :turingtrack
       t.timestamps
     end
   end

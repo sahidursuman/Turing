@@ -15,7 +15,11 @@
       
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation %>
-
+      
+      <%= f.label :department %>
+      <%= f.collection_select :type_ids, Type.all , :id, :department %>
+      <!--   , { selected: @staff.type_ids }, {multiple: true, size: Type.all.size } %>    -->
+      
       <%= f.submit(@staff.new_record? ? "Submit Profile" : "Submit Edited Profile", class: "btn btn-success") %>
     <% end %>
   </div>

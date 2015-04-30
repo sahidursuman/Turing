@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   
   def require_user
     if !logged_in?
-      flash[:danger] = "You must be logged in to perform that action"
+      flash[:danger] = "You must be logged in to perform that action."
       redirect_to :back
     end
     rescue ActionController::RedirectBackError
@@ -32,12 +32,21 @@ class ApplicationController < ActionController::Base
   end
   
   def admin_user
-    redirect_to computers_path unless current_user.admin?
+    unless current_user.admin?
+    flash[:danger] = "You must be a system administrator to perform that action."
+      redirect_to :back
+    end
+    rescue ActionController::RedirectBackError
+      redirect_to root_path
   end
   
   #def wipe_staff
   #  redirect_to computers_path unless current_user.admin? or current_user.types.department = "Wiping"
   #end
+  
+  def try_chain(*args)
+    args.size > 1 ? eval("self.try(args[0]).try_chain(#{args[1..-1].inspect[1..-2]})") : self.try(args[0])
+  end
   
 end
 

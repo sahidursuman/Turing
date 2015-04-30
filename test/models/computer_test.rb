@@ -6,9 +6,8 @@ class ComputerTest < ActiveSupport::TestCase
     @staff = Staff.create(staff_name: "John Example", staff_email: "John@example.com")
     @computer = @staff.computers.build(manufacturer: "Toshiba", computer_type: "Laptop",
                 model_no: "TSH1137", serial_no: "1234567890",
-                date: "2015-01-01", action_taken: "Wiped with Paragon",
                 donor: "Mr. J. Smith", specification: "Windows XP",
-                product_key: "WIN2015123456", initials_flag: "y")
+                product_key: "WIN2015123456", turingtrack: "0000000001")
   end
   
   test "computer should be valid" do
@@ -69,26 +68,6 @@ class ComputerTest < ActiveSupport::TestCase
     @computer.serial_no = "a" * 51
     assert_not @computer.valid?
   end
- 
-  test "date should be > 9" do
-    @computer.date = "1" * 9
-    assert_not @computer.valid?
-  end
-  
-  test "date should be < 11" do
-    @computer.date = "1" * 11
-    assert_not @computer.valid?
-  end
-  
-  test "action_taken should be > 2" do
-    @computer.action_taken = "a"
-    assert_not @computer.valid?
-  end
-  
-  test "action_taken should be < 50" do
-    @computer.action_taken = "a" * 251
-    assert_not @computer.valid?
-  end
   
   test "donor should be > 2" do
     @computer.donor = "a"
@@ -119,20 +98,15 @@ class ComputerTest < ActiveSupport::TestCase
     @computer.product_key = "a" * 51
     assert_not @computer.valid?
   end
-
-  test "initials_flag should not be 0 " do
-    @computer.initials_flag = " "
+  
+  test "turingtrack should be < 9" do
+    @computer.turingtrack = "a" * 9
     assert_not @computer.valid?
   end
   
-  test "initials_flag should not be > 1" do
-    @computer.initials_flag = "aa"
+  test "turingtrack should be > 7" do
+    @computer.turingtrack = "a"
     assert_not @computer.valid?
   end
   
-  test "initials_flag should not be = a" do
-    @computer.initials_flag = "a"
-    assert_not @computer.valid?
-  end
-
 end

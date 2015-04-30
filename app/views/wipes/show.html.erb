@@ -1,34 +1,15 @@
-<%= render "shared/page_title", title: "Wiped by " + @wipe.wiped_by  %>
+<%= render "shared/page_title", title: "Wiped by " + @wipe.staff.staff_name  %>
 
-<ul class="nav nav-tabs">
-  <li>
-    <%= link_to "Computers", computers_path %>
-  </li>
-  <li class="active">
-    <%= link_to "Staff", staffs_path %>
-  </li>
-</ul>
-
-<div class="row">
-  <div class="col-md-6 col-md-offset-3 center">
-    <%= will_paginate @computers %>
-  </div>
-</div>
-
-<% @wipe.computers.each do |computer| %>
   <div class="row">
     <div class="col-md-6 col-md-offset-3 left">
       <p>
-        <h5><strong><%= computer.manufacturer + " " + computer.computer_type + " wiped by " + @wipe.wiped_by %></strong></h5>
+        <h5><strong><%= @computer.manufacturer + " " + @computer.computer_type + 
+        " donated by " + @computer.donor + ", Turing Track #" + @computer.turingtrack %></strong></h5>
+        <h5><%= @wipe.action_taken %></h5>
+        <h5>On <%= @wipe.created_at.strftime("%A, %d %B %Y") %></h5>
       </p>
-      <%= link_to "Go to Staff Profile", computer_path(computer) %>
+      <%= link_to "Go to Computer Details", computer_path(@computer) %>
     </div>
   </div>
-<% end %>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3 center">
-    <%= will_paginate @computers %>
-  </div>
-</div>
 <!-- To come back to, as currently a department title is generated for each staff member -->

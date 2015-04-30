@@ -1,7 +1,6 @@
 class ComputersController < ApplicationController
   before_action :set_computer, only: [:edit, :update, :show]
   before_action :require_user, except: [:new, :create]
-  before_action :require_same_user, only: [:edit, :update]
   before_action :admin_user, only: :destroy
   
   layout :new_layout, only: [:new, :update]
@@ -12,29 +11,46 @@ class ComputersController < ApplicationController
   end
   
   def show
-
-  end
+    @wipe = @computer.wipe
+  end 
   
   def new
     @computer = Computer.new
+    @computer.build_wipe
   end
   
   def create
     @computer = Computer.new(computer_params)
-    @computer.staff = current_user
+    if logged_in?
+      @computer.wipe.staff = current_user
+    end
+    #@computer.wipe.computer_id = Computer.find(params[:id])
+    # Deals with different layouts and redirects for donors and staff
     if @computer.save
       flash[:success] = "You're computer's details have been submitted successfully!"
-      redirect_to computers_path
+      if logged_in?
+        redirect_to computers_path
+      else
+        redirect_to 'http://turingtrust.co.uk/'
+      end
     else
       render :new, layout: new_layout
     end
   end
   
   def edit
-    
+    unless @computer.wipe
+      @computer.build_wipe
+    end
   end
   
   def update
+    if @computer.wipe 
+      @computer.wipe.staff = current_user
+    else
+      @computer.build_wipe
+      @computer.wipe.staff = current_user
+    end
     if @computer.update(computer_params)
       flash[:success] = "The computer's details have been updated successfully!"
       redirect_to computer_path(@computer)
@@ -49,25 +65,22 @@ class ComputersController < ApplicationController
     redirect_to computers_path
   end
   
+  def table 
+    @computers = Computer.all
+  end
+  
   private
   
     # Whitelisting variables
     def computer_params
       params.require(:computer).permit(:manufacturer, :computer_type, :specification, 
                                        :donor, :model_no, :serial_no, :product_key, 
-                                       :action_taken, :data, :date, :initials_flag, 
-                                       :picture, wipe_ids: [])
+                                       :turingtrack, :picture, wipe_attributes: 
+                                       [:id, :action_taken, :staff_id])
     end
     
     def set_computer
       @computer = Computer.find(params[:id])
-    end
-    
-    def require_same_user
-      if current_user != @computer.staff and !current_user.admin?
-        flash[:danger] = "You may only edit your own computer's details"
-        redirect_to computer_path(@computer)
-      end
     end
     
     def new_layout

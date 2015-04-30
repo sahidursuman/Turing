@@ -6,49 +6,40 @@
     
       <%= f.label :manufacturer %>
       <%= f.text_field :manufacturer, :placeholder => "Toshiba" %>
-      <%= f.label :computer_type %>
+      <%= f.label :computer_type, "Computer Type" %>
       <%= f.text_field :computer_type, :placeholder => "Laptop"%>
-      <%= f.label :specification %>
+      <%= f.label :specification, "Specification (if known)" %> <!-- rows: 3 -->
       <%= f.text_area :specification, :placeholder => "Intel Celeron 1.1GHz, 256MB RAM 20GB HDD" %>
-      <%= f.label :donor %>
+      <% if logged_in? %>
+        <%= f.label :donor %>
+      <% else %>
+        <%= f.label :donor, "Your Name" %>
+      <% end %>
       <%= f.text_field :donor, :placeholder => "Mr. John Smith" %>
-      <%= f.label :model_no %>
+      <%= f.label :model_no, "Model No." %>
       <%= f.text_field :model_no, :placeholder => "Satellite S1800-712" %>
-      <%= f.label :serial_no %>
+      <%= f.label :serial_no, "Serial No." %>
       <%= f.text_field :serial_no, :placeholder => "43564391D" %>
-      <%= f.label :product_key %>
+      <%= f.label :product_key, "OS Product Key" %>
       <%= f.text_field :product_key, :placeholder => "Windows XP Professional QD464-ASF5F-VCF45-BV334-23DFS"%>
-      <%= f.label :action_taken %>
-      <%= f.text_area :action_taken, rows: 3%>
-      <%= f.label :date %>
-      <%= f.date_field :date %>
-      <%= f.label :initials_flag %>
-      <%= f.text_field :initials_flag %>
-      
-      <strong>Wiping Details</strong><br><br>
-   
-      <%= f.collection_check_boxes :wipe_ids, Wipe.all, :id, :wiped_by do |x| %>
-        <% x.label(class: "checkbox-inline input_checkbox") {x.check_box(class: "checkbox") + x.text} %>
-      <% end %>
-      <br><br>
-      
-      <%= f.collection_check_boxes :wipe_ids, Wipe.all, :id, :wiped_using do |x| %>
-        <% x.label(class: "checkbox-inline input_checkbox") {x.check_box(class: "checkbox") + x.text} %>
-      <% end %>
-      <br><br>
-      
-      <%= f.collection_check_boxes :wipe_ids, Wipe.all, :id, :date_wiped do |x| %>
-          <% x.label(class: "checkbox-inline input_checkbox") {x.check_box(class: "checkbox") + x.text} %>
-      <% end %>
-      <br><br>
       
       <span class="picture">
         <!-- Creates file field and whitelist -->
+        <%= f.label "Picture (optional)" %>
         <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
       </span>
+      
+      <% if logged_in? %>
+        <br><strong>Wiping Details:<br><br></strong>
+        <%= f.fields_for :wipe do |wipe_form| %>
+          <%= wipe_form.label :action_taken %>
+          <%= wipe_form.text_field :action_taken %>
+        <% end %>
+      <% end %>
 
       <%= f.submit(@computer.new_record? ? "Submit Details" : "Submit Edited Details", class: "btn btn-success") %>
     <% end %>
+    
   </div>
 </div>
 

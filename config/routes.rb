@@ -5,8 +5,9 @@ Rails.application.routes.draw do
   get '/home', to: 'pages#home'
   
   resources :computers
-  
   resources :staffs, except: [:new]
+  resources :types, only: [:new, :create, :show, :destroy]
+  resources :wipes, only: [:new, :create, :show]
   
   # Rename new_staff route to register
   get '/register', to: 'staffs#new'
@@ -16,9 +17,8 @@ Rails.application.routes.draw do
   post '/login', to: 'logins#create'
   get '/logout', to: 'logins#destroy'
   
-  resources :types, only: [:new, :create, :show, :destroy]
-  resources :wipes, only: [:new, :create, :show]
-  
+  # Route for computer table
+  get 'computertable', to: 'computers#table'
 end
 
   #  The following routes are the manual equivalent of resources:

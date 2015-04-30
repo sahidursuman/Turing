@@ -17,22 +17,26 @@
     <div class="col-md-2">
       <section class="staff_info center">
         <p>
-          <h5 class="vcenter">Created by <%= link_to computer.staff.staff_name, staff_path(computer.staff) %></h5>
+          <% if computer.wipe %>
+          <h5 class="vcenter">Wiping staff picture here</h5>
+          <% else %>
+          <h5 class="vcenter"><strong><%= link_to "Wipe this computer!", edit_computer_path(computer) %></strong></h5>
+          <% end %>
         </p>
 <!-- This is where to put a gravitar/avatar/photo if wanted -->
       </section>
     </div>
     
     <div class="col-md-6 well">
-      <h4><%= link_to "Serial No. " + computer.serial_no, computer_path(computer) %></h4>
+      <h4><%= link_to "Turing Track No #" + computer.turingtrack, computer_path(computer) %></h4>
       <p><%= computer.manufacturer %> <%= computer.computer_type %> donated by <%= computer.donor %></p>
-      <% if computer.wipes.any? %>
-        <p><%= render computer.wipes %></p>
-      <% end %>
       <p>
         <span class="quiet"><small>Created <%= time_ago_in_words(computer.created_at) %> ago, </small></span>
         <span class="quiet"><small>updated <%= time_ago_in_words(computer.updated_at) %> ago</small></span>
       </p>
+      <% if computer.wipe %>
+        <p><%= render computer.wipe %></p>
+      <% end %>
     </div>
     
     <div class="col-md-4">

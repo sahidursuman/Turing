@@ -52,7 +52,7 @@ class StaffTest < ActiveSupport::TestCase
     valid_addresses = %w(user@bipb.com user@bipb.turing.org first.last@bipb.com ha-ho@turing.co.uk)
     valid_addresses.each do |va|
       @staff.staff_email = va
-      assert @staff.valid?, '#{va.inspect} should be valid'
+      assert @staff.valid?, "#{va.inspect} should be valid"
     end
   end
   
@@ -60,7 +60,7 @@ class StaffTest < ActiveSupport::TestCase
     invalid_addresses = %w(user@bipb,com user.name@turing. user@tur_ing.com us_er@tu+ring.com)
     invalid_addresses.each do |ia|
       @staff.staff_email = ia
-      assert_not @staff.valid?, '#{ia.inspect} should be invalid'
+      assert_not @staff.valid?, "#{ia.inspect} should be invalid"
     end
   end
   

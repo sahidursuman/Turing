@@ -6,12 +6,10 @@
   <div class="well col-md-8 col-md-offset-2">
     <%= form_for @wipe do |f| %>
     
-      <%= f.label :date_wiped %>
-      <%= f.date_field :date_wiped %>
-       <%= f.label :wiped_using %>
-      <%= f.text_area :wiped_using %>
-       <%= f.label :wiped_by %>
-      <%= f.text_field :wiped_by %>
+      <%= f.label :computer_id, "Computer ID" %>
+      <%= f.text_field :computer_id, :maxlength => 8, :placeholder => "1" %>
+      <%= f.label :action_taken %>
+      <%= f.text_area :action_taken %>
 
       <%= f.submit "Submit Details", class: "btn btn-success" %>
     <% end %>

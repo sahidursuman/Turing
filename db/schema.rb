@@ -13,25 +13,17 @@
 
 ActiveRecord::Schema.define(version: 20150416082748) do
 
-  create_table "computer_wipes", force: true do |t|
-    t.integer "wipe_id"
-    t.integer "computer_id"
-  end
-
   create_table "computers", force: true do |t|
     t.string   "manufacturer"
     t.string   "computer_type"
     t.string   "model_no"
     t.string   "serial_no"
-    t.date     "date"
-    t.text     "action_taken"
     t.text     "donor"
     t.text     "specification"
     t.text     "product_key"
-    t.string   "initials_flag"
+    t.string   "turingtrack"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "staff_id"
     t.string   "picture"
   end
 
@@ -54,9 +46,11 @@ ActiveRecord::Schema.define(version: 20150416082748) do
   end
 
   create_table "wipes", force: true do |t|
-    t.date   "date_wiped"
-    t.text   "wiped_using"
-    t.string "wiped_by"
+    t.integer  "staff_id"
+    t.integer  "computer_id"
+    t.text     "action_taken"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

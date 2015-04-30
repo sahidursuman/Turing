@@ -1,15 +1,15 @@
 class StaffsController < ApplicationController
   before_action :set_staff, only: [:edit, :update, :show]
   before_action :require_user#, except [:show, :index]
-  before_action :require_same_user, only: [:edit, :update]
-  before_action :admin_user, only: :destroy
+  before_action :require_same_user, only: [:edit, :update, :show]
+  before_action :admin_user, only: [:destroy, :index, :new, :create]
   
   def index
     @staffs = Staff.paginate(page: params[:page], per_page: 10)
   end
   
   def show
-    @computers = @staff.computers.paginate(page: params[:page], per_page: 10)
+    @wipes = @staff.wipes.paginate(page: params[:page], per_page: 10)
   end
   
   def new
@@ -19,10 +19,10 @@ class StaffsController < ApplicationController
   def create
     @staff = Staff.new(staff_params)
     if @staff.save
-      flash[:success] = "Your account has been created successfully"
+      flash[:success] = "Your account has been created successfully."
       # Start session for user (automatically log in as user when creating user)
-      session[:staff_id] = @staff.id
-      redirect_to computers_path
+      # session[:staff_id] = @staff.id
+      redirect_to staff_path(@staff)
     else
       render 'new'
     end
@@ -34,7 +34,7 @@ class StaffsController < ApplicationController
   
   def update
     if @staff.update(staff_params)
-      flash[:success] = "Your profile has been updated successfully"
+      flash[:success] = "Your profile has been updated successfully."
       redirect_to staff_path(@staff) 
     else
       render 'new'
@@ -50,7 +50,8 @@ class StaffsController < ApplicationController
   private
   
     def staff_params
-      params.require(:staff).permit(:staff_name, :staff_email, :password)
+      params.require(:staff).permit(:staff_name, :staff_email, :password,
+                                    type_ids: [])
     end
     
     def set_staff
@@ -59,7 +60,7 @@ class StaffsController < ApplicationController
   
     def require_same_user
       if current_user != @staff and !current_user.admin?
-        flash[:danger] = "You may only edit your own profile"
+        flash[:danger] = "You may only edit your own profile."
         redirect_to root_path
       end
     end

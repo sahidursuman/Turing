@@ -1,21 +1,24 @@
 class Computer < ActiveRecord::Base
-  belongs_to :staff
-  has_many :computer_wipes, dependent: :destroy
-  has_many :wipes, through: :computer_wipes
-  validates :staff_id, presence: true
+  has_one :wipe, dependent: :destroy
+  accepts_nested_attributes_for :wipe #, allow_destroy: true
+  # alloy_destroy: true does not automatically delete associated records, but rather allows allows users to delete them. If the 
+  # hash of attributes for an object contains the key _destroy with a value of 1 or true then the object will be destroyed.
+  
   validates :manufacturer, length: { minimum: 2, maximum: 50 }
   validates :computer_type, presence: true, length: { minimum: 2, maximum: 50 }
   validates :model_no, length: { minimum: 2, maximum: 50 }
   validates :serial_no, presence: true, length: { minimum: 2, maximum: 50 }
-  validates :date, length: { is: 10 }
-  validates :action_taken, length: { minimum: 2, maximum: 250 }
   validates :donor, length: { minimum: 2, maximum: 50 }
   validates :specification, length: { minimum: 2, maximum: 250 }
   validates :product_key, length: { minimum: 2, maximum: 50 }
-  validates :initials_flag, inclusion: { in: %w(y n) }, length: { is: 1 }
+  validates :turingtrack, length: { minimum: 8, maximum: 8 }
   default_scope -> { order(updated_at: :desc) }
   mount_uploader :picture, PictureUploader
-# %w(foo bar) is a shortcut for ["foo", "bar"]
+# %w(foo bar) is a shortcut for ["foo", "bar"], e.g. validates :initials_flag, inclusion: { in: %w(y n) }, length: { is: 1 }
+
+  def turingtrack
+    (id.to_i + 10000000).to_s
+  end
 
   private
   
@@ -25,4 +28,4 @@ class Computer < ActiveRecord::Base
     end
   end
   
-end
+end 

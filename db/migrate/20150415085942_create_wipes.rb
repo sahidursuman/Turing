@@ -1,9 +1,10 @@
 class CreateWipes < ActiveRecord::Migration
   def change
     create_table :wipes do |t|
-      t.date :date_wiped
-      t.text :wiped_using
-      t.string :wiped_by
+      t.integer :staff_id
+      t.integer :computer_id
+      t.text :action_taken
+      t.timestamps
     end
   end
 end

@@ -1,12 +1,7 @@
-<%= render "shared/page_title", title: "Serial No. " + @computer.serial_no %>
+<%= render "shared/page_title", title: "Turing Track No. " + @computer.turingtrack %>
 
 <div class="row">
   <div class="col-md-4 pull-right center">
-    <h5>Created by <%= @computer.staff.staff_name %></h5>
-    <h5><%= link_to "Back to Staff Page", staff_path(@computer.staff) %></h5>
-    <h5><% if logged_in? and current_user.admin? %>
-      <%= link_to "[Delete Computer]", @computer, method: :delete, data: {confirm: "Delete this computer's details?" } %>
-    <% end %></h5>
     <!-- Include Gravitar / avatar / photo if wanted -->
   </div> 
   
@@ -15,36 +10,46 @@
     <div class="show_computer">
       <%= image_tag(@computer.picture.url, class: "picture_style") if @computer.picture? %>
     </div>
+    
     <div class="well">
       <p>
         <strong>Further Info:</strong>
       </p>
-      Manufacturer: <%= @computer.manufacturer %> <br>
-      Type of Computer: <%= @computer.computer_type %> <br>
-      Model No: <%= @computer.model_no %> <br>
-      Serial No: <%= @computer.serial_no %> <br>
-      Action Taken: <%= @computer.action_taken %> <br>
-      <!--Specification: <%# simple_format(@computer.specification) %> <br>-->
-      Specification: <%= @computer.specification %> <br>
-      Manufacturer: <%= @computer.manufacturer %> <br>
-      Product Key: <%= @computer.product_key %> <br>
-      Donor: <%= @computer.donor %> <br>
-      Initials: <%= @computer.initials_flag %>
-
-      <% if @computer.wipes.any? %>
-        <br><br>
-        <p><%= render @computer.wipes %></p>
-      <% end %>
-      
+      <p>
+        Turing Track No: <%= @computer.turingtrack %> <br>
+        Manufacturer: <%= @computer.manufacturer %> <br>
+        Type of Computer: <%= @computer.computer_type %> <br>
+        Model No: <%= @computer.model_no %> <br>
+        Serial No: <%= @computer.serial_no %> <br>
+        <!--Specification: <%# simple_format(@computer.specification) %> <br>-->
+        Specification: <%= @computer.specification %> <br>
+        OS Product Key: <%= @computer.product_key %> <br>
+        Donor: <%= @computer.donor %> <br>
+      </p>
+      <!-- If there is an associated wipe, render wipes/_wipe partial-->
+        <% if @computer.wipe %>
+          <%= render @computer.wipe %>
+        <% end %>
+        
+        <!-- To check that the computer and wipe id's are coming through. Comment out for production -->
+        <br><br>Computer ID: <%=  @computer.id %>
+        <% if @computer.wipe %>
+          <br>Wipe ID: <%= @computer.wipe.id %>
+          <br>Staff ID: <%= @computer.wipe.staff.id %>
+        <% end %>
     </div>
     
-      <h5>
-        <%= link_to "Return to computer index", computers_path, class: "btn btn-warning btn-small pull-right" %>
-        <% if logged_in? and (@computer.staff == current_user || current_user.admin? ) %>
-          <%= link_to "Edit these details", edit_computer_path(@computer), class: "btn btn-success pull-left" %>
-        <% end %>
-      </h5>
+    <h5>
+      <%= link_to "Return to computer index", computers_path, class: "btn btn-warning btn-small pull-right" %>
+    
+      <% if logged_in? %>
+        <%= link_to "Edit these details", edit_computer_path(@computer), class: "btn btn-success" %>
+      <% end %>
+      
+      <% if logged_in? and current_user.admin? %>
+        <%= link_to "Delete Computer", @computer, method: :delete, data: {confirm: "Delete this computer's details?" }, class: "btn btn-danger" %>
+      <% end %>
+    </h5>
       
   </div>
 </div>
-

@@ -3,7 +3,7 @@ class WipesController < ApplicationController
   
   def show
     @wipe = Wipe.find(params[:id])
-    @computers = @wipe.computers.paginate(page: params[:page], per_page: 20)
+    @computer = @wipe.computer
   end
   
   def new
@@ -12,6 +12,7 @@ class WipesController < ApplicationController
   
   def create
     @wipe = Wipe.new(wipe_params)
+    @wipe.staff = current_user
     if @wipe.save
       flash[:success] = "Thank you, your wipe has been saved."
       redirect_to computers_path
@@ -24,8 +25,7 @@ class WipesController < ApplicationController
     
     # Whitelisting parameters (strong)
     def wipe_params
-      params.require(:wipe).permit(:date_wiped, :wiped_using, :wiped_by)
-      
+      params.require(:wipe).permit(:staff_id, :action_taken, :computer_id)
     end
     
 end

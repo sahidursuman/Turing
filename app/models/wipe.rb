@@ -1,7 +1,8 @@
 class Wipe < ActiveRecord::Base
-  validates :date_wiped, presence: true, length: { is: 10}
-  validates :wiped_using, presence: true, length: { minimum: 2, maximum: 50 }
-  validates :wiped_by, presence: true, length: { minimum: 2, maximum: 50 }
-  has_many :computer_wipes
-  has_many :computers, through: :computer_wipes
+  belongs_to :computer#, dependent: destroy
+  belongs_to :staff
+  
+  validates :staff_id, presence: true
+  #validates :computer_id, presence: true
+  validates :action_taken, presence: true, length: { minimum: 2, maximum: 250 }
 end

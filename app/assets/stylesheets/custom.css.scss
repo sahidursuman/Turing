@@ -100,6 +100,22 @@ $navbar-default-color: $mid-grey;
   margin-top: 0px;
 }
 
+// Table Styling
+
+.table th, td {
+   text-align: center;  
+}
+
+// > is the child combinator/ direct descendant combinator. It means the selector 
+// tr > td only selects td tags that sit directly inside a tr tag, not those furtther nested.
+.table > tbody > tr > td {
+  vertical-align: middle;
+}
+
+.table > thead > tr > th {
+  vertical-align: middle;
+}
+
 // General Styling
 body{
   padding-top: 80px;

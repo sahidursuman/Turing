@@ -32,6 +32,13 @@
     
     <%= render 'layouts/messages' %>
     <%= yield %>
+    
+    <div class="row">
+      <div class="col-md-8  col-md-offset-2 text-center"> 
+        <%= link_to "Back to The Turing Trust Homepage", "http://turingtrust.co.uk" , class: "btn btn-lg linkbox_styling" %>
+      </div>
+    </div>
+    
     <%= render 'layouts/footer' %>
   
   </div>
