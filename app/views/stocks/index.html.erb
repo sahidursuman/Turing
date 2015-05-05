@@ -1,0 +1,53 @@
+<%= render "shared/page_title", title: "Stock Index Table" %>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Batch</th>
+          <th># of Keyboards</th>
+          <th># of Mice</th>
+          <th># of Monitors</th>
+          <th># of Printers</th>
+          <th># of Speakers</th>
+          <th>Created on</th>
+          <th>Updated on</th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @stocks.each do |stock| %>
+          <tr>
+            <td><%= link_to "#" + stock.id.to_s, stock_path(stock) %></td>
+            <td><%= stock.keyboards %></td>
+            <td><%= stock.mice %></td>
+            <td><%= stock.monitors %></td>
+            <td><%= stock.printers %></td>
+            <td><%= stock.speakers %></td>
+            <td><%= stock.created_at.strftime("%d/%m/%y") %></td>
+            <td><%= stock.updated_at.strftime("%d/%m/%y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    
+    <!-- Calculate Totals of Stock Items Donated -->
+    <% ke_count = 0  %><% mi_count = 0%><% mo_count = 0%><% pr_count = 0%><% sp_count = 0 %>
+    <% @stocks.each do |stock| %>
+      <% ke_count += stock.keyboards %>
+      <% mi_count += stock.mice %>
+      <% mo_count += stock.monitors %>
+      <% pr_count += stock.printers %>
+      <% sp_count += stock.speakers %>
+    <% end %>
+    
+    <h3 class="text-center">Total # of Items Donated</h3>
+    <p class="center">
+      Keyboards: <%= ke_count %> |
+      Mice: <%= mi_count %> |
+      Monitors: <%= mo_count %> |
+      Printers: <%= pr_count %> | 
+      Speakers: <%= sp_count %>
+    </p>
+  </div>
+</div>

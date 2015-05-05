@@ -193,11 +193,38 @@ span.picture {
   margin: 10px 10px 10px 10px;
 }
 
-.picture_style {
-  // Set just to leave a class in the code for later styling
+img.computer_img {
+  margin: 0px;
+  padding: 0px;
+  max-width: 380px;
+  height: auto;
+}
+
+img.donor_computer_img {
+  margin: 0px;
+  padding: 0px;
+  max-width: 230px;
+  height: auto;
 }
 
 // Vertically align in center
 .vcenter {
     margin-top: 61px;
+}
+
+// Barcode CSS
+table.barby-barcode { 
+  border-spacing: 0; 
+}
+
+tr.barby-row {
+  
+}
+
+td.barby-cell { 
+  width: 1.5px; height: 50px; 
+}
+
+td.barby-cell.on { 
+  background: #000; 
 }

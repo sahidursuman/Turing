@@ -44,9 +44,10 @@ class ApplicationController < ActionController::Base
   #  redirect_to computers_path unless current_user.admin? or current_user.types.department = "Wiping"
   #end
   
-  def try_chain(*args)
-    args.size > 1 ? eval("self.try(args[0]).try_chain(#{args[1..-1].inspect[1..-2]})") : self.try(args[0])
-  end
+  # Barcode Requirements 
+  require 'barby'
+  require 'barby/barcode/code_128'
+  require 'barby/outputter/html_outputter'
   
 end
 

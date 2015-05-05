@@ -1,15 +1,21 @@
 <%= render "shared/page_title", title: "Turing Track No. " + @computer.turingtrack %>
 
 <div class="row">
-  <div class="col-md-4 pull-right center">
-    <!-- Include Gravitar / avatar / photo if wanted -->
+  <div class="col-md-5 pull-right center">
+    <div class="show_computer">
+      <%= image_tag(@computer.picture.url, class: "computer_img") if @computer.picture? %>
+    </div>
   </div> 
   
-  <div class="col-md-8">
-    <h3><%= @computer.manufacturer %> <%= @computer.computer_type %> donated by <%= @computer.donor %></h3>
-    <div class="show_computer">
-      <%= image_tag(@computer.picture.url, class: "picture_style") if @computer.picture? %>
-    </div>
+  <div class="col-md-7">
+    <h3>
+      <%= @computer.manufacturer %> <%= @computer.computer_type %> donated by 
+      <% if current_user.admin? %>
+        <%= link_to @computer.donor.donor_name, donor_path(@computer.donor) %>
+      <% else %>
+        <%= @computer.donor.donor_name %>
+      <% end %>
+    </h3>
     
     <div class="well">
       <p>
@@ -24,7 +30,7 @@
         <!--Specification: <%# simple_format(@computer.specification) %> <br>-->
         Specification: <%= @computer.specification %> <br>
         OS Product Key: <%= @computer.product_key %> <br>
-        Donor: <%= @computer.donor %> <br>
+        Donor: <%= @computer.donor.donor_name %> <br>
       </p>
       <!-- If there is an associated wipe, render wipes/_wipe partial-->
         <% if @computer.wipe %>
@@ -32,11 +38,15 @@
         <% end %>
         
         <!-- To check that the computer and wipe id's are coming through. Comment out for production -->
+        
         <br><br>Computer ID: <%=  @computer.id %>
         <% if @computer.wipe %>
           <br>Wipe ID: <%= @computer.wipe.id %>
           <br>Staff ID: <%= @computer.wipe.staff.id %>
         <% end %>
+        <br>Donor ID: <%= @computer.donor.id %>
+        
+        <br><br>Barcode: <%= raw @barcode_for_html.to_html %>
     </div>
     
     <h5>

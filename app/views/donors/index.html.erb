@@ -1,0 +1,16 @@
+<%= render "shared/page_title", title: "Donor Index" %>
+
+<% @donors.each do |donor| %>
+  
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3 left">
+      <p>
+        #<%= donor.id %> <%= link_to donor.donor_name, donor_path(donor) %>, 
+        contact at <%= donor.donor_email %>, 
+        send email updates: <%= donor.allow_mail %>
+      </p>
+      
+    </div>
+  </div>
+
+<% end %>

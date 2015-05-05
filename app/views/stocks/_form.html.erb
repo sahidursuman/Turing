@@ -1,0 +1,26 @@
+<%= render "shared/errors", obj: @stock %>
+
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2 form-group">
+    <%= form_for @stock do |f| %>
+    
+      <%= f.label :keyboards, "No. of Keyboards" %>
+      <%= f.number_field :keyboards, :placeholder => 0, value: 0 %>
+    
+      <%= f.label :mice, "No. of Mice" %>
+      <%= f.number_field :mice, :placeholder => 0, value:0 %>
+      
+      <%= f.label :monitors, "No. of Monitors" %>
+      <%= f.number_field :monitors, :placeholder => 0, value:0 %>
+      
+      <%= f.label :printers, "No. of Printers" %>
+      <%= f.number_field :printers, :placeholder => 0, value: 0 %>
+      
+      <%= f.label :speakers, "No. of Speakers" %>
+      <%= f.number_field :speakers, :placeholder => 0, value: 0 %>
+    
+      <%= f.submit(@stock.new_record? ? "Submit Inventory Items" : "Update Inventory Items", class: "btn btn-success")%>
+
+    <% end %>
+  </div>
+</div>

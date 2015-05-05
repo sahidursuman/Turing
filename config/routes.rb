@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :staffs, except: [:new]
   resources :types, only: [:new, :create, :show, :destroy]
   resources :wipes, only: [:new, :create, :show]
+  resources :donors
+  resources :stocks
   
   # Rename new_staff route to register
   get '/register', to: 'staffs#new'
@@ -19,6 +21,14 @@ Rails.application.routes.draw do
   
   # Route for computer table
   get 'computertable', to: 'computers#table'
+  
+  # Add member thankyou route to computers resource
+  resources :computers do
+    member do
+      get 'thankyou'
+    end
+  end
+  
 end
 
   #  The following routes are the manual equivalent of resources:

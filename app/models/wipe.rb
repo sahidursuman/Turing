@@ -4,5 +4,5 @@ class Wipe < ActiveRecord::Base
   
   validates :staff_id, presence: true
   #validates :computer_id, presence: true
-  validates :action_taken, presence: true, length: { minimum: 2, maximum: 250 }
+  validates :action_taken, presence: true, length: { minimum: 2, maximum: 250 }, allow_blank: true
 end

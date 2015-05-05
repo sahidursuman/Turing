@@ -11,20 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416082748) do
+ActiveRecord::Schema.define(version: 20150503222136) do
 
   create_table "computers", force: true do |t|
     t.string   "manufacturer"
     t.string   "computer_type"
     t.string   "model_no"
     t.string   "serial_no"
-    t.text     "donor"
     t.text     "specification"
     t.text     "product_key"
     t.string   "turingtrack"
+    t.integer  "donor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "picture"
+  end
+
+  create_table "donors", force: true do |t|
+    t.string   "donor_name"
+    t.string   "donor_email"
+    t.boolean  "allow_mail",  default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "staff_types", force: true do |t|
@@ -39,6 +47,16 @@ ActiveRecord::Schema.define(version: 20150416082748) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.boolean  "admin",           default: false
+  end
+
+  create_table "stocks", force: true do |t|
+    t.integer  "keyboards"
+    t.integer  "mice"
+    t.integer  "monitors"
+    t.integer  "printers"
+    t.integer  "speakers"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "types", force: true do |t|

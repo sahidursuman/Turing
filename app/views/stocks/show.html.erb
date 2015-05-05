@@ -1,0 +1,41 @@
+<%= render "shared/page_title", title: "Stock Batch #" + @stock.id.to_s %>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th># of Keyboards</th>
+          <th># of Mice</th>
+          <th># of Monitors</th>
+          <th># of Printers</th>
+          <th># of Speakers</th>
+          <th>Created on</th>
+          <th>Updated on</th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @stock.keyboards %></td>
+          <td><%= @stock.mice %></td>
+          <td><%= @stock.monitors %></td>
+          <td><%= @stock.printers %></td>
+          <td><%= @stock.speakers %></td>
+          <td><%= @stock.created_at.strftime("%d/%m/%y") %></td>
+          <td><%= @stock.updated_at.strftime("%d/%m/%y") %></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="center">
+      <% if logged_in? %>
+        <%= link_to "Edit this batch", edit_stock_path(@stock), class: "btn btn-success" %>
+      <% end %>
+      
+      <% if logged_in? and current_user.admin? %>
+        <%= link_to "Delete this batch", @stock, method: :delete, data: {confirm: "Delete this batch?" }, class: "btn btn-danger" %>
+      <% end %>
+    </div>
+    
+  </div>
+</div>

@@ -4,7 +4,7 @@
     <div class="col-md-6 col-md-offset-3 left">
       <p>
         <h5><strong><%= @computer.manufacturer + " " + @computer.computer_type + 
-        " donated by " + @computer.donor + ", Turing Track #" + @computer.turingtrack %></strong></h5>
+        " donated by " + @computer.donor.donor_name + ", Turing Track #" + @computer.turingtrack %></strong></h5>
         <h5><%= @wipe.action_taken %></h5>
         <h5>On <%= @wipe.created_at.strftime("%A, %d %B %Y") %></h5>
       </p>

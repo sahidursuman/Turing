@@ -28,7 +28,7 @@
             <td><%= computer.model_no %></td>
             <td><%= computer.serial_no %></td>
             <td><%= computer.product_key %></td>
-            <td><%= computer.donor %></td>
+            <td><%= computer.donor.donor_name %></td>
             <td><%= computer.created_at.strftime("%d/%m/%y") %></td>
             <td><%= computer.updated_at.strftime("%d/%m/%y") %></td>
             <% if computer.wipe.present? %>

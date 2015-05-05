@@ -4,19 +4,14 @@ class ComputerTest < ActiveSupport::TestCase
   
   def setup
     @staff = Staff.create(staff_name: "John Example", staff_email: "John@example.com")
-    @computer = @staff.computers.build(manufacturer: "Toshiba", computer_type: "Laptop",
+    @computer = Computer.create(manufacturer: "Toshiba", computer_type: "Laptop",
                 model_no: "TSH1137", serial_no: "1234567890",
                 donor: "Mr. J. Smith", specification: "Windows XP",
-                product_key: "WIN2015123456", turingtrack: "0000000001")
+                product_key: "WIN2015123456", turingtrack: "10000001")
   end
   
   test "computer should be valid" do
     assert @computer.valid?
-  end
-  
-  test "staff_id should be present" do
-    @computer.staff_id = nil
-    assert_not @computer.valid?
   end
 
   test "manufacturer should be > 2" do
@@ -51,11 +46,6 @@ class ComputerTest < ActiveSupport::TestCase
   
   test "model_no should be < 50" do
     @computer.model_no = "a" * 51
-    assert_not @computer.valid?
-  end
-  
-   test "serial_no should be present" do
-    @computer.serial_no = " "
     assert_not @computer.valid?
   end
   
@@ -99,14 +89,9 @@ class ComputerTest < ActiveSupport::TestCase
     assert_not @computer.valid?
   end
   
-  test "turingtrack should be < 9" do
-    @computer.turingtrack = "a" * 9
-    assert_not @computer.valid?
-  end
-  
-  test "turingtrack should be > 7" do
-    @computer.turingtrack = "a"
-    assert_not @computer.valid?
+  test "turingtrack should be 8" do
+    @computer.product_key = "a" * 8
+    assert @computer.valid?
   end
   
 end

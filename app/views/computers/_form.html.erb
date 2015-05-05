@@ -4,18 +4,18 @@
   <div class="well col-md-8 col-md-offset-2">
     <%= form_for(@computer, html: { multipart: true }) do |f| %>
     
+      <% if logged_in? %>
+        <h3>Computer Details</h3><br>
+      <% else %>
+        <h3>Your Computer's Details</h3><br>
+      <% end %>
+    
       <%= f.label :manufacturer %>
       <%= f.text_field :manufacturer, :placeholder => "Toshiba" %>
       <%= f.label :computer_type, "Computer Type" %>
       <%= f.text_field :computer_type, :placeholder => "Laptop"%>
       <%= f.label :specification, "Specification (if known)" %> <!-- rows: 3 -->
       <%= f.text_area :specification, :placeholder => "Intel Celeron 1.1GHz, 256MB RAM 20GB HDD" %>
-      <% if logged_in? %>
-        <%= f.label :donor %>
-      <% else %>
-        <%= f.label :donor, "Your Name" %>
-      <% end %>
-      <%= f.text_field :donor, :placeholder => "Mr. John Smith" %>
       <%= f.label :model_no, "Model No." %>
       <%= f.text_field :model_no, :placeholder => "Satellite S1800-712" %>
       <%= f.label :serial_no, "Serial No." %>
@@ -30,11 +30,45 @@
       </span>
       
       <% if logged_in? %>
-        <br><strong>Wiping Details:<br><br></strong>
+        <br><h3>Wiping Details<br><br></h3>
         <%= f.fields_for :wipe do |wipe_form| %>
           <%= wipe_form.label :action_taken %>
           <%= wipe_form.text_field :action_taken %>
         <% end %>
+      <% end %>
+      
+      <% if logged_in? %>
+        <br><h3>Donor Details</h3><br>
+      <% else %>
+        <br><h3>Your Details</h3><br>
+      <% end %>
+      
+      <%= f.fields_for :donor do |donor_form| %>
+      
+        <% if logged_in? %>
+          <%= donor_form.label :donor_name %>
+        <% else %>
+          <%= donor_form.label :donor_name, "Your Name" %>
+        <% end %>
+        <%= donor_form.text_field :donor_name %>
+        <% if logged_in? %>
+          <%= donor_form.label :donor_email %>
+        <% else %>
+          <%= donor_form.label :donor_email, "Your Email Address" %>
+        <% end %>
+        <%= donor_form.text_field :donor_email %>
+        
+        <h4>
+          Would you like to join our mailing list? Tick the box below to get updates
+          on how The Turing Trust is supporting education in Ghana. We promise not to 
+          pass your details on to any 3rd parties! 
+        </h4>
+        
+        <%= donor_form.label :allow_mail, class: "checkbox pull-left" do %> 
+          <p class="pull-left">Update me!</p>
+          <%= donor_form.check_box :allow_mail %>
+        <% end %><br><br><br>
+        
       <% end %>
 
       <%= f.submit(@computer.new_record? ? "Submit Details" : "Submit Edited Details", class: "btn btn-success") %>

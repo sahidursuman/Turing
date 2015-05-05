@@ -22,7 +22,7 @@
     <div class="col-md-6 col-md-offset-3 well">
       <h4><%= link_to "Turing Track No #" + wipe.computer.turingtrack, computer_path(wipe.computer) %></h4>
       <p><%= wipe.computer.manufacturer + " " + wipe.computer.computer_type +  
-      " donated by " + wipe.computer.donor %></p>
+      " donated by " + wipe.computer.donor.donor_name %></p>
       <p>
         <span class="quiet"><small>Created <%= time_ago_in_words(wipe.computer.created_at) %> ago, </small></span>
         <span class="quiet"><small>updated <%= time_ago_in_words(wipe.computer.updated_at) %> ago</small></span>

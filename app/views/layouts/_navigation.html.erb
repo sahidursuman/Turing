@@ -14,10 +14,25 @@
           <ul class="dropdown-menu">
             <li><%= link_to "Computer Index", computers_path %></li>
             <li><%= link_to "Computer Table", computertable_path %></li>
+            <li class='divider'></li>
             <li><%= link_to "New Computer", new_computer_path %></li>
           </ul>
         </li>
       </ul>
+      
+      <ul class="nav_ul_item">
+        <li class="dropdown">
+          <%= link_to '#', class: "btn btn-default nav_styling dropdown-toggle", "data-toggle" => "dropdown" do %>
+            Stock <b class="caret"></b>
+          <% end %>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Stock Table", stocks_path %></li>
+            <li class='divider'></li>
+            <li><%= link_to "New Stock Item", new_stock_path %></li>
+          </ul>
+        </li>
+      </ul>
+        
     
       <% if current_user.admin? %>
         <ul class="nav_ul_item">
@@ -30,19 +45,30 @@
               <% Type.all.each do |type| %>
                 <li><%= link_to type.department, type_path(type) %></li>
               <% end %>
-              <% if logged_in? %>
-                <li class='divider'></li>
-                <li><%= link_to "New Staff Member", register_path %></li>
-                <li>
-                  <%= link_to(new_type_path) do %>
-                    New Department
-                  <% end %>
-                </li>
-              <% end %>
+              <li class='divider'></li>
+              <li><%= link_to "New Staff Member", register_path %></li>
+              <li>
+                <%= link_to(new_type_path) do %>
+                  New Department
+                <% end %>
+              </li>
             </ul>
           </li>
         </ul>
       <% end%>
+      
+      <% if current_user.admin? %>
+        <ul class="nav_ul_item">
+          <li class="dropdown">
+            <%= link_to '#', class: "btn btn-default nav_styling dropdown-toggle", "data-toggle" => "dropdown" do %>
+              Donors <b class="caret"></b>
+            <% end %>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Donor Index", donors_path %></li>
+            </ul>
+          </li>
+        </ul>
+      <% end %>  
       
     <!-- Creates drop down and pulls Log In and Log Out to RHS --> 
       

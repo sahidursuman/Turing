@@ -1,0 +1,25 @@
+<%= render "shared/errors", obj: @donor %>
+
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2 form-group">
+    <%= form_for @donor do |f| %>
+    
+      <%= f.label :donor_name %>
+      <%= f.text_field :donor_name %>
+    
+      <%= f.label :donor_email %>
+      <%= f.email_field :donor_email %>
+    
+      <h4>Would you like to join our mailing list? Tick the box below to get updates on how The Turing Trust
+      is supporting education in Ghana. We promise not to pass your details on to any 3rd parties! </h4>
+    
+      <%= f.label :allow_mail, class: "checkbox pull-left" do %> 
+        <p class="pull-left">Update me!</p>
+        <%= f.check_box :allow_mail %>
+      <% end %>
+    
+      <%= f.submit(@donor.new_record? ? "Submit Donor Details" : "Submit Edited Donor Details", class: "btn btn-success")%>
+
+    <% end %>
+  </div>
+</div>

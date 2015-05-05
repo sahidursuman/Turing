@@ -1,5 +1,5 @@
 class ComputersController < ApplicationController
-  before_action :set_computer, only: [:edit, :update, :show]
+  before_action :set_computer, only: [:edit, :update, :show, :thankyou]
   before_action :require_user, except: [:new, :create]
   before_action :admin_user, only: :destroy
   
@@ -12,11 +12,14 @@ class ComputersController < ApplicationController
   
   def show
     @wipe = @computer.wipe
+    @barcode = Barby::Code128B.new(@computer.turingtrack)
+    @barcode_for_html = Barby::HtmlOutputter.new(@barcode)
   end 
   
   def new
     @computer = Computer.new
     @computer.build_wipe
+    @computer.build_donor
   end
   
   def create
@@ -31,7 +34,7 @@ class ComputersController < ApplicationController
       if logged_in?
         redirect_to computers_path
       else
-        redirect_to 'http://turingtrust.co.uk/'
+        redirect_to thankyou_path
       end
     else
       render :new, layout: new_layout
@@ -69,14 +72,21 @@ class ComputersController < ApplicationController
     @computers = Computer.all
   end
   
+  def thankyou
+    @barcode = Barby::Code128B.new(@computer.turingtrack)
+    @barcode_for_html = Barby::HtmlOutputter.new(@barcode)
+  end
+  
   private
   
     # Whitelisting variables
     def computer_params
       params.require(:computer).permit(:manufacturer, :computer_type, :specification, 
-                                       :donor, :model_no, :serial_no, :product_key, 
+                                       :model_no, :serial_no, :product_key, 
                                        :turingtrack, :picture, wipe_attributes: 
-                                       [:id, :action_taken, :staff_id])
+                                       [:id, :action_taken, :staff_id],
+                                       donor_attributes: [:id, :donor_name, 
+                                       :donor_email, :allow_mail])
     end
     
     def set_computer

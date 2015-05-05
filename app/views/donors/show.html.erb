@@ -1,0 +1,49 @@
+<%= render "shared/page_title", title: @donor.donor_name %>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    
+    <h3 class="text-center">Donor Details</h3>
+      Donor ID: <%= @donor.id%> <br>
+      Donor Email: <%= @donor.donor_email %> <br>
+      Send Email Updates: <%= @donor.allow_mail %> <br>
+      Date Profile Created: <%= @donor.created_at.strftime("%d/%m/%y") %> <br>
+      Date Profile Last Updated: <%= @donor.updated_at.strftime("%d/%m/%y") %>
+    
+    <h3 class="text-center">Donation Details</h3><br>
+    <% @computers.each do |computer| %>
+      
+      <div class="col-md-6 pull-left">
+        <strong>Computer Details:</strong><br>
+        Turing Track No: #<%= link_to computer.turingtrack, computer_path(computer) %> <br>
+        Manufacturer: <%= computer.manufacturer %> <br>
+        Type of Computer: <%= computer.computer_type %> <br>
+        Model No: <%= computer.model_no %> <br>
+        Serial No: <%= computer.serial_no %> <br>
+        Specification: <%= computer.specification %> <br>
+        OS Product Key: <%= computer.product_key %> <br>
+        Created on: <%= computer.created_at.strftime("%d/%m/%y") %> <br>
+        Updated on: <%= computer.updated_at.strftime("%d/%m/%y") %>
+      </div>
+      
+      <div class="col-md-6">
+        <%= image_tag(computer.picture.url, class: "donor_computer_img") if computer.picture? %>
+      </div>
+      
+      <% if computer.wipe.present? %>
+        <div class="col-md-12 donor_computer">
+          <br><strong>Wiping Details:</strong><br>
+          
+          Wiped by <%= link_to computer.wipe.staff.staff_name, staff_path(computer.wipe.staff) %>
+          on <%= computer.wipe.created_at.strftime("%d/%m/%y") %>
+          with the following method: <%= computer.wipe.action_taken %>
+          
+        </div>
+      <% end %>
+      
+      <hr>
+      <br>
+    <% end %>
+    
+  </div>
+</div>
