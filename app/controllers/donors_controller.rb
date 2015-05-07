@@ -47,6 +47,10 @@ class DonorsController < ApplicationController
     flash[:success] = "The donor's details have been successfully deleted"
     redirect_to donors_path
   end
+  
+  def mailinglist
+    @donors = Donor.all
+  end
 
   private
   

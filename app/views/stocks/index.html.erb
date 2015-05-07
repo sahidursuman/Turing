@@ -1,7 +1,79 @@
-<%= render "shared/page_title", title: "Stock Index Table" %>
+<%= render "shared/page_title", title: "Stock Index" %>
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
+    
+    <!-- Calculate Totals of Stock Items Donated -->
+    <% ke_count = 0  %><% mi_count = 0%><% mo_count = 0%><% pr_count = 0%><% sp_count = 0 %>
+    <% @stocks.each do |stock| %>
+      <% ke_count += stock.keyboards %>
+      <% mi_count += stock.mice %>
+      <% mo_count += stock.monitors %>
+      <% pr_count += stock.printers %>
+      <% sp_count += stock.speakers %>
+    <% end %>
+    
+    <!-- Calculated Totals of Stock Items Shipped to Ghana -->
+    <% sent_ke_count = 0  %><% sent_mi_count = 0%><% sent_mo_count = 0%><% sent_pr_count = 0%><% sent_sp_count = 0 %>
+    <% @sent_stocks.each do |sent_stock| %>
+      <% sent_ke_count += sent_stock.sent_keyboards %>
+      <% sent_mi_count += sent_stock.sent_mice %>
+      <% sent_mo_count += sent_stock.sent_monitors %>
+      <% sent_pr_count += sent_stock.sent_printers %>
+      <% sent_sp_count += sent_stock.sent_speakers %>
+    <% end %>
+    
+    <!-- Totals Table -->
+    <h3 class="text-center">Totals</h3>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th></th>
+          <th># of Keyboards</th>
+          <th># of Mice</th>
+          <th># of Monitors</th>
+          <th># of Printers</th>
+          <th># of Speakers</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Items Recieved</strong></td>
+          <td><%= ke_count %></td>
+          <td><%= mi_count %></td>
+          <td><%= mo_count %></td>
+          <td><%= pr_count %></td>
+          <td><%= sp_count %></td>
+        </tr>
+        <tr>
+          <td><strong>Items Sent</strong></td>
+          <td><%= sent_ke_count %></td>
+          <td><%= sent_mi_count %></td>
+          <td><%= sent_mo_count %></td>
+          <td><%= sent_pr_count %></td>
+          <td><%= sent_sp_count %></td>
+        </tr>
+        <tr>
+          <td><strong>Current Stock</strong></td>
+          <td><%= ke_count - sent_ke_count %></td>
+          <td><%= mi_count - sent_mi_count %></td>
+          <td><%= mo_count - sent_mo_count %></td>
+          <td><%= pr_count - sent_pr_count %></td>
+          <td><%= sp_count - sent_sp_count %></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    
+    <!-- Stock Donations Recieved Table -->
+    <h3 class="text-center">Donated Items Recieved</h3>
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
@@ -12,7 +84,8 @@
           <th># of Printers</th>
           <th># of Speakers</th>
           <th>Created on</th>
-          <th>Updated on</th></th>
+          <th>Updated on</th>
+          <th>Uploaded by</th>
         </tr>
       </thead>
       <tbody>
@@ -26,28 +99,53 @@
             <td><%= stock.speakers %></td>
             <td><%= stock.created_at.strftime("%d/%m/%y") %></td>
             <td><%= stock.updated_at.strftime("%d/%m/%y") %></td>
+            <td><%= link_to stock.staff.staff_name, staff_path(stock.staff) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    
+    <!-- Stock Items Sent to Ghana Table -->
+    <h3 class="text-center">Items Sent to Ghana</h3>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Batch</th>
+          <th># of Keyboards</th>
+          <th># of Mice</th>
+          <th># of Monitors</th>
+          <th># of Printers</th>
+          <th># of Speakers</th>
+          <th>Created on</th>
+          <th>Updated on</th>
+          <th>Uploaded by</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @sent_stocks.each do |sent_stock| %>
+          <tr>
+            <td><%= link_to "#" + sent_stock.id.to_s, sent_stock_path(sent_stock) %></td>
+            <td><%= sent_stock.sent_keyboards %></td>
+            <td><%= sent_stock.sent_mice %></td>
+            <td><%= sent_stock.sent_monitors %></td>
+            <td><%= sent_stock.sent_printers %></td>
+            <td><%= sent_stock.sent_speakers %></td>
+            <td><%= sent_stock.created_at.strftime("%d/%m/%y") %></td>
+            <td><%= sent_stock.updated_at.strftime("%d/%m/%y") %></td>
+            <td><%= link_to sent_stock.staff.staff_name, staff_path(sent_stock.staff)  %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
     
-    <!-- Calculate Totals of Stock Items Donated -->
-    <% ke_count = 0  %><% mi_count = 0%><% mo_count = 0%><% pr_count = 0%><% sp_count = 0 %>
-    <% @stocks.each do |stock| %>
-      <% ke_count += stock.keyboards %>
-      <% mi_count += stock.mice %>
-      <% mo_count += stock.monitors %>
-      <% pr_count += stock.printers %>
-      <% sp_count += stock.speakers %>
-    <% end %>
-    
-    <h3 class="text-center">Total # of Items Donated</h3>
-    <p class="center">
-      Keyboards: <%= ke_count %> |
-      Mice: <%= mi_count %> |
-      Monitors: <%= mo_count %> |
-      Printers: <%= pr_count %> | 
-      Speakers: <%= sp_count %>
-    </p>
   </div>
 </div>
+

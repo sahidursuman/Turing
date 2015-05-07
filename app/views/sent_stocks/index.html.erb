@@ -1,0 +1,53 @@
+<%= render "shared/page_title", title: "Confirmation of Sent Stock Index Table" %>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Batch</th>
+          <th># of Keyboards</th>
+          <th># of Mice</th>
+          <th># of Monitors</th>
+          <th># of Printers</th>
+          <th># of Speakers</th>
+          <th>Created on</th>
+          <th>Updated on</th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @sent_stocks.each do |sent_stock| %>
+          <tr>
+            <td><%= link_to "#" + sent_stock.id.to_s, sent_stock_path(sent_stock) %></td>
+            <td><%= sent_stock.sent_keyboards %></td>
+            <td><%= sent_stock.sent_mice %></td>
+            <td><%= sent_stock.sent_monitors %></td>
+            <td><%= sent_stock.sent_printers %></td>
+            <td><%= sent_stock.sent_speakers %></td>
+            <td><%= sent_stock.created_at.strftime("%d/%m/%y") %></td>
+            <td><%= sent_stock.updated_at.strftime("%d/%m/%y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    
+    <!-- Calculate Totals of Stock Items Donated -->
+    <% ke_count = 0  %><% mi_count = 0%><% mo_count = 0%><% pr_count = 0%><% sp_count = 0 %>
+    <% @sent_stocks.each do |sent_stock| %>
+      <% ke_count += sent_stock.sent_keyboards %>
+      <% mi_count += sent_stock.sent_mice %>
+      <% mo_count += sent_stock.sent_monitors %>
+      <% pr_count += sent_stock.sent_printers %>
+      <% sp_count += sent_stock.sent_speakers %>
+    <% end %>
+    
+    <h3 class="text-center">Total # of Items Sent</h3>
+    <p class="center">
+      Keyboards: <%= ke_count %> |
+      Mice: <%= mi_count %> |
+      Monitors: <%= mo_count %> |
+      Printers: <%= pr_count %> | 
+      Speakers: <%= sp_count %>
+    </p>
+  </div>
+</div>

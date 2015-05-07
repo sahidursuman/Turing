@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150503222136) do
+ActiveRecord::Schema.define(version: 20150506120045) do
 
   create_table "computers", force: true do |t|
     t.string   "manufacturer"
@@ -31,6 +31,17 @@ ActiveRecord::Schema.define(version: 20150503222136) do
     t.string   "donor_name"
     t.string   "donor_email"
     t.boolean  "allow_mail",  default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sent_stocks", force: true do |t|
+    t.integer  "sent_keyboards"
+    t.integer  "sent_mice"
+    t.integer  "sent_monitors"
+    t.integer  "sent_printers"
+    t.integer  "sent_speakers"
+    t.integer  "staff_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -55,6 +66,7 @@ ActiveRecord::Schema.define(version: 20150503222136) do
     t.integer  "monitors"
     t.integer  "printers"
     t.integer  "speakers"
+    t.integer  "staff_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

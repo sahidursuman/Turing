@@ -1,15 +1,17 @@
 Rails.application.routes.draw do
   
+  # Home page route
   root 'pages#home'
-  
   get '/home', to: 'pages#home'
   
+  # General routes
   resources :computers
   resources :staffs, except: [:new]
   resources :types, only: [:new, :create, :show, :destroy]
   resources :wipes, only: [:new, :create, :show]
   resources :donors
   resources :stocks
+  resources :sent_stocks
   
   # Rename new_staff route to register
   get '/register', to: 'staffs#new'
@@ -22,12 +24,19 @@ Rails.application.routes.draw do
   # Route for computer table
   get 'computertable', to: 'computers#table'
   
-  # Add member thankyou route to computers resource
+  # Add member routes to computers resource
   resources :computers do
     member do
+      # Thank you page
       get 'thankyou'
+      # Dropbox uploads
+      post 'drop_upload'
+      get 'drop_display'
     end
   end
+  
+  # Route for mailing list
+  get 'mailinglist', to: 'donors#mailinglist'
   
 end
 

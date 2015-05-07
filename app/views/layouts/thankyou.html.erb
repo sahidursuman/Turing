@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The Turing Trust Donations</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body class="donate_body">
+
+  <header class="donate_header">
+    <div class="container">
+      <h1>
+        Thank you for your donation to The Turing Trust
+      </h1>
+    </div>
+  </header>
+  
+  <div class="container">
+    
+    <%= render 'layouts/messages' %>
+    <%= yield %>
+    
+    <div class="row">
+      <div class="col-md-8  col-md-offset-2 text-center"> 
+        <br><%= link_to "Back to The Turing Trust Homepage", "http://turingtrust.co.uk" , class: "btn btn-lg linkbox_styling" %>
+      </div>
+    </div>
+    
+    <%= render 'layouts/footer' %>
+  
+  </div>
+  
+</body>
+</html>

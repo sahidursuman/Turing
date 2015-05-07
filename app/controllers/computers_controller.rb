@@ -1,13 +1,15 @@
 class ComputersController < ApplicationController
-  before_action :set_computer, only: [:edit, :update, :show, :thankyou]
-  before_action :require_user, except: [:new, :create]
+  
+  before_action :set_computer, only: [:edit, :update, :show, :thankyou, :drop_upload, :drop_display]
+  before_action :require_user, except: [:new, :create, :thankyou]
   before_action :admin_user, only: :destroy
   
   layout :new_layout, only: [:new, :update]
+  layout "thankyou", only: [:thankyou]
   
   def index
     # Pagination of computers
-    @computers = Computer.paginate(page: params[:page], per_page: 10)
+    @computers = Computer.paginate(page: params[:page], per_page: 20)
   end
   
   def show
@@ -34,7 +36,7 @@ class ComputersController < ApplicationController
       if logged_in?
         redirect_to computers_path
       else
-        redirect_to thankyou_path
+        redirect_to thankyou_computer_path(@computer)
       end
     else
       render :new, layout: new_layout
@@ -76,6 +78,20 @@ class ComputersController < ApplicationController
     @barcode = Barby::Code128B.new(@computer.turingtrack)
     @barcode_for_html = Barby::HtmlOutputter.new(@barcode)
   end
+  
+  ##########################################################################################
+  # Dropbox Image Uploader
+  include Dropboxer
+  
+  def drop_upload
+    upload
+  end
+  
+  def drop_display
+    display
+  end
+
+  ##########################################################################################
   
   private
   

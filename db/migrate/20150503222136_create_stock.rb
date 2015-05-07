@@ -6,6 +6,7 @@ class CreateStock < ActiveRecord::Migration
       t.integer :monitors
       t.integer :printers
       t.integer :speakers
+      t.integer :staff_id
       t.timestamps
     end
   end

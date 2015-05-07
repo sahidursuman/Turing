@@ -20,19 +20,21 @@
         </li>
       </ul>
       
-      <ul class="nav_ul_item">
-        <li class="dropdown">
-          <%= link_to '#', class: "btn btn-default nav_styling dropdown-toggle", "data-toggle" => "dropdown" do %>
-            Stock <b class="caret"></b>
-          <% end %>
-          <ul class="dropdown-menu">
-            <li><%= link_to "Stock Table", stocks_path %></li>
-            <li class='divider'></li>
-            <li><%= link_to "New Stock Item", new_stock_path %></li>
-          </ul>
-        </li>
-      </ul>
-        
+      <% if current_user.admin? %>
+        <ul class="nav_ul_item">
+          <li class="dropdown">
+            <%= link_to '#', class: "btn btn-default nav_styling dropdown-toggle", "data-toggle" => "dropdown" do %>
+              Stock <b class="caret"></b>
+            <% end %>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Stock Index", stocks_path %></li>
+              <li class='divider'></li>
+              <li><%= link_to "New Stock Received", new_stock_path %></li>
+              <li><%= link_to "New Sent Confirmation", new_sent_stock_path %></li>
+            </ul>
+          </li>
+        </ul>
+      <% end %>
     
       <% if current_user.admin? %>
         <ul class="nav_ul_item">
@@ -65,6 +67,7 @@
             <% end %>
             <ul class="dropdown-menu">
               <li><%= link_to "Donor Index", donors_path %></li>
+              <li><%= link_to "Mailing List", mailinglist_path %></li>
             </ul>
           </li>
         </ul>

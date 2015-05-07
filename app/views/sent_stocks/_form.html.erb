@@ -1,0 +1,26 @@
+<%= render "shared/errors", obj: @sent_stock %>
+
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2 form-group">
+    <%= form_for @sent_stock do |f| %>
+    
+      <%= f.label :sent_keyboards, "No. of Keyboards" %>
+      <%= f.number_field :sent_keyboards, :placeholder => 0, value: 0 %>
+    
+      <%= f.label :sent_mice, "No. of Mice" %>
+      <%= f.number_field :sent_mice, :placeholder => 0, value:0 %>
+      
+      <%= f.label :sent_monitors, "No. of Monitors" %>
+      <%= f.number_field :sent_monitors, :placeholder => 0, value:0 %>
+      
+      <%= f.label :sent_printers, "No. of Printers" %>
+      <%= f.number_field :sent_printers, :placeholder => 0, value: 0 %>
+      
+      <%= f.label :sent_speakers, "No. of Speakers" %>
+      <%= f.number_field :sent_speakers, :placeholder => 0, value: 0 %>
+    
+      <%= f.submit(@sent_stock.new_record? ? "Submit Sent Items Confirmation" : "Update Sent Items Confirmation", class: "btn btn-success")%>
+
+    <% end %>
+  </div>
+</div>

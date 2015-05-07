@@ -1,5 +1,3 @@
-<%= render "shared/page_title", title: "Thankyou for your donation to The Turing Trust" %>
-
 <div class="row">
   <div class="col-md-12">
     <h3>Dear <%= @computer.donor.donor_name %>, </h3>
@@ -14,7 +12,7 @@
 
 <div class="row">
   <div class="col-md-4 col-md-offset-4 center">
-    <%= raw @barcode_for_html.to_html %>
+    <br><%= raw @barcode_for_html.to_html %>
   </div> 
 </div>
 
@@ -33,7 +31,7 @@
 
     <h3>Oli, Jade, & your team at The Turing Trust</h3>
 
-    <br><h5>If you have any additional queries or questions, please don't hesitate to
+    <br><h5 class="center">If you have any additional queries or questions, please don't hesitate to
     contact us at recycle@turingtrust.co.uk</h5>
   </div>
 </div>

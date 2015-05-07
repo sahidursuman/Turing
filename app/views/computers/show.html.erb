@@ -2,9 +2,21 @@
 
 <div class="row">
   <div class="col-md-5 pull-right center">
+    
     <div class="show_computer">
       <%= image_tag(@computer.picture.url, class: "computer_img") if @computer.picture? %>
     </div>
+    <div>
+      <%= link_to "View Image", @computer.picture_url , class: "btn btn-primary" if @computer.picture.present?%>
+    </div>
+   
+    <div><br>
+      <%= form_tag({:action => :drop_upload}, :multipart => true) do %>
+        <%= file_field_tag 'file' %><%= submit_tag 'Upload Image' %>
+        <%= link_to "Image" , drop_display_computer_path(@computer) %>
+      <% end %>
+    </div>
+    
   </div> 
   
   <div class="col-md-7">

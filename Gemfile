@@ -34,6 +34,8 @@ gem 'will_paginate', '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
 # Barcode Gem
 gem 'barby'
+# Dropbox Ruby DSK 
+gem 'dropbox-sdk'
 
 # Use unicorn as the app server
 # gem 'unicorn'

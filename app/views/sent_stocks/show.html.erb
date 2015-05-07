@@ -1,4 +1,4 @@
-<%= render "shared/page_title", title: "Stock Batch #" + @stock.id.to_s %>
+<%= render "shared/page_title", title: "Sent Stock Batch #" + @sent_stock.id.to_s %>
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
@@ -17,14 +17,14 @@
       </thead>
       <tbody>
         <tr>
-          <td><%= @stock.keyboards %></td>
-          <td><%= @stock.mice %></td>
-          <td><%= @stock.monitors %></td>
-          <td><%= @stock.printers %></td>
-          <td><%= @stock.speakers %></td>
-          <td><%= @stock.created_at.strftime("%d/%m/%y") %></td>
-          <td><%= @stock.updated_at.strftime("%d/%m/%y") %></td>
-          <td><%= link_to @stock.staff.staff_name, staff_path(@stock.staff)  %></td>
+          <td><%= @sent_stock.sent_keyboards %></td>
+          <td><%= @sent_stock.sent_mice %></td>
+          <td><%= @sent_stock.sent_monitors %></td>
+          <td><%= @sent_stock.sent_printers %></td>
+          <td><%= @sent_stock.sent_speakers %></td>
+          <td><%= @sent_stock.created_at.strftime("%d/%m/%y") %></td>
+          <td><%= @sent_stock.updated_at.strftime("%d/%m/%y") %></td>
+          <td><%= link_to @sent_stock.staff.staff_name, staff_path(@sent_stock.staff)  %></td>
         </tr>
       </tbody>
     </table>
@@ -35,12 +35,12 @@
     
     <div class="center">
       <% if logged_in? %>
-        <%= link_to "Edit this batch", edit_stock_path(@stock), class: "btn btn-success" %>
+        <%= link_to "Edit this batch", edit_sent_stock_path(@sent_stock), class: "btn btn-success" %>
       <% end %>
       
       <% if logged_in? and current_user.admin? %>
         <%= link_to "Go To Stock Index", stocks_path, class: "btn btn-warning" %>
-        <%= link_to "Delete this batch", @stock, method: :delete, data: {confirm: "Delete this batch?" }, class: "btn btn-danger" %>
+        <%= link_to "Delete this batch", @sent_stock, method: :delete, data: {confirm: "Delete this batch?" }, class: "btn btn-danger" %>
       <% end %>
     </div>
     

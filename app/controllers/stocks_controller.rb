@@ -5,6 +5,7 @@ class StocksController < ApplicationController
   
   def index
     @stocks = Stock.all
+    @sent_stocks = SentStock.all
   end
   
   def show
@@ -17,6 +18,7 @@ class StocksController < ApplicationController
   
   def create
     @stock = Stock.new(stock_params)
+    @stock.staff = current_user
     if @stock.save
       flash[:success] = "Your items have been added to the stock inventory successfully."
       redirect_to stock_path(@stock)
@@ -30,6 +32,7 @@ class StocksController < ApplicationController
   end
   
   def update
+    @stock.staff = current_user
     if @stock.update(stock_params)
       flash[:success] = "The stock inventory have been updated successfully."
       if logged_in?
