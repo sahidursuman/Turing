@@ -3,17 +3,24 @@
 <div class="row">
   <div class="col-md-5 pull-right center">
     
+    <!-- Original image storage with Carrier Wave saving to server file system
     <div class="show_computer">
-      <%= image_tag(@computer.picture.url, class: "computer_img") if @computer.picture? %>
+      <#%= image_tag(@computer.picture.url, class: "computer_img") if @computer.picture? %>
     </div>
     <div>
-      <%= link_to "View Image", @computer.picture_url , class: "btn btn-primary" if @computer.picture.present?%>
+      <#%= link_to "View Image", @computer.picture_url , class: "btn btn-primary" if @computer.picture.present?%>
     </div>
+    -->
    
-    <div><br>
+    <!-- Dropbox image pull using url -->
+    <% if @photo_url %>
+      <div>
+        <%= image_tag @photo_url.inspect.to_s.split()[0].split('"')[3], class: "computer_img" %>
+      </div>
+    <% end %>
+    <div style="margin: 10px">
       <%= form_tag({:action => :drop_upload}, :multipart => true) do %>
         <%= file_field_tag 'file' %><%= submit_tag 'Upload Image' %>
-        <%= link_to "Image" , drop_display_computer_path(@computer) %>
       <% end %>
     </div>
     

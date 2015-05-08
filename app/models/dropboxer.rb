@@ -1,4 +1,4 @@
-module Dropboxer
+ module Dropboxer
   
   require 'securerandom'
 
@@ -18,6 +18,7 @@ module Dropboxer
   
   def upload
     client = get_dropbox_client
+    @client = client
     unless client
       redirect_to(:action => 'auth_start') and return
     end
@@ -29,11 +30,13 @@ module Dropboxer
       #ender :text => "Upload successful.  File now at #{resp['path']}"
     rescue DropboxAuthError => e
       session.delete(:access_token)  # An auth error means the access token is probably bad
-      logger.info "Dropbox auth error: #{e}"
-      render :text => "Dropbox auth error"
+      logger.info "Dropbox Upload Authorisation error: #{e}"
+      # render :text => "Dropbox auth error"
+      flash[:danger] = "Dropbox Upload Authorisation Error: #{e}"
     rescue DropboxError => e
-      logger.info "Dropbox API error: #{e}"
-      render :text => "Dropbox API error"
+      logger.info "Dropbox Upload API error: #{e}"
+      #render :text => "Dropbox API error"
+      flash[:danger] = "Dropbox Upload API Error: #{e}"
     end
   end
   
@@ -48,11 +51,13 @@ module Dropboxer
         #client.metadata('/').inspect # List of all photos in folder
     rescue DropboxAuthError => e
       session.delete(:access_token)  # An auth error means the access token is probably bad
-      logger.info "Dropbox auth error: #{e}"
-      render :text => "Dropbox auth error"
+      logger.info "Dropbox Displau Authorisation error: #{e}"
+      #render :text => "Dropbox auth error"
+      flash[:danger] = "Dropbox Display Authorisation Error: #{e}"
     rescue DropboxError => e
-      logger.info "Dropbox API error: #{e}"
-      render :text => "Dropbox API error"
+      logger.info "Dropbox Display API error: #{e}"
+      #render :text => "Dropbox API error"
+      flash[:danger] = "Dropbox Display API Error: #{e}"
     end
   end
   
@@ -87,21 +92,26 @@ module Dropboxer
       session[:access_token] = access_token
       redirect_to :action => 'main'
     rescue DropboxOAuth2Flow::BadRequestError => e
-      render :text => "Error in OAuth 2 flow: Bad request: #{e}"
+      #render :text => "Error in OAuth 2 flow: Bad request: #{e}"
+      flash[:danger] = "Error in OAuth 2 flow: Bad request: #{e}"
     rescue DropboxOAuth2Flow::BadStateError => e
       logger.info("Error in OAuth 2 flow: No CSRF token in session: #{e}")
       redirect_to(:action => 'auth_start')
     rescue DropboxOAuth2Flow::CsrfError => e
       logger.info("Error in OAuth 2 flow: CSRF mismatch: #{e}")
-      render :text => "CSRF error"
+      #render :text => "CSRF error"
+      flash[:danger] = "CSRF Error"
     rescue DropboxOAuth2Flow::NotApprovedError => e
-      render :text => "Approval Error: Session must be Authorised"
+      #render :text => "Approval Error: Session must be Authorised"
+      flash[:danger] = "Approval Error: Session must be Authorised"
     rescue DropboxOAuth2Flow::ProviderError => e
       logger.info "Error in OAuth 2 flow: Error redirect from Dropbox: #{e}"
-      render :text => "Strange error."
+      #render :text => "Strange error."
+      flash[:danger] = "Strage Error: #{e}"
     rescue DropboxError => e
       logger.info "Error getting OAuth 2 access token: #{e}"
-      render :text => "Error communicating with Dropbox servers."
+      #ender :text => "Error communicating with Dropbox servers."
+      flash[:danger] = "Error communicating with Dropbox servers."
     end
   end
 

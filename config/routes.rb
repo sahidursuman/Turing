@@ -31,10 +31,13 @@ Rails.application.routes.draw do
       get 'thankyou'
       # Dropbox uploads
       post 'drop_upload'
-      get 'drop_display'
     end
   end
   
+  # Dropbox Authorisation
+  get  'auth_start', to: 'computers#drop_auth_start'
+  get  'auth_finish', to: 'computers#drop_auth_finish'
+
   # Route for mailing list
   get 'mailinglist', to: 'donors#mailinglist'
   

@@ -1,6 +1,6 @@
 class ComputersController < ApplicationController
   
-  before_action :set_computer, only: [:edit, :update, :show, :thankyou, :drop_upload, :drop_display]
+  before_action :set_computer, only: [:edit, :update, :show, :thankyou, :drop_upload]
   before_action :require_user, except: [:new, :create, :thankyou]
   before_action :admin_user, only: :destroy
   
@@ -16,6 +16,7 @@ class ComputersController < ApplicationController
     @wipe = @computer.wipe
     @barcode = Barby::Code128B.new(@computer.turingtrack)
     @barcode_for_html = Barby::HtmlOutputter.new(@barcode)
+    display
   end 
   
   def new
@@ -87,10 +88,19 @@ class ComputersController < ApplicationController
     upload
   end
   
+  def drop_auth_start
+    get_dropbox_client
+    auth_start
+  end
+  
+  def drop_auth_finish
+    auth_finish
+  end
+  
   def drop_display
     display
   end
-
+    
   ##########################################################################################
   
   private
