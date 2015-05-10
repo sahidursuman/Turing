@@ -1,5 +1,7 @@
 class Computer < ActiveRecord::Base
   belongs_to :donor
+  has_one :shipment
+  has_one :receipt
   has_one :wipe, dependent: :destroy
   accepts_nested_attributes_for :wipe
   accepts_nested_attributes_for :donor #, allow_destroy: true

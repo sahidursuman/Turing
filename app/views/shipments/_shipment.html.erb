@@ -1,0 +1,5 @@
+<span class="quiet">
+  <%= link_to "Shipped", shipment_path(shipment) %> by <%= link_to shipment.staff.staff_name, staff_path(shipment.staff) %>
+  on <%= shipment.created_at.strftime("%A, %d %B %Y") %> <br>
+  Confirmation last updated on <%= shipment.updated_at.strftime("%A, %d %B %Y") %>
+</span>

@@ -1,0 +1,39 @@
+<%= render "shared/page_title", title: "Receipt Confirmation for TuringTrack #" + @receipt.computer.turingtrack %>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>TuringTrack</th>
+          <th>Received</th>
+          <th>Receipt ID</th>
+          <th>Received by</th>
+          <th>Receipt Date</th>
+          <th>Date Last Edited </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= link_to "#" + @receipt.computer.turingtrack, computer_path(@receipt.computer) %></td>
+          <td><% if @receipt.received %> Yes <% else %> No <% end %></td>
+          <td><%= "#" + @receipt.id.to_s %></td>
+          <td><%= link_to @receipt.staff.staff_name, staff_path(@receipt.staff) %></td>
+          <td><%= @receipt.created_at.strftime("%d/%m/%y") %></td>
+          <td><%= @receipt.updated_at.strftime("%d/%m/%y") %></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="center">
+      <%= link_to "Edit this confirmation", edit_receipt_path(@receipt), class: "btn btn-success" %>
+      
+      <% if current_user.admin? %>
+        <%= link_to "Go To Receipts Index", receipts_path, class: "btn btn-warning" %>
+        <%= link_to "Delete this confirmation", @receipt, method: :delete, data: {confirm: "Delete this confirmation?" }, class: "btn btn-danger" %>
+      <% end %>
+    </div>
+    
+  </div>
+</div>

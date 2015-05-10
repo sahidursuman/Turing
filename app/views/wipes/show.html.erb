@@ -1,15 +1,42 @@
-<%= render "shared/page_title", title: "Wiped by " + @wipe.staff.staff_name  %>
+<%= render "shared/page_title", title: "Wiping Confirmation for TuringTrack #" + @wipe.computer.turingtrack %>
 
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3 left">
-      <p>
-        <h5><strong><%= @computer.manufacturer + " " + @computer.computer_type + 
-        " donated by " + @computer.donor.donor_name + ", Turing Track #" + @computer.turingtrack %></strong></h5>
-        <h5><%= @wipe.action_taken %></h5>
-        <h5>On <%= @wipe.created_at.strftime("%A, %d %B %Y") %></h5>
-      </p>
-      <%= link_to "Go to Computer Details", computer_path(@computer) %>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>TuringTrack</th>
+          <th>Wiped</th>
+          <th>Wiping ID</th>
+          <th>Wiped by</th>
+          <th>Wiping Date</th>
+          <th>Date Last Edited </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= link_to "#" + @wipe.computer.turingtrack, computer_path(@wipe.computer) %></td>
+          <td><% if @wipe.action_taken.length > 0 %> Yes <% else %> No <% end %></td>
+          <td><%= "#" + @wipe.id.to_s %></td>
+          <td><%= link_to @wipe.staff.staff_name, staff_path(@wipe.staff) %></td>
+          <td><%= @wipe.created_at.strftime("%d/%m/%y") %></td>
+          <td><%= @wipe.updated_at.strftime("%d/%m/%y") %></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <h4 class="text-center">Action Taken</h4>
+    <p class="text-center"><%= @wipe.action_taken %></p><br>
+    
+    <div class="center">
+      <%= link_to "Edit this confirmation", edit_computer_path(@wipe.computer), class: "btn btn-success" %>
+      
+      <% if current_user.admin? %>
+        <%= link_to "Go To Computer Index", computers_path, class: "btn btn-warning" %>
+        <%= link_to "Delete this confirmation", @wipe, method: :delete, data: {confirm: "Delete this confirmation?" }, class: "btn btn-danger" %>
+      <% end %>
     </div>
+    
   </div>
-
-<!-- To come back to, as currently a department title is generated for each staff member -->
+</div>

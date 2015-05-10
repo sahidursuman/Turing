@@ -16,7 +16,7 @@ class ComputersController < ApplicationController
     @wipe = @computer.wipe
     @barcode = Barby::Code128B.new(@computer.turingtrack)
     @barcode_for_html = Barby::HtmlOutputter.new(@barcode)
-    display
+    display # Dropbox Images
   end 
   
   def new
@@ -97,10 +97,6 @@ class ComputersController < ApplicationController
     auth_finish
   end
   
-  def drop_display
-    display
-  end
-    
   ##########################################################################################
   
   private

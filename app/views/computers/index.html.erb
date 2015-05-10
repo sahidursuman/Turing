@@ -14,14 +14,14 @@
 <% @computers.each do |computer| %>
   <div class="row">
     
-    <div class="col-md-2">
+    <div class="col-md-2 col-md-offset-1">
       <section class="staff_info center">
         <p>
-          <% if computer.wipe %>
-          <h5 class="vcenter">Wiping staff picture here</h5>
-          <% else %>
+        <% if computer.wipe.present? and computer.wipe.action_taken.length > 0 %>
+          <h5 class="vcenter">Computer Wiped!</h5>
+        <% else %>
           <h5 class="vcenter"><strong><%= link_to "Wipe this computer!", edit_computer_path(computer) %></strong></h5>
-          <% end %>
+        <% end %>
         </p>
 <!-- This is where to put a gravitar/avatar/photo if wanted -->
       </section>
@@ -34,17 +34,35 @@
         <span class="quiet"><small>Created <%= time_ago_in_words(computer.created_at) %> ago, </small></span>
         <span class="quiet"><small>updated <%= time_ago_in_words(computer.updated_at) %> ago</small></span>
       </p>
-      <% if computer.wipe %>
+      
+      <% if computer.wipe.present? and computer.wipe.action_taken.length > 0 %>
         <p><%= render computer.wipe %></p>
       <% end %>
     </div>
     
-    <div class="col-md-4">
-      <%= image_tag(computer.picture.url, size: "250x150", class: "picture_style") if computer.picture? %>
+   
+    <div class="col-md-2">
+      <% if computer.shipment and computer.shipment.shipped %>
+        <h5 class="vcenter">Computer Shipped!</h5>
+      <% else %>
+        <h5 class="vcenter"><strong><%= link_to "Ship this computer!", new_shipment_path %></strong></h5>
+      <% end %><br>
+        
+      <% if computer.receipt and computer.receipt.received %>
+        <h5>Computer Received!</h5>
+      <% else %>
+        <h5><strong><%= link_to "Confirm this computer's arrival!", new_receipt_path %></strong></h5>
+      <% end %>
     </div>
+    
+    
+    <!-- Original Non Dropbox Image Thumbnails, Removed to Reduce DB Transfer Useage 
+    <div class="col-md-4">
+      <#%= image_tag(computer.picture.url, size: "250x150", class: "picture_style") if computer.picture? %>
+    </div>-->
     
   </div>
   <hr/>
 <% end %>
 
-<%= will_paginate %>
+<%= will_paginate %> 

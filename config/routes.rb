@@ -8,10 +8,12 @@ Rails.application.routes.draw do
   resources :computers
   resources :staffs, except: [:new]
   resources :types, only: [:new, :create, :show, :destroy]
-  resources :wipes, only: [:new, :create, :show]
+  resources :wipes, only: [:show]
   resources :donors
   resources :stocks
   resources :sent_stocks
+  resources :shipments
+  resources :receipts
   
   # Rename new_staff route to register
   get '/register', to: 'staffs#new'
@@ -34,13 +36,14 @@ Rails.application.routes.draw do
     end
   end
   
-  # Dropbox Authorisation
-  get  'auth_start', to: 'computers#drop_auth_start'
-  get  'auth_finish', to: 'computers#drop_auth_finish'
-
   # Route for mailing list
   get 'mailinglist', to: 'donors#mailinglist'
+  post 'upload', to: 'computers#upload'
   
+  # Dropbox Authorisation
+  get 'auth_start', to: 'computers#auth_start'
+  get 'auth_finish', to: 'computers#auth_finish'
+
 end
 
   #  The following routes are the manual equivalent of resources:

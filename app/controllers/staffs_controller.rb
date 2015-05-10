@@ -5,11 +5,13 @@ class StaffsController < ApplicationController
   before_action :admin_user, only: [:destroy, :index, :new, :create]
   
   def index
-    @staffs = Staff.paginate(page: params[:page], per_page: 10)
+    @staffs = Staff.paginate(page: params[:page], per_page: 20)
   end
   
   def show
-    @wipes = @staff.wipes.paginate(page: params[:page], per_page: 10)
+    @wipes = @staff.wipes.paginate(page: params[:page], per_page: 20)
+    @shipments = @staff.shipments.paginate(page: params[:page], per_page: 20)
+    @receipts = @staff.receipts.paginate(page: params[:page], per_page: 20)
   end
   
   def new

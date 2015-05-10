@@ -1,0 +1,39 @@
+<%= render "shared/page_title", title: "Shipment Confirmation for TuringTrack #" + @shipment.computer.turingtrack %>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>TuringTrack</th>
+          <th>Shipped</th>
+          <th>Shipping ID</th>
+          <th>Shipped by</th>
+          <th>Shipping Date</th>
+          <th>Date Last Edited </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= link_to "#" + @shipment.computer.turingtrack, computer_path(@shipment.computer) %></td>
+          <td><% if @shipment.shipped %> Yes <% else %> No <% end %></td>
+          <td><%= "#" + @shipment.id.to_s %></td>
+          <td><%= link_to @shipment.staff.staff_name, staff_path(@shipment.staff) %></td>
+          <td><%= @shipment.created_at.strftime("%d/%m/%y") %></td>
+          <td><%= @shipment.updated_at.strftime("%d/%m/%y") %></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="center">
+      <%= link_to "Edit this confirmation", edit_shipment_path(@shipment), class: "btn btn-success" %>
+      
+      <% if current_user.admin? %>
+        <%= link_to "Go To Shipments Index", shipments_path, class: "btn btn-warning" %>
+        <%= link_to "Delete this confirmation", @shipment, method: :delete, data: {confirm: "Delete this confirmation?" }, class: "btn btn-danger" %>
+      <% end %>
+    </div>
+    
+  </div>
+</div>

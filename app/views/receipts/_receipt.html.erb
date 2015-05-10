@@ -1,0 +1,5 @@
+<span class="quiet">
+  <%= link_to "Received", receipt_path(receipt) %> by <%= link_to receipt.staff.staff_name, staff_path(receipt.staff) %>
+  on <%= receipt.created_at.strftime("%A, %d %B %Y") %> <br> 
+  Confirmation last updated on <%= receipt.updated_at.strftime("%A, %d %B %Y") %>
+</span>

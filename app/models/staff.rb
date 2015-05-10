@@ -4,6 +4,8 @@ class Staff < ActiveRecord::Base
   has_many :wipes
   has_many :stocks
   has_many :sent_stocks
+  has_many :shipments
+  has_many :receipts
   accepts_nested_attributes_for :types
   
   before_save { self.staff_email = staff_email.downcase }

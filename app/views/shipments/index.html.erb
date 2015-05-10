@@ -1,0 +1,34 @@
+<%= render "shared/page_title", title: "Shipment Index" %>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>TuringTrack</th>
+          <th>Shipped</th>
+          <th>Shipping ID</th>
+          <th>Shipped by</th>
+          <th>Shipping Date</th>
+          <th>Date Edited </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @shipments.each do |shipment| %>
+          <tr>
+            <td><%= link_to "#" + shipment.computer.turingtrack, computer_path(shipment.computer) %></td>
+            <td><% if shipment.shipped %> Yes <% else %> No <% end %></td>
+            <td><%= link_to "#" + shipment.id.to_s, shipment_path(shipment) %></td>
+            <td><%= link_to shipment.staff.staff_name, staff_path(shipment.staff) %></td>
+            <td><%= shipment.created_at.strftime("%d/%m/%y") %></td>
+            <td><%= shipment.updated_at.strftime("%d/%m/%y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  
+  </div>
+</div>
+
+<hr>

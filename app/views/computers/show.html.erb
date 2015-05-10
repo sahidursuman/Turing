@@ -13,16 +13,29 @@
     -->
    
     <!-- Dropbox image pull using url -->
-    <% if @photo_url %>
+    <% if @photo_url.nil? %>
+      <div style="margin: 50px">
+        <%#= form_tag({:action => :drop_upload}, :multipart => true) do %>
+        <%= form_tag({action: :drop_upload}, multipart: true) do %>
+          <%= file_field_tag 'file' %><%= submit_tag 'Upload Image To Dropbox' %>
+        <% end %>
+      </div>
+    <% else %>
       <div>
         <%= image_tag @photo_url.inspect.to_s.split()[0].split('"')[3], class: "computer_img" %>
+        <div style="margin: 15px">
+        <%#= form_tag({:action => :drop_upload}, :multipart => true) do %>
+        <%= form_tag({action: :drop_upload}, multipart: true) do %>
+          <%= file_field_tag 'file' %><%= submit_tag 'Upload Image To Dropbox' %>
+        <% end %>
+      </div>
       </div>
     <% end %>
-    <div style="margin: 10px">
-      <%= form_tag({:action => :drop_upload}, :multipart => true) do %>
-        <%= file_field_tag 'file' %><%= submit_tag 'Upload Image' %>
-      <% end %>
-    </div>
+    
+    <!-- Dropbox Client Account Information
+    <div>
+      <%#= @client_account_info %>
+    </div> -->
     
   </div> 
   
@@ -51,21 +64,38 @@
         OS Product Key: <%= @computer.product_key %> <br>
         Donor: <%= @computer.donor.donor_name %> <br>
       </p>
+      
       <!-- If there is an associated wipe, render wipes/_wipe partial-->
-        <% if @computer.wipe %>
+      <p>
+        <% if @computer.wipe and @computer.wipe.action_taken.length > 0 %>
           <%= render @computer.wipe %>
         <% end %>
-        
-        <!-- To check that the computer and wipe id's are coming through. Comment out for production -->
-        
-        <br><br>Computer ID: <%=  @computer.id %>
-        <% if @computer.wipe %>
-          <br>Wipe ID: <%= @computer.wipe.id %>
-          <br>Staff ID: <%= @computer.wipe.staff.id %>
+      </p>
+      
+      <!-- If the computer has been shipped, render shipments/_shipment partial -->
+      <p>
+        <% if @computer.shipment and @computer.shipment.shipped %>
+          <%= render @computer.shipment %>
         <% end %>
-        <br>Donor ID: <%= @computer.donor.id %>
+      </p>
+      
+      <!-- If the computer has been received, render shipments/_receipt partial -->
+      <p>
+        <% if @computer.receipt and @computer.receipt.received %>
+          <%= render @computer.receipt %>
+        <% end %>
+      </p>
         
-        <br><br>Barcode: <%= raw @barcode_for_html.to_html %>
+      <!-- To check that the computer and wipe id's are coming through. Comment out for production -->
+        
+      Computer ID: <%=  @computer.id %>, 
+      <% if @computer.wipe and @computer.wipe.action_taken.length > 0 %>
+        Wipe ID: <%= @computer.wipe.id %>, 
+        Staff ID: <%= @computer.wipe.staff.id %>, 
+      <% end %>
+      Donor ID: <%= @computer.donor.id %>
+        
+      <br><br>Barcode: <%= raw @barcode_for_html.to_html %>
     </div>
     
     <h5>

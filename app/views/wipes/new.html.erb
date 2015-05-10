@@ -6,8 +6,8 @@
   <div class="well col-md-8 col-md-offset-2">
     <%= form_for @wipe do |f| %>
     
-      <%= f.label :computer_id, "Computer ID" %>
-      <%= f.text_field :computer_id, :maxlength => 8, :placeholder => "1" %>
+      <%= f.label :entertrack, "TuringTrack" %>
+      <%= f.text_field :entertrack, :maxlength => 8, :placeholder => 10000001 %>
       <%= f.label :action_taken %>
       <%= f.text_area :action_taken %>
 

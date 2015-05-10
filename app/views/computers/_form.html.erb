@@ -23,13 +23,14 @@
       <%= f.label :product_key, "OS Product Key" %>
       <%= f.text_field :product_key, :placeholder => "Windows XP Professional QD464-ASF5F-VCF45-BV334-23DFS"%>
       
-      <% if logged_in? %>
-        <span class="picture">
+      <!-- Original picture uploader (to internal storage) now replaced with Dropbox
+      <#% if logged_in? %>
+        <span class="picture"> -->
           <!-- Creates file field and whitelist -->
-          <%= f.label "Picture (optional)" %>
-          <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
-        </span>
-      <% end %>
+          <%#= f.label "Picture (optional)" %>
+          <%#= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+      <!-- </span> -->
+      <%# end %>
       
       <% if logged_in? %>
         <br><h3>Wiping Details<br><br></h3>

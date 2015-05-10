@@ -1,0 +1,34 @@
+<%= render "shared/page_title", title: "Receipt Index" %>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>TuringTrack</th>
+          <th>Received</th>
+          <th>Receipt ID</th>
+          <th>Received by</th>
+          <th>Receipt Date</th>
+          <th>Date Edited </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @receipts.each do |receipt| %>
+          <tr>
+            <td><%= link_to "#" + receipt.computer.turingtrack, computer_path(receipt.computer) %></td>
+            <td><% if receipt.received %> Yes <% else %> No <% end %></td>
+            <td><%= link_to "#" + receipt.id.to_s, receipt_path(receipt) %></td>
+            <td><%= link_to receipt.staff.staff_name, staff_path(receipt.staff) %></td>
+            <td><%= receipt.created_at.strftime("%d/%m/%y") %></td>
+            <td><%= receipt.updated_at.strftime("%d/%m/%y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  
+  </div>
+</div>
+
+<hr>

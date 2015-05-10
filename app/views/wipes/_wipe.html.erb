@@ -1,3 +1,5 @@
- <span class="quiet">Wiped by <%= link_to wipe.staff.staff_name, wipe_path(wipe) %>
-                     on <%= wipe.created_at.strftime("%A, %d %B %Y") %> <br> Processed
-                     using the following method: <%= wipe.action_taken %></span>
+<span class="quiet">
+  <%= link_to "Wiped", wipe_path(wipe) %> by <%= link_to wipe.staff.staff_name, staff_path(wipe.staff) %>
+  on <%= wipe.created_at.strftime("%A, %d %B %Y") %> <br> 
+  Processed using the following method: <%= wipe.action_taken %>
+</span>

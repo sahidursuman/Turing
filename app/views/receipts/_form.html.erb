@@ -1,0 +1,22 @@
+<%= render "shared/errors", obj: @receipt %>
+
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2 form-group">
+    <%= form_for @receipt do |f| %>
+    
+      
+      <% if @receipt.new_record? %>
+        <%= f.label :entertrack, "TuringTrack" %>
+        <%= f.number_field :entertrack, :placeholder => 10000001 %>
+      <% else %>
+        <h3><%= "TuringTrack: #" + @receipt.computer.turingtrack %></h3><br>
+      <% end %>
+      
+      <%= f.label :received, "Confirm the computer has been received?" %>
+      <%= f.check_box :received, value: 0 %>
+      
+      <%= f.submit(@receipt.new_record? ? "Submit Confirmation" : "Update Confirmation", class: "btn btn-success")%>
+
+    <% end %>
+  </div>
+</div>

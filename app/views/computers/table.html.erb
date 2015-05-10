@@ -17,22 +17,25 @@
           <th>Wiped?</th>
           <th>Wiped by</th>
           <th>Wiped on</th>
+          <th>Shipped?</th>
+          <th>Received?</th>
         </tr>
       </thead>
       <tbody>
         <% @computers.each do |computer| %>
         <% if computer.wipe.present? %> <tr> <% else %> <tr class="danger"> <% end %>
-            <td><%= link_to computer.turingtrack, computer_path(computer) %></td>
+            <td><%= link_to "#" + computer.turingtrack, computer_path(computer) %></td>
             <td><%= computer.manufacturer %></td>
             <td><%= computer.computer_type %></td>
             <td><%= computer.model_no %></td>
             <td><%= computer.serial_no %></td>
             <td><%= computer.product_key %></td>
-            <td><%= computer.donor.donor_name %></td>
+            <td><%= link_to computer.donor.donor_name, donor_path(computer.donor) %></td>
             <td><%= computer.created_at.strftime("%d/%m/%y") %></td>
             <td><%= computer.updated_at.strftime("%d/%m/%y") %></td>
-            <% if computer.wipe.present? %>
-              <td>Yes</td>
+            
+            <% if computer.wipe.present? and  computer.wipe.action_taken.length > 0  %>
+              <td><%= link_to "Yes", wipe_path(computer.wipe) %></td>
               <td><%= link_to computer.wipe.staff.staff_name, staff_path(computer.wipe.staff) %></td>
               <td><%= computer.wipe.created_at.strftime("%d/%m/%y") %></td>
             <% else %>
@@ -40,6 +43,19 @@
               <td>-</td>
               <td>-</td>
             <% end %>
+            
+            <% if computer.shipment.present? and computer.shipment.shipped %>
+              <td><%= link_to "Yes", shipment_path(computer.shipment) %>
+            <% else %>
+              <td><%= link_to "No", new_shipment_path %></td>
+            <% end %>
+            
+            <% if computer.receipt.present? and computer.receipt.received %>
+              <td><%= link_to "Yes", receipt_path(computer.receipt) %>
+            <% else %>
+              <td><%= link_to "No", new_receipt_path %></td>
+            <% end %>
+            
           </tr>
         <% end %>
       </tbody>

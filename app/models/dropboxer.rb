@@ -3,14 +3,11 @@
   require 'securerandom'
 
   def main
-  
     client = get_dropbox_client
     unless client
       redirect_to(:action => 'auth_start') and return
     end
-  
     account_info = client.account_info
-  
     # Show a file upload page
     render :inline =>
       "#{account_info['email']} <br/><%= form_tag({:action => :upload}, :multipart => true) do %><%= file_field_tag 'file' %><%= submit_tag 'Upload' %><% end %>"
@@ -18,7 +15,6 @@
   
   def upload
     client = get_dropbox_client
-    @client = client
     unless client
       redirect_to(:action => 'auth_start') and return
     end
@@ -42,6 +38,7 @@
   
   def display
     client = get_dropbox_client
+    #@client_account_info =client.account_info
     unless client
       redirect_to(:action => 'auth_start') and return
     end
@@ -57,7 +54,7 @@
     rescue DropboxError => e
       logger.info "Dropbox Display API error: #{e}"
       #render :text => "Dropbox API error"
-      flash[:danger] = "Dropbox Display API Error: #{e}"
+      #flash[:danger] = "Dropbox Display API Error: #{e}"
     end
   end
   
@@ -90,7 +87,7 @@
     begin
       access_token, user_id, url_state = get_web_auth.finish(params)
       session[:access_token] = access_token
-      redirect_to :action => 'main'
+      redirect_to :back
     rescue DropboxOAuth2Flow::BadRequestError => e
       #render :text => "Error in OAuth 2 flow: Bad request: #{e}"
       flash[:danger] = "Error in OAuth 2 flow: Bad request: #{e}"

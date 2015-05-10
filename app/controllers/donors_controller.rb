@@ -8,7 +8,7 @@ class DonorsController < ApplicationController
   end
   
   def show
-    @computers = @donor.computers.paginate(page: params[:page], per_page: 10)
+    @computers = @donor.computers.paginate(page: params[:page], per_page: 20)
   end
   
   def new

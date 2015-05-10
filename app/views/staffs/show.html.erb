@@ -12,21 +12,120 @@
 
 <div class="row">
   <div class="col-md-4 col-md-offset-4 center">
-    <h3><em>Wiped Computers:</em></h3>
+    <h3>Wiped Computers:</h3>
     <%= will_paginate @wipes %>
   </div>
 </div>
 
-<% @wipes.each do |wipe| %>
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3 well">
-      <h4><%= link_to "Turing Track No #" + wipe.computer.turingtrack, computer_path(wipe.computer) %></h4>
-      <p><%= wipe.computer.manufacturer + " " + wipe.computer.computer_type +  
-      " donated by " + wipe.computer.donor.donor_name %></p>
-      <p>
-        <span class="quiet"><small>Created <%= time_ago_in_words(wipe.computer.created_at) %> ago, </small></span>
-        <span class="quiet"><small>updated <%= time_ago_in_words(wipe.computer.updated_at) %> ago</small></span>
-      </p>
-    </div>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>TuringTrack</th>
+          <th>Wiped</th>
+          <th>Wiping ID</th>
+          <th>Wiped by</th>
+          <th>Wiping Date</th>
+          <th>Date Last Edited </th>
+          <th>Action Taken:</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <% @wipes.each do |wipe| %>
+          <tr>
+            <td><%= link_to "#" + wipe.computer.turingtrack, computer_path(wipe.computer) %></td>
+            <td><% if wipe.action_taken.length > 0 %> Yes <% else %> No <% end %></td>
+            <td><%= "#" + wipe.id.to_s %></td>
+            <td><%= link_to wipe.staff.staff_name, staff_path(wipe.staff) %></td>
+            <td><%= wipe.created_at.strftime("%d/%m/%y") %></td>
+            <td><%= wipe.updated_at.strftime("%d/%m/%y") %></td>
+            <td><%= wipe.action_taken %></td>
+          </tr>
+        <% end%>
+        
+      </tbody>
+    </table>
   </div>
-<% end %>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col-md-4 col-md-offset-4 center">
+    <h3>Shipped Computers:</h3>
+    <%= will_paginate @shipments %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>TuringTrack</th>
+          <th>Shipped</th>
+          <th>Shipping ID</th>
+          <th>Shipped by</th>
+          <th>Shipping Date</th>
+          <th>Date Last Edited </th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <% @shipments.each do |shipment| %>
+          <tr>
+            <td><%= link_to "#" + shipment.computer.turingtrack, computer_path(shipment.computer) %></td>
+            <td><% if shipment.shipped %> Yes <% else %> No <% end %></td>
+            <td><%= "#" + shipment.id.to_s %></td>
+            <td><%= link_to shipment.staff.staff_name, staff_path(shipment.staff) %></td>
+            <td><%= shipment.created_at.strftime("%d/%m/%y") %></td>
+            <td><%= shipment.updated_at.strftime("%d/%m/%y") %></td>
+          </tr>
+        <% end %>
+        
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col-md-4 col-md-offset-4 center">
+    <h3>Received Computers:</h3>
+    <%= will_paginate @receipts %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>TuringTrack</th>
+          <th>Received</th>
+          <th>Receipt ID</th>
+          <th>Received by</th>
+          <th>Receipt Date</th>
+          <th>Date Last Edited </th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <% @receipts.each do |receipt| %>
+          <tr>
+            <td><%= link_to "#" + receipt.computer.turingtrack, computer_path(receipt.computer) %></td>
+            <td><% if receipt.received %> Yes <% else %> No <% end %></td>
+            <td><%= "#" + receipt.id.to_s %></td>
+            <td><%= link_to receipt.staff.staff_name, staff_path(receipt.staff) %></td>
+            <td><%= receipt.created_at.strftime("%d/%m/%y") %></td>
+            <td><%= receipt.updated_at.strftime("%d/%m/%y") %></td>
+          </tr>
+        <% end %>
+      
+      </tbody>
+    </table>
+  </div>
+</div>

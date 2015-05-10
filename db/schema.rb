@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150506120045) do
+ActiveRecord::Schema.define(version: 20150510153522) do
 
   create_table "computers", force: true do |t|
     t.string   "manufacturer"
@@ -35,6 +35,15 @@ ActiveRecord::Schema.define(version: 20150506120045) do
     t.datetime "updated_at"
   end
 
+  create_table "receipts", force: true do |t|
+    t.integer  "entertrack"
+    t.integer  "staff_id"
+    t.integer  "computer_id"
+    t.boolean  "received",    default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sent_stocks", force: true do |t|
     t.integer  "sent_keyboards"
     t.integer  "sent_mice"
@@ -42,6 +51,15 @@ ActiveRecord::Schema.define(version: 20150506120045) do
     t.integer  "sent_printers"
     t.integer  "sent_speakers"
     t.integer  "staff_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "shipments", force: true do |t|
+    t.integer  "entertrack"
+    t.integer  "staff_id"
+    t.integer  "computer_id"
+    t.boolean  "shipped",     default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
