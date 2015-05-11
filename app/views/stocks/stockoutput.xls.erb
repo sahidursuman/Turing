@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  
+  <Worksheet ss:Name="Stock Received">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Stock Batch ID</Data></Cell>
+        <Cell><Data ss:Type="String">Keyboards</Data></Cell>
+        <Cell><Data ss:Type="String">Mice</Data></Cell>
+        <Cell><Data ss:Type="String">Monitors</Data></Cell>
+        <Cell><Data ss:Type="String">Printers</Data></Cell>
+        <Cell><Data ss:Type="String">Speakers</Data></Cell>
+        <Cell><Data ss:Type="String">Confirmed By</Data></Cell>
+        <Cell><Data ss:Type="String">Staff Email</Data></Cell>
+        <Cell><Data ss:Type="String">Created At</Data></Cell>
+        <Cell><Data ss:Type="String">Updated At</Data></Cell>
+      </Row>
+      
+      <% @stocks.each do |stock| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= stock.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= stock.keyboards %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= stock.mice %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= stock.monitors %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= stock.printers %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= stock.speakers %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= stock.staff.staff_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= stock.staff.staff_email %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= stock.created_at %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= stock.updated_at %></Data></Cell>
+      </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+  
+  <Worksheet ss:Name="Stock Sent">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Sent Stock Batch ID</Data></Cell>
+        <Cell><Data ss:Type="String">Keyboards</Data></Cell>
+        <Cell><Data ss:Type="String">Mice</Data></Cell>
+        <Cell><Data ss:Type="String">Monitors</Data></Cell>
+        <Cell><Data ss:Type="String">Printers</Data></Cell>
+        <Cell><Data ss:Type="String">Speakers</Data></Cell>
+        <Cell><Data ss:Type="String">Confirmed By</Data></Cell>
+        <Cell><Data ss:Type="String">Staff Email</Data></Cell>
+        <Cell><Data ss:Type="String">Created At</Data></Cell>
+        <Cell><Data ss:Type="String">Updated At</Data></Cell>
+      </Row>
+      
+      <% @sent_stocks.each do |sent_stock| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= sent_stock.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= sent_stock.sent_keyboards %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= sent_stock.sent_mice %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= sent_stock.sent_monitors %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= sent_stock.sent_printers %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= sent_stock.sent_speakers %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= sent_stock.staff.staff_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= sent_stock.staff.staff_email %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= sent_stock.created_at %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= sent_stock.updated_at %></Data></Cell>
+      </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+  
+</Workbook>

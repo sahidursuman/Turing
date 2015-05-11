@@ -2,7 +2,7 @@ class ComputersController < ApplicationController
   
   before_action :set_computer, only: [:edit, :update, :show, :thankyou, :drop_upload]
   before_action :require_user, except: [:new, :create, :thankyou]
-  before_action :admin_user, only: :destroy
+  before_action :admin_user, only: [:destroy, :dataoutput]
   
   layout :new_layout, only: [:new, :update]
   layout "thankyou", only: [:thankyou]
@@ -78,6 +78,20 @@ class ComputersController < ApplicationController
   def thankyou
     @barcode = Barby::Code128B.new(@computer.turingtrack)
     @barcode_for_html = Barby::HtmlOutputter.new(@barcode)
+  end
+  
+  def dataoutput
+    @computers = Computer.order(id: :desc)
+    respond_to do |format|
+      format.html
+      format.csv do
+        #send_data @computers.to_csv
+        headers['Content-Disposition'] = "attachment; filename=\"#{DateTime.now.to_date.to_s + "_computers.csv"}\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+      format.xls { headers["Content-Disposition"] = "attachment; filename=\"#{DateTime.now.to_date.to_s + "_computers.xls"}\"" } 
+      #{ send_data @computers.to_csv(col_sep: "\t") }
+    end
   end
   
   ##########################################################################################

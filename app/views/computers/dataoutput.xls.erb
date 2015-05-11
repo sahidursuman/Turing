@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Computer ID</Data></Cell>
+        <Cell><Data ss:Type="String">TuringTrack</Data></Cell>
+        <Cell><Data ss:Type="String">Manufacturer</Data></Cell>
+        <Cell><Data ss:Type="String">Model No</Data></Cell>
+        <Cell><Data ss:Type="String">Serial No</Data></Cell>
+        <Cell><Data ss:Type="String">OS Product Key</Data></Cell>
+        <Cell><Data ss:Type="String">Specification</Data></Cell>
+        <Cell><Data ss:Type="String">Computer Created At</Data></Cell>
+        <Cell><Data ss:Type="String">Computer Updated At</Data></Cell>
+        <Cell><Data ss:Type="String">Donor ID</Data></Cell>
+        <Cell><Data ss:Type="String">Donor Name</Data></Cell>
+        <Cell><Data ss:Type="String">Donor Email</Data></Cell>
+        <Cell><Data ss:Type="String">Donor Mailing List</Data></Cell>
+        <Cell><Data ss:Type="String">Donor Created At</Data></Cell>
+        <Cell><Data ss:Type="String">Donor Updated At</Data></Cell>
+        <Cell><Data ss:Type="String">Wipe ID</Data></Cell>
+        <Cell><Data ss:Type="String">Wiped</Data></Cell>
+        <Cell><Data ss:Type="String">Wipe Staff</Data></Cell>
+        <Cell><Data ss:Type="String">Wipe Staff Email</Data></Cell>
+        <Cell><Data ss:Type="String">Action Taken</Data></Cell>
+        <Cell><Data ss:Type="String">Wipe Created At</Data></Cell>
+        <Cell><Data ss:Type="String">Wipe Updated At</Data></Cell>
+        <Cell><Data ss:Type="String">Shipment ID</Data></Cell>
+        <Cell><Data ss:Type="String">Shipped</Data></Cell>
+        <Cell><Data ss:Type="String">Shipment Staff</Data></Cell>
+        <Cell><Data ss:Type="String">Shipment Staff Email</Data></Cell>
+        <Cell><Data ss:Type="String">Shipment Created At</Data></Cell>
+        <Cell><Data ss:Type="String">Shipment Updated At</Data></Cell>
+        <Cell><Data ss:Type="String">Receipt ID</Data></Cell>
+        <Cell><Data ss:Type="String">Received</Data></Cell>
+        <Cell><Data ss:Type="String">Receipt Staff</Data></Cell>
+        <Cell><Data ss:Type="String">Receipt Staff Email</Data></Cell>
+        <Cell><Data ss:Type="String">Receipt Created At</Data></Cell>
+        <Cell><Data ss:Type="String">Receipt Updated At</Data></Cell>
+      </Row>
+      
+      <% @computers.each do |computer| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= computer.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= computer.turingtrack %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= computer.manufacturer %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= computer.model_no %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= computer.serial_no %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= computer.product_key %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= computer.specification %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= computer.created_at %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= computer.updated_at %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= computer.donor.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= computer.donor.donor_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= computer.donor.donor_email %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= computer.donor.allow_mail %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= computer.donor.created_at %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= computer.donor.updated_at %></Data></Cell>
+        <% if computer.wipe and computer.wipe.action_taken.length > 0 %>
+          <Cell><Data ss:Type="Number"><%= computer.wipe.id %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= computer.wipe.present? %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= computer.wipe.staff.staff_name %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= computer.wipe.staff.staff_email %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= computer.wipe.action_taken %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= computer.wipe.created_at %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= computer.wipe.updated_at %></Data></Cell>
+        <% else %>
+          <Cell><Data ss:Type="Number"></Data></Cell>
+          <Cell><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="String"></Data></Cell>
+        <% end %>
+        <% if computer.shipment and computer.shipment.shipped %>
+          <Cell><Data ss:Type="Number"><%= computer.shipment.id %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= computer.shipment.shipped %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= computer.shipment.staff.staff_name %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= computer.shipment.staff.staff_email %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= computer.shipment.created_at %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= computer.shipment.updated_at %></Data></Cell>
+        <% else %>
+          <Cell><Data ss:Type="Number"></Data></Cell>
+          <Cell><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="String"></Data></Cell>
+        <% end %>
+        <% if computer.receipt and computer.receipt.received %>
+          <Cell><Data ss:Type="Number"><%= computer.receipt.id %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= computer.receipt.received %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= computer.receipt.staff.staff_name %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= computer.receipt.staff.staff_email %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= computer.receipt.created_at %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= computer.receipt.updated_at %></Data></Cell>
+        <% else %>
+          <Cell><Data ss:Type="Number"></Data></Cell>
+          <Cell><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="String"></Data></Cell>
+        <% end %>
+      </Row>
+      <% end %>
+      
+    </Table>
+  </Worksheet>
+</Workbook>

@@ -1,0 +1,10 @@
+<%- headers = ['Computer ID', 'TuringTrack', 'Manufacturer', 'Model No', 'Serial No', 'OS Product Key',
+'Specification', 'Computer Created At', 'Computer Updated At', 'Donor ID', 'Donor Name', 'Donor Email',
+'Donor Mailing List', 'Donor Created At', 'Donor Updated At'] -%>
+<%= CSV.generate_line headers -%>
+<%- @computers.each do |computer| -%>
+  <%= CSV.generate_line([computer.id, computer.turingtrack, computer.manufacturer, computer.model_no,
+  computer.serial_no, computer.product_key, computer.specification, computer.created_at, 
+  computer.updated_at, computer.donor.id, computer.donor.donor_name, computer.donor.donor_email,
+  computer.donor.allow_mail, computer.donor.created_at, computer.donor.updated_at]) -%>
+<%- end -%>

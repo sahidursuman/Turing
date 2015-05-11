@@ -51,6 +51,21 @@ class StocksController < ApplicationController
     redirect_to stocks_path
   end
   
+  def stockoutput
+    @stocks = Stock.order(id: :desc)
+    @sent_stocks = SentStock.order(id: :desc)
+    respond_to do |format|
+      format.html
+      format.csv do
+        #send_data @computers.to_csv
+        headers['Content-Disposition'] = "attachment; filename=\"#{DateTime.now.to_date.to_s + "_stock.csv"}\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+      format.xls { headers["Content-Disposition"] = "attachment; filename=\"#{DateTime.now.to_date.to_s + "_stock.xls"}\"" } 
+      #{ send_data @computers.to_csv(col_sep: "\t") }
+    end
+  end
+  
   private
   
   def set_stock
