@@ -1,5 +1,4 @@
 class ComputersController < ApplicationController
-  
   before_action :set_computer, only: [:edit, :update, :show, :thankyou, :drop_upload]
   before_action :require_user, except: [:new, :create, :thankyou]
   before_action :admin_user, only: [:destroy, :dataoutput]
@@ -72,7 +71,12 @@ class ComputersController < ApplicationController
   end
   
   def table 
-    @computers = Computer.all
+    #@computers = Computer.all
+    if params[:search]
+      @computers = Computer.search(params[:search]).order("created_at DESC")
+    else
+      @computers = Computer.all.order('created_at DESC')
+    end
   end
   
   def thankyou

@@ -30,6 +30,10 @@ class Computer < ActiveRecord::Base
 
   private
   
+    def self.search(search)
+      where("turingtrack = ? OR serial_no LIKE ? OR manufacturer LIKE ?", search, "%#{search}%", "%#{search}%")
+    end
+  
     def id_to_track
       self.turingtrack = (id.to_i + 10000000).to_s
       self.save
