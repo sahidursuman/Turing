@@ -1,10 +1,10 @@
-<%= render "shared/page_title", title: "Turing Track No. " + @computer.turingtrack %>
+<%= render "shared/page_title", title: "Turing Track No. #" + @computer.turingtrack %>
 
 <div class="row">
   <div class="col-md-5 pull-right center">
     
     <!-- Original image storage with Carrier Wave saving to server file system
-    <div class="show_computer">
+    <div>
       <#%= image_tag(@computer.picture.url, class: "computer_img") if @computer.picture? %>
     </div>
     <div>
@@ -88,12 +88,12 @@
         
       <!-- To check that the computer and wipe id's are coming through. Comment out for production -->
         
-      Computer ID: <%=  @computer.id %>, 
-      <% if @computer.wipe and @computer.wipe.action_taken.length > 0 %>
-        Wipe ID: <%= @computer.wipe.id %>, 
-        Staff ID: <%= @computer.wipe.staff.id %>, 
-      <% end %>
-      Donor ID: <%= @computer.donor.id %>
+      <!--Computer ID: <%#=  @computer.id %>, 
+      <%# if @computer.wipe and @computer.wipe.action_taken.length > 0 %>
+        Wipe ID: <%#= @computer.wipe.id %>, 
+        Staff ID: <%#= @computer.wipe.staff.id %>, 
+      <%# end %>
+      Donor ID: <%#= @computer.donor.id %> -->
         
       <br><br>Barcode: <%= raw @barcode_for_html.to_html %>
     </div>
