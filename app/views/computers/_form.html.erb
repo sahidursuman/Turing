@@ -9,6 +9,10 @@
       <% else %>
         <h3>Your Computer's Details</h3><br>
       <% end %>
+      
+      <p class = "donation_advice"><small>
+        Please note that all greyed out writing is for exemplary purposes only - simply type over the top.
+      </small></p>
     
       <%= f.label :manufacturer %>
       <%= f.text_field :manufacturer, :placeholder => "Toshiba" %>
@@ -36,7 +40,7 @@
         <br><h3>Wiping Details<br><br></h3>
         <%= f.fields_for :wipe do |wipe_form| %>
           <%= wipe_form.label :action_taken %>
-          <%= wipe_form.text_field :action_taken %>
+          <%= wipe_form.text_field :action_taken, :placeholder => "Wiped using Paragon Hard Disk Manger Version 15" %>
         <% end %>
       <% end %>
       
@@ -53,13 +57,19 @@
         <% else %>
           <%= donor_form.label :donor_name, "Your Name" %>
         <% end %>
-        <%= donor_form.text_field :donor_name %>
+        <%= donor_form.text_field :donor_name, :placeholder => "Mr. John Smith" %>
         <% if logged_in? %>
           <%= donor_form.label :donor_email %>
         <% else %>
           <%= donor_form.label :donor_email, "Your Email Address" %>
         <% end %>
-        <%= donor_form.text_field :donor_email %>
+        <%= donor_form.email_field :donor_email, :placeholder => "johnsmith@gmail.com" %>
+        <% if logged_in? %>
+          <%= donor_form.label :donor_address %>
+        <% else %>
+          <%= donor_form.label :donor_address, "Your Mailing Address" %>
+        <% end %>
+          <%= donor_form.text_field :donor_address, :placeholder => "16 Old Compton Street, London, W1D 4TL" %>
         
         <h4>
           Would you like to join our mailing list? Tick the box below to get updates
@@ -70,9 +80,30 @@
         <%= donor_form.label :allow_mail, class: "checkbox pull-left" do %> 
           <p class="pull-left">Update me!</p>
           <%= donor_form.check_box :allow_mail %>
-        <% end %><br><br><br>
+        <% end %><br><br>
+        
+        <h4>
+          Please check the following if you do not have an email address, and would rather receive a paper certificate
+          of data destruction. We encourage you to only do this if an email really won’t suffice, as keeping postage to 
+          a minimum allows us to keep overheads to a minimum, helping us support more students in rural areas of Ghana.
+        </h4>
+        
+        <%= donor_form.label :paper_cert, class: "checkbox pull-left" do %> 
+          <p class="pull-left">Send me a paper certificate of destruction</p>
+          <%= donor_form.check_box :paper_cert, allow_blank: true %>
+        <% end %><br>
         
       <% end %>
+      
+      <br><h3>Hub Details</h3><br>
+      
+      <% if logged_in? %>
+        <%= f.label :hub_id, "Hub" %>
+      <% else %>
+        <%= f.label :hub_location, "Please select which of our hubs you would like to send your computer to:" %>
+      <% end %>
+      <%= f.collection_select :hub_id, Hub.all , :id, :hub_location, selected: '1' %> <!-- ,include_blank: true -->
+      <br><br>
 
       <%= f.submit(@computer.new_record? ? "Submit Details" : "Submit Edited Details", class: "btn btn-success") %>
     <% end %>

@@ -60,7 +60,8 @@ class DonorsController < ApplicationController
     
     # Whitelisting variables
     def donor_params
-      params.require(:donor).permit(:donor_name, :donor_email, :allow_mail)
+      params.require(:donor).permit(:donor_name, :donor_email, :allow_mail,
+                                    :donor_address, :paper_cert)
     end
   
 end

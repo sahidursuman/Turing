@@ -4,6 +4,7 @@ class CreateReceipts < ActiveRecord::Migration
       t.integer :entertrack
       t.integer :staff_id
       t.integer :computer_id
+      t.string :school
       t.boolean :received, :default => false
       t.timestamps
     end

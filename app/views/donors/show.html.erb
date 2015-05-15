@@ -7,13 +7,22 @@
       Donor ID: <%= @donor.id%> <br>
       Donor Email: <%= @donor.donor_email %> <br>
       Send Email Updates: <%= @donor.allow_mail %> <br>
+      Donor Address: <%= @donor.donor_address %> <br>
+      Paper Certificate: <%= @donor.paper_cert %> <br>
       Date Profile Created: <%= @donor.created_at.strftime("%d/%m/%y") %> <br>
       Date Profile Last Updated: <%= @donor.updated_at.strftime("%d/%m/%y") %>
+      
+  </div>
+</div>
+
+<hr>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
     
     <h3 class="text-center">Donation Details</h3><br>
     <% @computers.each do |computer| %>
       
-      <div class="col-md-6 pull-left">
+      <div class="col-md-6 pull-left" style="padding-left:0px;">
         <strong>Computer Details:</strong><br>
         Turing Track No: #<%= link_to computer.turingtrack, computer_path(computer) %> <br>
         Manufacturer: <%= computer.manufacturer %> <br>
@@ -31,7 +40,7 @@
       </div>
       
       <% if computer.wipe.present? %>
-        <div class="col-md-12 donor_computer">
+        <div class="col-md-12 donor_computer" style="padding-left:0px;">
           <br><strong>Wiping Details:</strong><br>
           
           Wiped by <%= link_to computer.wipe.staff.staff_name, staff_path(computer.wipe.staff) %>
@@ -47,3 +56,13 @@
     
   </div>
 </div>
+
+<hr>    
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 center">
+    <%= link_to "Edit this Donor", edit_donor_path(@donor), class: "btn btn-success" %>
+    <%= link_to "Go To Donor Index", donors_path, class: "btn btn-warning" %>
+    <%= link_to "Delete this Donor", @donor, method: :delete, data: {confirm: "Delete this Donor" }, class: "btn btn-danger" %>
+  </div>
+</div>
+    

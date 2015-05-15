@@ -5,22 +5,32 @@
     
     <!-- Calculate Totals of Stock Items Donated -->
     <% ke_count = 0  %><% mi_count = 0%><% mo_count = 0%><% pr_count = 0%><% sp_count = 0 %>
+    <% vga_count = 0 %><% kl_count = 0 %><% rt_count = 0 %><% ls_count = 0 %>
     <% @stocks.each do |stock| %>
       <% ke_count += stock.keyboards %>
       <% mi_count += stock.mice %>
       <% mo_count += stock.monitors %>
       <% pr_count += stock.printers %>
       <% sp_count += stock.speakers %>
+      <% vga_count += stock.vga_cables %>
+      <% kl_count += stock.kettle_leads %>
+      <% rt_count += stock.routers %>
+      <% ls_count += stock.lan_switches %>
     <% end %>
     
     <!-- Calculated Totals of Stock Items Shipped to Ghana -->
     <% sent_ke_count = 0  %><% sent_mi_count = 0%><% sent_mo_count = 0%><% sent_pr_count = 0%><% sent_sp_count = 0 %>
+    <% sent_vga_count = 0 %><% sent_kl_count = 0 %><% sent_rt_count = 0 %><% sent_ls_count = 0 %>
     <% @sent_stocks.each do |sent_stock| %>
       <% sent_ke_count += sent_stock.sent_keyboards %>
       <% sent_mi_count += sent_stock.sent_mice %>
       <% sent_mo_count += sent_stock.sent_monitors %>
       <% sent_pr_count += sent_stock.sent_printers %>
       <% sent_sp_count += sent_stock.sent_speakers %>
+      <% sent_vga_count += sent_stock.sent_vga_cables %>
+      <% sent_kl_count += sent_stock.sent_kettle_leads %>
+      <% sent_rt_count += sent_stock.sent_routers %>
+      <% sent_ls_count += sent_stock.sent_lan_switches %>
     <% end %>
     
     <!-- Totals Table -->
@@ -34,6 +44,10 @@
           <th># of Monitors</th>
           <th># of Printers</th>
           <th># of Speakers</th>
+          <th># of VGA Cables</th>
+          <th># of Kettle Leads</th>
+          <th># of Routers</th>
+          <th># of LAN Switches</th>
         </tr>
       </thead>
       <tbody>
@@ -44,6 +58,10 @@
           <td><%= mo_count %></td>
           <td><%= pr_count %></td>
           <td><%= sp_count %></td>
+          <td><%= vga_count %></td>
+          <td><%= kl_count %></td>
+          <td><%= rt_count %></td>
+          <td><%= ls_count %></td>
         </tr>
         <tr>
           <td><strong>Items Sent</strong></td>
@@ -52,6 +70,10 @@
           <td><%= sent_mo_count %></td>
           <td><%= sent_pr_count %></td>
           <td><%= sent_sp_count %></td>
+          <td><%= sent_vga_count %></td>
+          <td><%= sent_kl_count %></td>
+          <td><%= sent_rt_count %></td>
+          <td><%= sent_ls_count %></td>
         </tr>
         <tr>
           <td><strong>Current Stock</strong></td>
@@ -60,6 +82,10 @@
           <td><%= mo_count - sent_mo_count %></td>
           <td><%= pr_count - sent_pr_count %></td>
           <td><%= sp_count - sent_sp_count %></td>
+          <td><%= vga_count - sent_vga_count %></td>
+          <td><%= kl_count - sent_kl_count %></td>
+          <td><%= rt_count - sent_rt_count %></td>
+          <td><%= ls_count - sent_ls_count %></td>
         </tr>
       </tbody>
     </table>
@@ -70,7 +96,7 @@
 <hr>
 
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-10 col-md-offset-1">
     
     <!-- Stock Donations Recieved Table -->
     <h3 class="text-center">Donated Items Recieved</h3>
@@ -83,6 +109,10 @@
           <th># of Monitors</th>
           <th># of Printers</th>
           <th># of Speakers</th>
+          <th># of VGA Cables</th>
+          <th># of Kettle Leads</th>
+          <th># of Routers</th>
+          <th># of LAN Switches</th>
           <th>Created on</th>
           <th>Updated on</th>
           <th>Uploaded by</th>
@@ -97,6 +127,10 @@
             <td><%= stock.monitors %></td>
             <td><%= stock.printers %></td>
             <td><%= stock.speakers %></td>
+            <td><%= stock.vga_cables %></td>
+            <td><%= stock.kettle_leads %></td>
+            <td><%= stock.routers %></td>
+            <td><%= stock.lan_switches %></td>
             <td><%= stock.created_at.strftime("%d/%m/%y") %></td>
             <td><%= stock.updated_at.strftime("%d/%m/%y") %></td>
             <td><%= link_to stock.staff.staff_name, staff_path(stock.staff) %></td>
@@ -109,9 +143,11 @@
 </div>
 
 <hr>
+<p class="text-center"><small>Please note that batches of stock and sent stock are not associated.</small></p>
+<hr>
 
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-10 col-md-offset-1">
     
     <!-- Stock Items Sent to Ghana Table -->
     <h3 class="text-center">Items Sent to Ghana</h3>
@@ -124,6 +160,10 @@
           <th># of Monitors</th>
           <th># of Printers</th>
           <th># of Speakers</th>
+          <th># of VGA Cables</th>
+          <th># of Kettle Leads</th>
+          <th># of Routers</th>
+          <th># of LAN Switches</th>
           <th>Created on</th>
           <th>Updated on</th>
           <th>Uploaded by</th>
@@ -138,6 +178,10 @@
             <td><%= sent_stock.sent_monitors %></td>
             <td><%= sent_stock.sent_printers %></td>
             <td><%= sent_stock.sent_speakers %></td>
+            <td><%= sent_stock.sent_vga_cables %></td>
+            <td><%= sent_stock.sent_kettle_leads %></td>
+            <td><%= sent_stock.sent_routers %></td>
+            <td><%= sent_stock.sent_lan_switches %></td>
             <td><%= sent_stock.created_at.strftime("%d/%m/%y") %></td>
             <td><%= sent_stock.updated_at.strftime("%d/%m/%y") %></td>
             <td><%= link_to sent_stock.staff.staff_name, staff_path(sent_stock.staff)  %></td>

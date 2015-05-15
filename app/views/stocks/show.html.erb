@@ -10,6 +10,10 @@
           <th># of Monitors</th>
           <th># of Printers</th>
           <th># of Speakers</th>
+          <th># of VGA Cables</th>
+          <th># of Kettle Leads</th>
+          <th># of Routers</th>
+          <th># of LAN Switches</th>
           <th>Created on</th>
           <th>Updated on</th></th>
           <th>Uploaded by</th>
@@ -22,6 +26,10 @@
           <td><%= @stock.monitors %></td>
           <td><%= @stock.printers %></td>
           <td><%= @stock.speakers %></td>
+          <td><%= @stock.vga_cables %></td>
+          <td><%= @stock.kettle_leads %></td>
+          <td><%= @stock.routers %></td>
+          <td><%= @stock.lan_switches %></td>
           <td><%= @stock.created_at.strftime("%d/%m/%y") %></td>
           <td><%= @stock.updated_at.strftime("%d/%m/%y") %></td>
           <td><%= link_to @stock.staff.staff_name, staff_path(@stock.staff)  %></td>
@@ -34,11 +42,10 @@
     </div>
     
     <div class="center">
-      <% if logged_in? %>
+        <%= link_to "New batch", new_stock_path(@stock), class: "btn btn-primary" %>
         <%= link_to "Edit this batch", edit_stock_path(@stock), class: "btn btn-success" %>
-      <% end %>
       
-      <% if logged_in? and current_user.admin? %>
+      <% if current_user.admin? %>
         <%= link_to "Go To Stock Index", stocks_path, class: "btn btn-warning" %>
         <%= link_to "Delete this batch", @stock, method: :delete, data: {confirm: "Delete this batch?" }, class: "btn btn-danger" %>
       <% end %>

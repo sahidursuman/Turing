@@ -1,15 +1,38 @@
 <%= render "shared/page_title", title: "Computer Index Table" %>
 
+<!-- Calculates the # of computers in stock, processed, & unprocessed -->
+<% c_count = 0 %><% p_count = 0 %>
+<% @computers.each do |computer| %>
+  <% c_count += 1 %>
+  <% if computer.wipe and computer.wipe.action_taken.length > 0 %>
+    <% p_count += 1 %>
+  <% end %>
+<% end %>
+
 <div class="row">
-  <div class="col-md-4 col-md-offset-4 center">
+  <div class="col-md-6 col-md-offset-3 text-center">
+    <p>
+      Computers in stock: <strong><%= c_count %></strong> |
+      Computers processed: <strong><%= p_count %></strong> |
+      Computers unprocessed: <strong><%= c_count - p_count %></strong>
+    </p>
+  </div>
+</div>
+<hr>
+
+<!-- Search bar -->
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 center">
     <%= form_tag(computertable_path, :method => "get", id: "search-form") do %>
-      <%= label_tag :search, "Search by TuringTrack, Serial No, or Manufacturer" %>
+      <%= label_tag :search, "Search by TuringTrack, Serial No, Product Key, or Manufacturer" %>
       <%= text_field_tag :search, params[:search], placeholder: "Search Manufacturers" %>
       <strong><%= submit_tag "Search" %></strong>
     <% end %>
   </div>
 </div>
+<hr>
 
+<!-- Computer details table -->
 <% if @computers.present? %>
 
   <div class="row">
@@ -77,6 +100,7 @@
 
 <% else %>
 
+<!-- Warning for empty search results -->
 <hr>
 <div class="row">
   <div class="col-md-6 col-md-offset-3 center">

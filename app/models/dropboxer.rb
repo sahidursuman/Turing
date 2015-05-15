@@ -20,7 +20,7 @@
     end
     begin
       # Upload the POST'd file to Dropbox, Naming it using the TuringTrack and original file extension
-      resp = client.put_file("IMG_" + @computer.turingtrack + File.extname(params[:file].original_filename), params[:file].read)
+      resp = client.put_file("WIPE_" + @computer.turingtrack + File.extname(params[:file].original_filename), params[:file].read)
       flash[:success] = "Your image has been successfully uploaded to Dropbox at #{resp['path']}"
       redirect_to :back
       #ender :text => "Upload successful.  File now at #{resp['path']}"
@@ -43,7 +43,7 @@
       redirect_to(:action => 'auth_start') and return
     end
     begin
-      @photo_url = client.media("IMG_" + @computer.turingtrack + ".jpg")
+      @photo_url = client.media("WIPE_" + @computer.turingtrack + ".jpg")
       #render inline: 
         #client.metadata('/').inspect # List of all photos in folder
     rescue DropboxAuthError => e

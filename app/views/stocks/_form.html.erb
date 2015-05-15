@@ -18,6 +18,18 @@
       
       <%= f.label :speakers, "No. of Speakers" %>
       <%= f.number_field :speakers, :placeholder => 0, value: 0 %>
+      
+      <%= f.label :vga_cables, "No. of VGA Cables" %>
+      <%= f.number_field :vga_cables, :placeholder => 0, value: 0 %>
+      
+      <%= f.label :kettle_leads, "No. of Kettle Leads" %>
+      <%= f.number_field :kettle_leads, :placeholder => 0, value: 0 %>
+      
+      <%= f.label :routers, "No. of Routers" %>
+      <%= f.number_field :routers, :placeholder => 0, value: 0 %>
+      
+      <%= f.label :lan_switches, "No. of LAN Switches" %>
+      <%= f.number_field :lan_switches, :placeholder => 0, value: 0 %>
     
       <%= f.submit(@stock.new_record? ? "Submit Inventory Items" : "Update Inventory Items", class: "btn btn-success")%>
 

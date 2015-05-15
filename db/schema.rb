@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150510153522) do
+ActiveRecord::Schema.define(version: 20150515084402) do
 
   create_table "computers", force: true do |t|
     t.string   "manufacturer"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20150510153522) do
     t.text     "product_key"
     t.string   "turingtrack"
     t.integer  "donor_id"
+    t.integer  "hub_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "picture"
@@ -30,15 +31,22 @@ ActiveRecord::Schema.define(version: 20150510153522) do
   create_table "donors", force: true do |t|
     t.string   "donor_name"
     t.string   "donor_email"
-    t.boolean  "allow_mail",  default: false
+    t.text     "donor_address"
+    t.boolean  "paper_cert",    default: false
+    t.boolean  "allow_mail",    default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "hubs", force: true do |t|
+    t.string "hub_location"
   end
 
   create_table "receipts", force: true do |t|
     t.integer  "entertrack"
     t.integer  "staff_id"
     t.integer  "computer_id"
+    t.string   "school"
     t.boolean  "received",    default: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -50,6 +58,10 @@ ActiveRecord::Schema.define(version: 20150510153522) do
     t.integer  "sent_monitors"
     t.integer  "sent_printers"
     t.integer  "sent_speakers"
+    t.integer  "sent_vga_cables"
+    t.integer  "sent_kettle_leads"
+    t.integer  "sent_routers"
+    t.integer  "sent_lan_switches"
     t.integer  "staff_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -84,6 +96,10 @@ ActiveRecord::Schema.define(version: 20150510153522) do
     t.integer  "monitors"
     t.integer  "printers"
     t.integer  "speakers"
+    t.integer  "vga_cables"
+    t.integer  "kettle_leads"
+    t.integer  "routers"
+    t.integer  "lan_switches"
     t.integer  "staff_id"
     t.datetime "created_at"
     t.datetime "updated_at"

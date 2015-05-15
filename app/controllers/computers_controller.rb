@@ -4,7 +4,7 @@ class ComputersController < ApplicationController
   before_action :admin_user, only: [:destroy, :dataoutput]
   
   layout :new_layout, only: [:new, :update]
-  layout "thankyou", only: [:thankyou]
+  #layout :thankyou, only: [:thankyou]
   
   def index
     # Pagination of computers
@@ -26,10 +26,10 @@ class ComputersController < ApplicationController
   
   def create
     @computer = Computer.new(computer_params)
+     #@computer.wipe.computer_id = Computer.find(params[:id])
     if logged_in?
       @computer.wipe.staff = current_user
     end
-    #@computer.wipe.computer_id = Computer.find(params[:id])
     # Deals with different layouts and redirects for donors and staff
     if @computer.save
       flash[:success] = "You're computer's details have been submitted successfully!"
@@ -122,11 +122,12 @@ class ComputersController < ApplicationController
     # Whitelisting variables
     def computer_params
       params.require(:computer).permit(:manufacturer, :computer_type, :specification, 
-                                       :model_no, :serial_no, :product_key, 
+                                       :model_no, :serial_no, :product_key, :hub_id,
                                        :turingtrack, :picture, wipe_attributes: 
                                        [:id, :action_taken, :staff_id],
                                        donor_attributes: [:id, :donor_name, 
-                                       :donor_email, :allow_mail])
+                                       :donor_email, :allow_mail, :donor_address,
+                                       :paper_cert])
     end
     
     def set_computer

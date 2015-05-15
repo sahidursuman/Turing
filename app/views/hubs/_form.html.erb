@@ -1,0 +1,13 @@
+<%= render "shared/errors", obj: @hub %>
+
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2">
+    <%= form_for @hub do |f| %>
+    
+      <%= f.label :hub_location, "Hub Location" %>
+      <%= f.text_field :hub_location %>
+
+      <%= f.submit "Create Hub", class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>

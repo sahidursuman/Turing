@@ -1,0 +1,9 @@
+<%= render "shared/page_title", title: "Hub Index" %>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 center">
+    <% @hubs.each do |hub| %>
+        <h4><strong><%= link_to "#" + hub.id.to_s + " - " + hub.hub_location, hub_path(hub) %></strong></h4>
+    <% end %>
+  </div>
+</div>

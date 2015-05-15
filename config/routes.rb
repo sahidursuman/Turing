@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :sent_stocks
   resources :shipments
   resources :receipts
+  resources :hubs
   
   # Rename new_staff route to register
   get '/register', to: 'staffs#new'

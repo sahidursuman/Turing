@@ -18,10 +18,7 @@
 <% @type.staffs.each do |staff| %>
   <div class="row">
     <div class="col-md-6 col-md-offset-3 left">
-      <p>
-        <h5><strong><%= staff.staff_name %></strong>, contact at <%= staff.staff_email %>, department of <%= render staff.types %></h5>
-      </p>
-      <%= link_to "Go to Staff Profile", staff_path(staff) %>
+      <h5><strong><%= link_to staff.staff_name, staff_path(staff) %></strong>, contact at <%= staff.staff_email %>, department of <%= render staff.types %></h5>
     </div>
   </div>
 <% end %>

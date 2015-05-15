@@ -3,11 +3,15 @@
 <% @donors.each do |donor| %>
   
   <div class="row">
-    <div class="col-md-6 col-md-offset-3 left">
+    <div class="col-md-10 col-md-offset-1">
       <p>
-        #<%= donor.id %> <%= link_to donor.donor_name, donor_path(donor) %>, 
-        contact at <%= donor.donor_email %>, 
-        send email updates: <%= donor.allow_mail %>
+        #<%= donor.id %> - <%= link_to donor.donor_name, donor_path(donor) %>, 
+        Email: <%= donor.donor_email %>,
+        Mailing List: <%= donor.allow_mail %>,
+        <% if donor.donor_address.length > 0 %>
+          Address: <%= donor.donor_address %>, 
+          Send Paper Certificate: <%= donor.paper_cert %>
+        <% end %>
       </p>
       
     </div>

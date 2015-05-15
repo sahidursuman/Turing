@@ -6,6 +6,10 @@ class CreateSentStock < ActiveRecord::Migration
       t.integer :sent_monitors
       t.integer :sent_printers
       t.integer :sent_speakers
+      t.integer :sent_vga_cables
+      t.integer :sent_kettle_leads
+      t.integer :sent_routers
+      t.integer :sent_lan_switches
       t.integer :staff_id
       t.timestamps
     end

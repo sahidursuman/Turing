@@ -12,6 +12,7 @@
           <th>Received by</th>
           <th>Receipt Date</th>
           <th>Date Edited </th>
+          <th>School</th>
         </tr>
       </thead>
       <tbody>
@@ -23,6 +24,7 @@
             <td><%= link_to receipt.staff.staff_name, staff_path(receipt.staff) %></td>
             <td><%= receipt.created_at.strftime("%d/%m/%y") %></td>
             <td><%= receipt.updated_at.strftime("%d/%m/%y") %></td>
+            <td><%= receipt.school %></td>
           </tr>
         <% end %>
       </tbody>

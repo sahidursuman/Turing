@@ -55,6 +55,7 @@
       </p>
       <p>
         Turing Track No: <%= @computer.turingtrack %> <br>
+        Processing Hub: <%= link_to @computer.hub.hub_location, hub_path(@computer.hub) %> <br>
         Manufacturer: <%= @computer.manufacturer %> <br>
         Type of Computer: <%= @computer.computer_type %> <br>
         Model No: <%= @computer.model_no %> <br>
@@ -62,7 +63,7 @@
         <!--Specification: <%# simple_format(@computer.specification) %> <br>-->
         Specification: <%= @computer.specification %> <br>
         OS Product Key: <%= @computer.product_key %> <br>
-        Donor: <%= @computer.donor.donor_name %> <br>
+        Donor: <%= link_to @computer.donor.donor_name, donor_path(@computer.donor) %> <br>
       </p>
       
       <!-- If there is an associated wipe, render wipes/_wipe partial-->
@@ -93,7 +94,8 @@
         Wipe ID: <%#= @computer.wipe.id %>, 
         Staff ID: <%#= @computer.wipe.staff.id %>, 
       <%# end %>
-      Donor ID: <%#= @computer.donor.id %> -->
+      Donor ID: <%#= @computer.donor.id %>
+      Hub ID: <%#= @computer.hub.id %> -->
         
       <br><br>Barcode: <%= raw @barcode_for_html.to_html %>
     </div>

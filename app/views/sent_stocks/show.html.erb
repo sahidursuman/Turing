@@ -10,6 +10,10 @@
           <th># of Monitors</th>
           <th># of Printers</th>
           <th># of Speakers</th>
+          <th># of VGA Cables</th>
+          <th># of Kettle Leads</th>
+          <th># of Routers</th>
+          <th># of LAN Switches</th>
           <th>Created on</th>
           <th>Updated on</th></th>
           <th>Uploaded by</th>
@@ -22,6 +26,10 @@
           <td><%= @sent_stock.sent_monitors %></td>
           <td><%= @sent_stock.sent_printers %></td>
           <td><%= @sent_stock.sent_speakers %></td>
+          <td><%= @sent_stock.sent_vga_cables %></td>
+          <td><%= @sent_stock.sent_kettle_leads %></td>
+          <td><%= @sent_stock.sent_routers%></td>
+          <td><%= @sent_stock.sent_lan_switches %></td>
           <td><%= @sent_stock.created_at.strftime("%d/%m/%y") %></td>
           <td><%= @sent_stock.updated_at.strftime("%d/%m/%y") %></td>
           <td><%= link_to @sent_stock.staff.staff_name, staff_path(@sent_stock.staff)  %></td>
@@ -34,11 +42,10 @@
     </div>
     
     <div class="center">
-      <% if logged_in? %>
+        <%= link_to "New batch", new_sent_stock_path(@sent_stock), class: "btn btn-primary" %>
         <%= link_to "Edit this batch", edit_sent_stock_path(@sent_stock), class: "btn btn-success" %>
-      <% end %>
       
-      <% if logged_in? and current_user.admin? %>
+      <% if current_user.admin? %>
         <%= link_to "Go To Stock Index", stocks_path, class: "btn btn-warning" %>
         <%= link_to "Delete this batch", @sent_stock, method: :delete, data: {confirm: "Delete this batch?" }, class: "btn btn-danger" %>
       <% end %>

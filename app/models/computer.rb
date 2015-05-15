@@ -1,11 +1,12 @@
 class Computer < ActiveRecord::Base
   belongs_to :donor
+  belongs_to :hub
   has_one :shipment
   has_one :receipt
   has_one :wipe, dependent: :destroy
   
   accepts_nested_attributes_for :wipe
-  accepts_nested_attributes_for :donor #, allow_destroy: true
+  accepts_nested_attributes_for :donor#, allow_destroy: true
   # alloy_destroy: true does not automatically delete associated records, but rather allows allows users to delete them. If the 
   # hash of attributes for an object contains the key _destroy with a value of 1 or true then the object will be destroyed.
   
@@ -31,7 +32,8 @@ class Computer < ActiveRecord::Base
   private
   
     def self.search(search)
-      where("turingtrack = ? OR serial_no LIKE ? OR manufacturer LIKE ?", search, "%#{search}%", "%#{search}%")
+      where("turingtrack = ? OR serial_no LIKE ? OR manufacturer LIKE ? 
+      Or product_key LIKE ?", search, "%#{search}%", "%#{search}%", "%#{search}%")
     end
   
     def id_to_track

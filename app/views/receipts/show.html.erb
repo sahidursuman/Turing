@@ -12,6 +12,7 @@
           <th>Received by</th>
           <th>Receipt Date</th>
           <th>Date Last Edited </th>
+          <th>School</th>
         </tr>
       </thead>
       <tbody>
@@ -22,11 +23,13 @@
           <td><%= link_to @receipt.staff.staff_name, staff_path(@receipt.staff) %></td>
           <td><%= @receipt.created_at.strftime("%d/%m/%y") %></td>
           <td><%= @receipt.updated_at.strftime("%d/%m/%y") %></td>
+          <td><%= @receipt.school %></td>
         </tr>
       </tbody>
     </table>
     
     <div class="center">
+      <%= link_to "Create New confirmation", new_receipt_path(@receipt), class: "btn btn-primary" %>
       <%= link_to "Edit this confirmation", edit_receipt_path(@receipt), class: "btn btn-success" %>
       
       <% if current_user.admin? %>

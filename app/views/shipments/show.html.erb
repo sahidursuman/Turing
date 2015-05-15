@@ -27,6 +27,7 @@
     </table>
     
     <div class="center">
+      <%= link_to "Create New confirmation", new_shipment_path(@shipment), class: "btn btn-primary" %>
       <%= link_to "Edit this confirmation", edit_shipment_path(@shipment), class: "btn btn-success" %>
       
       <% if current_user.admin? %>

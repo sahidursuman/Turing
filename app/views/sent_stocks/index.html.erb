@@ -11,6 +11,10 @@
           <th># of Monitors</th>
           <th># of Printers</th>
           <th># of Speakers</th>
+          <th># of VGA Cables</th>
+          <th># of Kettle Leads</th>
+          <th># of Routers</th>
+          <th># of LAN Switches</th>
           <th>Created on</th>
           <th>Updated on</th></th>
         </tr>
@@ -24,6 +28,10 @@
             <td><%= sent_stock.sent_monitors %></td>
             <td><%= sent_stock.sent_printers %></td>
             <td><%= sent_stock.sent_speakers %></td>
+            <td><%= sent_stock.sent_vga_cables %></td>
+            <td><%= sent_stock.sent_kettle_leads %></td>
+            <td><%= sent_stock.sent_routers %></td>
+            <td><%= sent_stock.sent_lan_switches %></td>
             <td><%= sent_stock.created_at.strftime("%d/%m/%y") %></td>
             <td><%= sent_stock.updated_at.strftime("%d/%m/%y") %></td>
           </tr>
@@ -33,12 +41,17 @@
     
     <!-- Calculate Totals of Stock Items Donated -->
     <% ke_count = 0  %><% mi_count = 0%><% mo_count = 0%><% pr_count = 0%><% sp_count = 0 %>
+    <% vga_count = 0 %><% kl_count = 0 %><% rt_count = 0 %><% ls_count = 0 %>
     <% @sent_stocks.each do |sent_stock| %>
       <% ke_count += sent_stock.sent_keyboards %>
       <% mi_count += sent_stock.sent_mice %>
       <% mo_count += sent_stock.sent_monitors %>
       <% pr_count += sent_stock.sent_printers %>
       <% sp_count += sent_stock.sent_speakers %>
+      <% vga_count += sent_stock.sent_vga_cables %>
+      <% kl_count += sent_stock.sent_kettle_leads %>
+      <% rt_count += sent_stock.sent_routers %>
+      <% ls_count += sent_stock.sent_lan_switches %>
     <% end %>
     
     <h3 class="text-center">Total # of Items Sent</h3>
@@ -47,7 +60,11 @@
       Mice: <%= mi_count %> |
       Monitors: <%= mo_count %> |
       Printers: <%= pr_count %> | 
-      Speakers: <%= sp_count %>
+      Speakers: <%= sp_count %> |
+      VGA Cables: <%= vga_count %> |
+      Kettle Leads: <%= kl_count %> |
+      Routers: <%= rt_count %> |
+      LAN Switches: <%= ls_count %>
     </p>
   </div>
 </div>

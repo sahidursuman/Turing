@@ -18,6 +18,18 @@
       
       <%= f.label :sent_speakers, "No. of Speakers" %>
       <%= f.number_field :sent_speakers, :placeholder => 0, value: 0 %>
+      
+      <%= f.label :sent_vga_cables, "No. of VGA Cables" %>
+      <%= f.number_field :sent_vga_cables, :placeholder => 0, value: 0 %>
+      
+      <%= f.label :sent_kettle_leads, "No. of Kettle Leads" %>
+      <%= f.number_field :sent_kettle_leads, :placeholder => 0, value: 0 %>
+      
+      <%= f.label :sent_routers, "No. of Routers" %>
+      <%= f.number_field :sent_routers, :placeholder => 0, value: 0 %>
+      
+      <%= f.label :sent_lan_switches, "No. of LAN Switches" %>
+      <%= f.number_field :sent_lan_switches, :placeholder => 0, value: 0 %>
     
       <%= f.submit(@sent_stock.new_record? ? "Submit Sent Items Confirmation" : "Update Sent Items Confirmation", class: "btn btn-success")%>
 

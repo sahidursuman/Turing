@@ -9,6 +9,7 @@ class CreateComputer < ActiveRecord::Migration
       t.text :product_key
       t.string :turingtrack
       t.integer :donor_id
+      t.integer :hub_id
       t.timestamps
     end
   end

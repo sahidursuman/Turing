@@ -8,6 +8,7 @@ class Receipt < ActiveRecord::Base
   validates :staff_id, presence: true
   validates :computer_id, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_blank: true
   validates :received, presence: true, inclusion: { in: [true, false], message: "%{Has the item been received?} " } 
+  validates :school, length: { minimum: 2, maximum: 150 }, allow_blank: true
   
   private
   

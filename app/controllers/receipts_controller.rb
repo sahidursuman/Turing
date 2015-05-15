@@ -49,7 +49,7 @@ class ReceiptsController < ApplicationController
   private
   
     def receipt_params
-      params.require(:receipt).permit(:entertrack, :computer_id, :staff_id, :received)
+      params.require(:receipt).permit(:entertrack, :computer_id, :staff_id, :received, :school)
     end
     
     def set_receipt

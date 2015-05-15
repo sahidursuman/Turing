@@ -12,6 +12,8 @@
         <h3><%= "TuringTrack: #" + @receipt.computer.turingtrack %></h3><br>
       <% end %>
       
+      <%= f.label :school, "Which school is the computer being sent to?" %>
+      <%= f.text_field :school, :placeholder => "Some School" %>
       <%= f.label :received, "Confirm the computer has been received?" %>
       <%= f.check_box :received, value: 0 %>
       

@@ -31,7 +31,10 @@
     
     <div class="col-md-6 well">
       <h4><%= link_to "Turing Track No #" + computer.turingtrack, computer_path(computer) %></h4>
-      <p><%= computer.manufacturer %> <%= computer.computer_type %> donated by <%= computer.donor.donor_name %></p>
+      <p>
+        <%= computer.manufacturer %> <%= computer.computer_type %> donated by <%= computer.donor.donor_name %><br>
+        Processing Hub <%= computer.hub.hub_location %>
+      </p>
       <p>
         <span class="quiet"><small>Created <%= time_ago_in_words(computer.created_at) %> ago, </small></span>
         <span class="quiet"><small>updated <%= time_ago_in_words(computer.updated_at) %> ago</small></span>

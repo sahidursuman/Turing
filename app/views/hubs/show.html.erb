@@ -1,0 +1,10 @@
+<%= render "shared/page_title", title: "#" + @hub.id.to_s + " - " + @hub.hub_location %>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 center">
+    <%= link_to "New Hub", new_hub_path(@hub), class: "btn btn-primary" %>
+    <%= link_to "Edit this Hub", edit_hub_path(@hub), class: "btn btn-success" %>
+    <%= link_to "Go To Hub Index", hubs_path, class: "btn btn-warning" %>
+    <%= link_to "Delete this Hub", @hub, method: :delete, data: {confirm: "Delete this Hub?" }, class: "btn btn-danger" %>
+  </div>
+</div>
