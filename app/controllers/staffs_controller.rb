@@ -12,6 +12,7 @@ class StaffsController < ApplicationController
     @wipes = @staff.wipes.paginate(page: params[:page], per_page: 20)
     @shipments = @staff.shipments.paginate(page: params[:page], per_page: 20)
     @receipts = @staff.receipts.paginate(page: params[:page], per_page: 20)
+    @decommissions = @staff.decommissions.paginate(page: params[:page], per_page: 20)
   end
   
   def new
