@@ -57,7 +57,7 @@ class SentStocksController < ApplicationController
   end
   
   def sent_stock_params
-    params.require(:sent_stock).permit(:sent_keyboards, :sent_mice, :sent_monitors, :sent_printers, :sent_speakers,
+    params.require(:sent_stock).permit(:sent_batch_name, :sent_keyboards, :sent_mice, :sent_monitors, :sent_printers, :sent_speakers,
                                       :sent_vga_cables, :sent_kettle_leads, :sent_routers, :sent_lan_switches)
   end
   

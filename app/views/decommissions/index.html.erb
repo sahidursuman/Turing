@@ -1,0 +1,67 @@
+<%= render "shared/page_title", title: "Decommission Index" %>
+
+<!-- Search bar -->
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 center">
+    <%= form_tag(decommissions_path, :method => "get", id: "search-form") do %>
+      <%= label_tag :search, "Search by TuringTrack" %>
+      <%= text_field_tag :search, params[:search], placeholder: "10000001" %>
+      <strong><%= submit_tag "Search" %></strong>
+    <% end %>
+  </div>
+</div>
+<hr>
+
+<!-- Index Table -->
+<% if @decommissions.present? %>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>TuringTrack</th>
+          <th>Decommissioned</th>
+          <th>Decommission ID</th>
+          <th>Decommissioned by</th>
+          <th>Decommission Date</th>
+          <th>Date Last Edited </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @decommissions.each do |decommission| %>
+          <tr>
+          <td><%= link_to "#" + decommission.computer.turingtrack, computer_path(decommission.computer) %></td>
+          <td><% if decommission.decommissioned %> Yes <% else %> No <% end %></td>
+          <td><%= link_to "#" + decommission.id.to_s, decommission_path(decommission) %></td>
+          <td><%= link_to decommission.staff.staff_name, staff_path(decommission.staff) %></td>
+          <td><%= decommission.created_at.strftime("%d/%m/%y") %></td>
+          <td><%= decommission.updated_at.strftime("%d/%m/%y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  
+  </div>
+</div>
+
+<!-- Warning for empty search results -->
+<% else %>
+
+<hr>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 center">
+    <h4>There are no records containing the term: <%= params[:search] %></h4>
+  </div>
+</div>
+<hr>
+  
+<% end %>
+
+<!-- Refresh Index --> 
+<div class="row">
+  <div class="col-md-2 col-md-offset-5 center">
+     <%= link_to "Return to Decommission Index", decommissions_path, class: "btn btn-warning btn-small" %>
+  </div>
+</div>

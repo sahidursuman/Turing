@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150515084402) do
+ActiveRecord::Schema.define(version: 20150518151345) do
 
   create_table "computers", force: true do |t|
     t.string   "manufacturer"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 20150515084402) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "picture"
+  end
+
+  create_table "decommissions", force: true do |t|
+    t.integer  "entertrack"
+    t.integer  "staff_id"
+    t.integer  "computer_id"
+    t.boolean  "decommissioned", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "donors", force: true do |t|
@@ -53,6 +62,7 @@ ActiveRecord::Schema.define(version: 20150515084402) do
   end
 
   create_table "sent_stocks", force: true do |t|
+    t.string   "sent_batch_name"
     t.integer  "sent_keyboards"
     t.integer  "sent_mice"
     t.integer  "sent_monitors"
@@ -71,7 +81,7 @@ ActiveRecord::Schema.define(version: 20150515084402) do
     t.integer  "entertrack"
     t.integer  "staff_id"
     t.integer  "computer_id"
-    t.boolean  "shipped",     default: true
+    t.boolean  "shipped",     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -90,7 +100,18 @@ ActiveRecord::Schema.define(version: 20150515084402) do
     t.boolean  "admin",           default: false
   end
 
+  create_table "statuses", force: true do |t|
+    t.integer  "entertrack"
+    t.integer  "staff_id"
+    t.integer  "computer_id"
+    t.boolean  "scrapped",    default: false
+    t.boolean  "sold",        default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "stocks", force: true do |t|
+    t.string   "batch_name"
     t.integer  "keyboards"
     t.integer  "mice"
     t.integer  "monitors"

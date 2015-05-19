@@ -1,20 +1,36 @@
 <%= render "shared/page_title", title: "Computer Index Table" %>
 
-<!-- Calculates the # of computers in stock, processed, & unprocessed -->
-<% c_count = 0 %><% p_count = 0 %>
+<!-- Calculates the # of computers in stock, processed, & unprocessed, totals (ever), and  scrapped/sold -->
+<% total_c_count = 0 %><% total_p_count = 0 %><% current_c_count = 0 %><% current_p_count = 0 %><% s_count = 0%>
 <% @computers.each do |computer| %>
-  <% c_count += 1 %>
-  <% if computer.wipe and computer.wipe.action_taken.length > 0 %>
-    <% p_count += 1 %>
+  <% total_c_count += 1 %>
+  <% unless computer.status and (computer.status.scrapped or computer.status.sold) %>
+  
+    <% if computer.wipe and computer.wipe.action_taken.length > 0 %>
+      <% total_p_count += 1 %>
+    <% end %>
+    <% unless computer.shipment and computer.shipment.shipped %>
+      <% current_c_count += 1 %>
+      <% if computer.wipe and computer.wipe.action_taken.length > 0 %>
+        <% current_p_count += 1 %>
+      <% end %>
+    <% end %>
+    
+  <% else %>
+    <% s_count +=1 %>
   <% end %>
+  
 <% end %>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3 text-center">
     <p>
-      Computers in stock: <strong><%= c_count %></strong> |
-      Computers processed: <strong><%= p_count %></strong> |
-      Computers unprocessed: <strong><%= c_count - p_count %></strong>
+      Computers in stock: <strong><%= current_c_count %></strong> |
+      Stock processed: <strong><%= current_p_count %></strong> |
+      Stock unprocessed: <strong><%= current_c_count - current_p_count %></strong><br>
+      Total received: <strong><%= total_c_count %></strong> |
+      Total processed: <strong><%= total_p_count %></strong> |
+      Total scrapped/sold: <strong><%= s_count %></strong>
     </p>
   </div>
 </div>
@@ -25,7 +41,7 @@
   <div class="col-md-6 col-md-offset-3 center">
     <%= form_tag(computertable_path, :method => "get", id: "search-form") do %>
       <%= label_tag :search, "Search by TuringTrack, Serial No, Product Key, or Manufacturer" %>
-      <%= text_field_tag :search, params[:search], placeholder: "Search Manufacturers" %>
+      <%= text_field_tag :search, params[:search], placeholder: "10000001" %>
       <strong><%= submit_tag "Search" %></strong>
     <% end %>
   </div>
@@ -43,17 +59,17 @@
             <th class="text-center">Turing Track</th>
             <th>Manufacturer</th>
             <th>Computer Type</th>
-            <th>Model No.</th>
             <th>Serial No.</th>
             <th>OS Product Key</th>
             <th>Donor</th>
+            <th>Hub</th>
             <th>Created At</th>
             <th>Updated At</th>
+            <th>Status</th>
             <th>Wiped?</th>
-            <th>Wiped by</th>
-            <th>Wiped on</th>
             <th>Shipped?</th>
             <th>Received?</th>
+            <th>Decom?</th>
           </tr>
         </thead>
         <tbody>
@@ -62,33 +78,53 @@
               <td><%= link_to "#" + computer.turingtrack, computer_path(computer) %></td>
               <td><%= computer.manufacturer %></td>
               <td><%= computer.computer_type %></td>
-              <td><%= computer.model_no %></td>
               <td><%= computer.serial_no %></td>
               <td><%= computer.product_key %></td>
               <td><%= link_to computer.donor.donor_name, donor_path(computer.donor) %></td>
+              <td><%= link_to "#" + computer.hub.id.to_s, hub_path(computer.hub) %></td>
               <td><%= computer.created_at.strftime("%d/%m/%y") %></td>
               <td><%= computer.updated_at.strftime("%d/%m/%y") %></td>
               
+              <% if computer.status %>
+                <% if computer.status.scrapped %>
+                  <td><%= link_to "Scrapped", status_path(computer.status) %></td>
+                <% elsif computer.status.sold %>
+                  <td><%= link_to "Sold", status_path(computer.status) %></td>
+                <% else %>
+                  <td><%= link_to "None", new_status_path %></td>
+                <% end %>
+              <% else %>
+                <td><%= link_to "None", new_status_path %></td>
+              <% end %>
+              
               <% if computer.wipe.present? and  computer.wipe.action_taken.length > 0  %>
                 <td><%= link_to "Yes", wipe_path(computer.wipe) %></td>
-                <td><%= link_to computer.wipe.staff.staff_name, staff_path(computer.wipe.staff) %></td>
-                <td><%= computer.wipe.created_at.strftime("%d/%m/%y") %></td>
               <% else %>
-                <td>No</td>
-                <td>-</td>
-                <td>-</td>
+               <td><%= link_to "No", edit_computer_path(computer) %></td>
               <% end %>
               
               <% if computer.shipment.present? and computer.shipment.shipped %>
                 <td><%= link_to "Yes", shipment_path(computer.shipment) %>
+              <% elsif computer.shipment.present? and !computer.shipment.shipped  %>
+                <td><%= link_to "No", edit_shipment_path(computer.shipment) %></td>
               <% else %>
                 <td><%= link_to "No", new_shipment_path %></td>
               <% end %>
               
               <% if computer.receipt.present? and computer.receipt.received %>
                 <td><%= link_to "Yes", receipt_path(computer.receipt) %>
+              <% elsif computer.receipt.present? and !computer.receipt.received  %>
+                <td><%= link_to "No", edit_receipt_path(computer.receipt) %></td>
               <% else %>
                 <td><%= link_to "No", new_receipt_path %></td>
+              <% end %>
+              
+              <% if computer.decommission.present? and computer.decommission.decommissioned %>
+                <td><%= link_to "Yes", decommission_path(computer.decommission) %>
+              <% elsif computer.decommission.present? and !computer.decommission.decommissioned  %>
+                <td><%= link_to "No", edit_decommission_path(computer.decommission) %></td>
+              <% else %>
+                <td><%= link_to "No", new_decommission_path %></td>
               <% end %>
               
             </tr>
@@ -113,6 +149,6 @@
 
 <div class="row">
   <div class="col-md-2 col-md-offset-5 center">
-     <%= link_to "Return to Computer Index", computertable_path, class: "btn btn-success btn-small" %>
+     <%= link_to "Return to Computer Index", computertable_path, class: "btn btn-warning btn-small" %>
   </div>
 </div>

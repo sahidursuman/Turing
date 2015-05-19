@@ -73,7 +73,7 @@ class StocksController < ApplicationController
   end
   
   def stock_params
-    params.require(:stock).permit(:keyboards, :mice, :monitors, :printers, :speakers,
+    params.require(:stock).permit(:batch_name, :keyboards, :mice, :monitors, :printers, :speakers,
                                   :vga_cables, :kettle_leads, :routers, :lan_switches)
   end
   

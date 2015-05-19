@@ -5,7 +5,12 @@ class ReceiptsController < ApplicationController
   before_action :admin_user, only: [:destroy, :index]
   
   def index
-    @receipts = Receipt.paginate(page: params[:page], per_page: 50)
+    #@receipts = Receipt.paginate(page: params[:page], per_page: 50)
+    if params[:search]
+      @receipts = Receipt.search(params[:search]).order("computer_id DESC")
+    else
+      @receipts = Receipt.all.order('computer_id DESC')
+    end
   end
   
   def show

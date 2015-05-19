@@ -4,6 +4,9 @@
   <div class="well col-md-8 col-md-offset-2 form-group">
     <%= form_for @stock do |f| %>
     
+      <%= f.label :batch_name, "Batch Name" %>
+      <%= f.text_field :batch_name, :placeholder => "May's Stock Donations" %>
+    
       <%= f.label :keyboards, "No. of Keyboards" %>
       <%= f.number_field :keyboards, :placeholder => 0, value: 0 %>
     

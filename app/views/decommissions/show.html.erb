@@ -1,0 +1,40 @@
+<%= render "shared/page_title", title: "Decommission Confirmation for TuringTrack #" + @decommission.computer.turingtrack %>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>TuringTrack</th>
+          <th>Decommissioned</th>
+          <th>Decommission ID</th>
+          <th>Decommissioned by</th>
+          <th>Decommission Date</th>
+          <th>Date Last Edited </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= link_to "#" + @decommission.computer.turingtrack, computer_path(@decommission.computer) %></td>
+          <td><% if @decommission.decommissioned %> Yes <% else %> No <% end %></td>
+          <td><%= "#" + @decommission.id.to_s %></td>
+          <td><%= link_to @decommission.staff.staff_name, staff_path(@decommission.staff) %></td>
+          <td><%= @decommission.created_at.strftime("%d/%m/%y") %></td>
+          <td><%= @decommission.updated_at.strftime("%d/%m/%y") %></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="center">
+      <%= link_to "Create New confirmation", new_decommission_path(@decommission), class: "btn btn-primary" %>
+      <%= link_to "Edit this confirmation", edit_decommission_path(@decommission), class: "btn btn-success" %>
+      
+      <% if current_user.admin? %>
+        <%= link_to "Go To decommissions Index", decommissions_path, class: "btn btn-warning" %>
+        <%= link_to "Delete this confirmation", @decommission, method: :delete, data: {confirm: "Delete this confirmation?" }, class: "btn btn-danger" %>
+      <% end %>
+    </div>
+    
+  </div>
+</div>

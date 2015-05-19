@@ -1,0 +1,36 @@
+<%= render "shared/page_title", title: "Status Index" %>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>TuringTrack</th>
+          <th>Status ID</th>
+          <th>Scrapped</th>
+          <th>Sold</th>
+          <th>Created On</th>
+          <th>Updated On</th>
+          <th>Confirmed by</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @statuses.each do |status| %>
+          <tr>
+          <td><%= link_to "#" + status.computer.turingtrack, computer_path(status.computer) %></td>
+          <td><%= link_to "#" + status.id.to_s, status_path(status) %></td>
+          <td><%= status.scrapped %></td>
+          <td><%= status.sold %></td>
+          <td><%= status.created_at.strftime("%d/%m/%y") %></td>
+          <td><%= status.updated_at.strftime("%d/%m/%y") %></td>
+          <td><%= link_to status.staff.staff_name, staff_path(status.staff) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  
+  </div>
+</div>
+
+<hr>

@@ -8,6 +8,27 @@ $navbar-default-color: $mid-grey;
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+// Styling of the Turing Trust Logo in navbar
+#logo {
+  background-color: #FFFFFF;
+  border-color: #434343;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  float: left;
+  margin-right: 0px;
+  font-size: 2em;
+  color: #434343;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+}
+
+#logo:hover {
+  color: #BE5555;
+  text-decoration: none;
+}
+
 // Stlying for boxes / links in navigation bar
 .nav_styling {
   background-color: #FFFFFF;
@@ -21,6 +42,33 @@ $navbar-default-color: $mid-grey;
   color: #BE5555;
   border-color: #434343;
   font-weight: bold;
+}
+
+.nav_item {
+  margin-left: 25px;
+  float: left;
+  margin-top: 23px;
+  
+}
+
+.nav_item_right {
+  padding-left: 0px;
+  margin-top: 23px;
+  margin-right: 0px;
+}
+
+.nav_item_right > li > ul > li {
+  text-align: right;
+}
+
+.nav_ul_item {
+  padding-left: 10px;
+  float: left;
+  margin-top: 23px;
+}
+
+.dropdown-menu {
+  min-width: 0px !important;
 }
 
 @media (max-width: 1200px) {
@@ -60,7 +108,7 @@ $navbar-default-color: $mid-grey;
 	}
 }
 
-// Styling of the link boxes
+// Styling of the link boxes on homepage
 .linkbox_styling {
   background-color: #BE5555;
   color: #FFFFFF;
@@ -74,48 +122,7 @@ $navbar-default-color: $mid-grey;
   border-color: #BE5555;
 }
 
-.nav_item {
-  margin-left: 25px;
-  float: left;
-  margin-top: 23px;
-  
-}
-
-.nav_item_right {;
-  float: left;
-  margin-top: 23px;
-  margin-right: 0px;
-}
-
-.nav_ul_item {
-  padding-left: 14px;
-  float: left;
-  margin-top: 23px;
-  
-}
-
-// Styling of the Turing Trust Logo in navbar
-#logo {
-  background-color: #FFFFFF;
-  border-color: #434343;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  float: left;
-  margin-right: 0px;
-  font-size: 2em;
-  color: #434343;
-  text-transform: uppercase;
-  letter-spacing: -1px;
-  padding-top: 9px;
-  font-weight: bold;
-}
-
-#logo:hover {
-  color: #BE5555;
-  text-decoration: none;
-}
-
-// Button Styling
+// General Button Styling
 .btn {
   border-radius: 0px;
   -webkit-border-radius: 0px;

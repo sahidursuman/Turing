@@ -1,9 +1,11 @@
 class Computer < ActiveRecord::Base
   belongs_to :donor
   belongs_to :hub
-  has_one :shipment
-  has_one :receipt
+  has_one :shipment, dependent: :destroy
+  has_one :receipt, dependent: :destroy
+  has_one :status, dependent: :destroy
   has_one :wipe, dependent: :destroy
+  has_one :decommission, dependent: :destroy
   
   accepts_nested_attributes_for :wipe
   accepts_nested_attributes_for :donor#, allow_destroy: true

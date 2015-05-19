@@ -18,13 +18,18 @@
     
     <div class="col-md-2 col-md-offset-1">
       <section class="staff_info center">
-        <p>
         <% if computer.wipe.present? and computer.wipe.action_taken.length > 0 %>
           <h5 class="vcenter">Computer Wiped!</h5>
         <% else %>
           <h5 class="vcenter"><strong><%= link_to "Wipe this computer!", edit_computer_path(computer) %></strong></h5>
         <% end %>
-        </p>
+        
+      <% unless computer.status and (computer.status.scrapped or computer.status.sold) %>
+        <br><h5><strong><%= link_to "Add a status", new_status_path %></strong></h5>
+      <% end %>
+      <% if computer.status and computer.status.scrapped %><br><strong>Computer has been scrapped</strong><br><% end %>
+      <% if computer.status and computer.status.sold %><br><strong>Computer has been sold</strong><br><% end %>
+      
 <!-- This is where to put a gravitar/avatar/photo if wanted -->
       </section>
     </div>
@@ -43,8 +48,8 @@
       <% if computer.wipe.present? and computer.wipe.action_taken.length > 0 %>
         <p><%= render computer.wipe %></p>
       <% end %>
+      
     </div>
-    
    
     <div class="col-md-2">
       <% if computer.shipment and computer.shipment.shipped %>

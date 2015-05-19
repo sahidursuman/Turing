@@ -103,7 +103,8 @@
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
-          <th>Batch</th>
+          <th>Batch ID</th>
+          <th>Batch Name</th>
           <th># of Keyboards</th>
           <th># of Mice</th>
           <th># of Monitors</th>
@@ -122,6 +123,7 @@
         <% @stocks.each do |stock| %>
           <tr>
             <td><%= link_to "#" + stock.id.to_s, stock_path(stock) %></td>
+            <td><%= stock.batch_name %></td>
             <td><%= stock.keyboards %></td>
             <td><%= stock.mice %></td>
             <td><%= stock.monitors %></td>
@@ -154,7 +156,8 @@
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
-          <th>Batch</th>
+          <th>Batch ID</th>
+          <th>Batch Name</th>
           <th># of Keyboards</th>
           <th># of Mice</th>
           <th># of Monitors</th>
@@ -173,6 +176,7 @@
         <% @sent_stocks.each do |sent_stock| %>
           <tr>
             <td><%= link_to "#" + sent_stock.id.to_s, sent_stock_path(sent_stock) %></td>
+            <td><%= sent_stock.sent_batch_name %></td>
             <td><%= sent_stock.sent_keyboards %></td>
             <td><%= sent_stock.sent_mice %></td>
             <td><%= sent_stock.sent_monitors %></td>

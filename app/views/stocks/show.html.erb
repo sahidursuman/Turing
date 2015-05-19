@@ -1,10 +1,11 @@
 <%= render "shared/page_title", title: "Stock Batch #" + @stock.id.to_s %>
 
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-10 col-md-offset-1">
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
+          <th>Batch Name</th>
           <th># of Keyboards</th>
           <th># of Mice</th>
           <th># of Monitors</th>
@@ -21,6 +22,7 @@
       </thead>
       <tbody>
         <tr>
+          <td><%= @stock.batch_name %></td>
           <td><%= @stock.keyboards %></td>
           <td><%= @stock.mice %></td>
           <td><%= @stock.monitors %></td>

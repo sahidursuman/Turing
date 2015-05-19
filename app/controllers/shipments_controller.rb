@@ -5,7 +5,12 @@ class ShipmentsController < ApplicationController
   before_action :admin_user, only: [:destroy, :index]
   
   def index
-    @shipments = Shipment.paginate(page: params[:page], per_page: 50)
+    #@shipments = Shipment.paginate(page: params[:page], per_page: 50)
+    if params[:search]
+      @shipments = Shipment.search(params[:search]).order("computer_id DESC")
+    else
+      @shipments = Shipment.all.order('computer_id DESC')
+    end
   end
   
   def show
@@ -43,7 +48,7 @@ class ShipmentsController < ApplicationController
   def destroy
     Shipment.find(params[:id]).destroy
     flash[:success] = "The shipments details have been successfully deleted."
-    redirect_to staffs_path
+    redirect_to shipments_path
   end
   
   private

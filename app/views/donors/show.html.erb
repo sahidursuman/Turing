@@ -1,7 +1,7 @@
 <%= render "shared/page_title", title: @donor.donor_name %>
 
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-8 col-md-offset-2">
     
     <h3 class="text-center">Donor Details</h3>
       Donor ID: <%= @donor.id%> <br>
@@ -17,7 +17,7 @@
 
 <hr>
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-8 col-md-offset-2">
     
     <h3 class="text-center">Donation Details</h3><br>
     <% @computers.each do |computer| %>
@@ -25,6 +25,7 @@
       <div class="col-md-6 pull-left" style="padding-left:0px;">
         <strong>Computer Details:</strong><br>
         Turing Track No: #<%= link_to computer.turingtrack, computer_path(computer) %> <br>
+        Processing Hub: <br><%= link_to computer.hub.hub_location, hub_path(computer.hub) %> <br>
         Manufacturer: <%= computer.manufacturer %> <br>
         Type of Computer: <%= computer.computer_type %> <br>
         Model No: <%= computer.model_no %> <br>
@@ -43,7 +44,8 @@
         <div class="col-md-12 donor_computer" style="padding-left:0px;">
           <br><strong>Wiping Details:</strong><br>
           
-          Wiped by <%= link_to computer.wipe.staff.staff_name, staff_path(computer.wipe.staff) %>
+          <%= link_to "Wiped", wipe_path(computer.wipe) %> by 
+          <%= link_to computer.wipe.staff.staff_name, staff_path(computer.wipe.staff) %>
           on <%= computer.wipe.created_at.strftime("%d/%m/%y") %>
           with the following method: <%= computer.wipe.action_taken %>
           
@@ -59,7 +61,7 @@
 
 <hr>    
 <div class="row">
-  <div class="col-md-6 col-md-offset-3 center">
+  <div class="col-md-8 col-md-offset-2 center">
     <%= link_to "Edit this Donor", edit_donor_path(@donor), class: "btn btn-success" %>
     <%= link_to "Go To Donor Index", donors_path, class: "btn btn-warning" %>
     <%= link_to "Delete this Donor", @donor, method: :delete, data: {confirm: "Delete this Donor" }, class: "btn btn-danger" %>

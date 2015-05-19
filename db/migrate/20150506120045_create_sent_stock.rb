@@ -1,6 +1,7 @@
 class CreateSentStock < ActiveRecord::Migration
   def change
     create_table :sent_stocks do |t|
+      t.string :sent_batch_name
       t.integer :sent_keyboards
       t.integer :sent_mice 
       t.integer :sent_monitors

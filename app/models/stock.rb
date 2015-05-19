@@ -1,6 +1,7 @@
 class Stock < ActiveRecord::Base
   belongs_to :staff
   
+  validates :batch_name, length: { minimum: 3, maximum: 25 } ,allow_blank: true
   validates :keyboards, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_blank: true
   validates :mice, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_blank: true
   validates :monitors, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_blank: true

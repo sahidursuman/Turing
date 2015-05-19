@@ -1,6 +1,7 @@
 class CreateStock < ActiveRecord::Migration
   def change
     create_table :stocks do |t|
+      t.string :batch_name
       t.integer :keyboards
       t.integer :mice 
       t.integer :monitors

@@ -1,0 +1,22 @@
+<%= render "shared/errors", obj: @decommission %>
+
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2 form-group">
+    <%= form_for @decommission do |f| %>
+    
+      
+      <% if @decommission.new_record? %>
+        <%= f.label :entertrack, "TuringTrack" %>
+        <%= f.number_field :entertrack, :placeholder => 10000001 %>
+      <% else %>
+        <h3><%= "TuringTrack: #" + @decommission.computer.turingtrack %></h3><br>
+      <% end %>
+      
+      <%= f.label :decommissioned, "Confirm the computer has been decommissioned?" %>
+      <%= f.check_box :decommissioned %>
+      
+      <%= f.submit(@decommission.new_record? ? "Submit Confirmation" : "Update Confirmation", class: "btn btn-success")%>
+
+    <% end %>
+  </div>
+</div>

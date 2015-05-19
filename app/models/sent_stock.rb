@@ -1,6 +1,7 @@
 class SentStock < ActiveRecord::Base
   belongs_to :staff
   
+  validates :sent_batch_name, length: { minimum: 3, maximum: 25 } ,allow_blank: true
   validates :sent_keyboards, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_blank: true
   validates :sent_mice, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_blank: true
   validates :sent_monitors, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_blank: true

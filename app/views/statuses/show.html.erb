@@ -1,0 +1,42 @@
+<%= render "shared/page_title", title: "Status Confirmation for TuringTrack #" + @status.computer.turingtrack %>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>TuringTrack</th>
+          <th>Status ID</th>
+          <th>Scrapped</th>
+          <th>Sold</th>
+          <th>Created On</th>
+          <th>Updated On</th>
+          <th>Confirmed by</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= link_to "#" + @status.computer.turingtrack, computer_path(@status.computer) %></td>
+          <td><%= "#" + @status.id.to_s %></td>
+          <td><%= @status.scrapped %></td>
+          <td><%= @status.sold %></td>
+          <td><%= @status.created_at.strftime("%d/%m/%y") %></td>
+          <td><%= @status.updated_at.strftime("%d/%m/%y") %></td>
+          <td><%= link_to @status.staff.staff_name, staff_path(@status.staff) %></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="center">
+      <%= link_to "Create New confirmation", new_status_path(@status), class: "btn btn-primary" %>
+      <%= link_to "Edit this confirmation", edit_status_path(@status), class: "btn btn-success" %>
+      
+      <% if current_user.admin? %>
+        <%= link_to "Go To Status Index", statuses_path, class: "btn btn-warning" %>
+        <%= link_to "Delete this confirmation", @status, method: :delete, data: {confirm: "Delete this confirmation?" }, class: "btn btn-danger" %>
+      <% end %>
+    </div>
+    
+  </div>
+</div>
