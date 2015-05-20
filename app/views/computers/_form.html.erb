@@ -36,6 +36,7 @@
       <!-- </span> -->
       <%# end %>
       
+      <!-- Wiping Details for staff -->
       <% if logged_in? %>
         <br><h3>Wiping Details<br><br></h3>
         <%= f.fields_for :wipe do |wipe_form| %>
@@ -44,57 +45,70 @@
         <% end %>
       <% end %>
       
-      <% if logged_in? %>
-        <br><h3>Donor Details</h3><br>
+      <!-- Donor Form, only displayed for new donors without current_donor session -->
+      <% unless @current_donor %>
+      
+        <% if logged_in? %>
+          <br><h3>Donor Details</h3><br>
+        <% else %>
+          <br><h3>Your Details</h3><br>
+        <% end %>
+        
+        <%= f.fields_for :donor do |donor_form| %>
+        
+          <% if logged_in? %>
+            <%= donor_form.label :donor_name %>
+          <% else %>
+            <%= donor_form.label :donor_name, "Your Name" %>
+          <% end %>
+          <%= donor_form.text_field :donor_name, :placeholder => "Mr. John Smith" %>
+          <% if logged_in? %>
+            <%= donor_form.label :donor_email %>
+          <% else %>
+            <%= donor_form.label :donor_email, "Your Email Address" %>
+          <% end %>
+          <%= donor_form.email_field :donor_email, :placeholder => "johnsmith@gmail.com" %>
+          <% if logged_in? %>
+            <%= donor_form.label :donor_address %>
+          <% else %>
+            <%= donor_form.label :donor_address, "Your Mailing Address" %>
+          <% end %>
+            <%= donor_form.text_field :donor_address, :placeholder => "16 Old Compton Street, London, W1D 4TL" %>
+          
+          <h4>
+            Would you like to join our mailing list? Tick the box below to get updates
+            on how The Turing Trust is supporting education in Ghana. We promise not to 
+            pass your details on to any 3rd parties! 
+          </h4>
+          
+          <%= donor_form.label :allow_mail, class: "checkbox pull-left" do %> 
+            <p class="pull-left">Update me!</p>
+            <%= donor_form.check_box :allow_mail %>
+          <% end %><br><br>
+          
+          <h4>
+            Please check the following if you do not have an email address, and would rather receive a paper certificate
+            of data destruction. We encourage you to only do this if an email really won’t suffice, as keeping postage to 
+            a minimum allows us to keep overheads to a minimum, helping us support more students in rural areas of Ghana.
+          </h4>
+          
+          <%= donor_form.label :paper_cert, class: "checkbox pull-left" do %> 
+            <p class="pull-left">Send me a paper certificate of destruction</p>
+            <%= donor_form.check_box :paper_cert, allow_blank: true %>
+          <% end %><br>
+          
+        <% end %>
+      <!-- Exisiting Donor Details -->  
       <% else %>
         <br><h3>Your Details</h3><br>
+        <h5>
+          <strong>Name: </strong><%= @computer.donor.donor_name%><br><br> 
+          <strong>Email: </strong><%= @computer.donor.donor_email %><br><br>
+          <strong>Address: </strong><%= @computer.donor.donor_address %>
+        </h5>
       <% end %>
       
-      <%= f.fields_for :donor do |donor_form| %>
-      
-        <% if logged_in? %>
-          <%= donor_form.label :donor_name %>
-        <% else %>
-          <%= donor_form.label :donor_name, "Your Name" %>
-        <% end %>
-        <%= donor_form.text_field :donor_name, :placeholder => "Mr. John Smith" %>
-        <% if logged_in? %>
-          <%= donor_form.label :donor_email %>
-        <% else %>
-          <%= donor_form.label :donor_email, "Your Email Address" %>
-        <% end %>
-        <%= donor_form.email_field :donor_email, :placeholder => "johnsmith@gmail.com" %>
-        <% if logged_in? %>
-          <%= donor_form.label :donor_address %>
-        <% else %>
-          <%= donor_form.label :donor_address, "Your Mailing Address" %>
-        <% end %>
-          <%= donor_form.text_field :donor_address, :placeholder => "16 Old Compton Street, London, W1D 4TL" %>
-        
-        <h4>
-          Would you like to join our mailing list? Tick the box below to get updates
-          on how The Turing Trust is supporting education in Ghana. We promise not to 
-          pass your details on to any 3rd parties! 
-        </h4>
-        
-        <%= donor_form.label :allow_mail, class: "checkbox pull-left" do %> 
-          <p class="pull-left">Update me!</p>
-          <%= donor_form.check_box :allow_mail %>
-        <% end %><br><br>
-        
-        <h4>
-          Please check the following if you do not have an email address, and would rather receive a paper certificate
-          of data destruction. We encourage you to only do this if an email really won’t suffice, as keeping postage to 
-          a minimum allows us to keep overheads to a minimum, helping us support more students in rural areas of Ghana.
-        </h4>
-        
-        <%= donor_form.label :paper_cert, class: "checkbox pull-left" do %> 
-          <p class="pull-left">Send me a paper certificate of destruction</p>
-          <%= donor_form.check_box :paper_cert, allow_blank: true %>
-        <% end %><br>
-        
-      <% end %>
-      
+      <!-- Dropdown Select for Exisiting Hubs -->
       <br><h3>Hub Details</h3><br>
       
       <% if logged_in? %>
@@ -111,6 +125,7 @@
   </div>
 </div>
 
+<!-- Original picture uploader file size limiter -->
 <script type="text/javascript">
   $('#computer_picture').bind('change',function() {
     size_in_megabytes = this.files[0].size/1024/1024;

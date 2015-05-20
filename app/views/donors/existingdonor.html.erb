@@ -1,0 +1,55 @@
+<!-- For Exisiting Donors -->
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 center">
+    
+    <% unless @donor.present? %>
+    
+      <h3>Have you previously donated to The Turing Trust? If so, please enter your Donor ID in the box below:</h3><br>
+    
+      <!-- Search bar -->
+      <%= form_tag(existingdonor_path, :method => "get", id: "search-form") do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Enter Your Donor ID Here" %>
+        <strong><%= submit_tag "Find Me" %></strong>
+      <% end %>
+      
+       <p class = "donation_advice"><small><br>
+        If you have forgotten your Donor ID or no search results are displaying, please contact
+        <a href="mailto:info@theturingtrust.co.uk&subject=Donor%20ID%20Forgotten%20/%20Not%20Displaying">
+        info@theturingtrust.co.uk</a> and one of our staff will be happy to assist you.
+      </small></p>
+      
+      <hr>
+      
+      <!-- New Donor Link -->
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 center">
+          <h3> If not, please click the link below:</h3><br>
+          <%= link_to "Donate", new_computer_path, class: "btn btn-lg btn-primary" %>
+        </div>
+      </div>
+    
+    <% else %>
+      
+      <!-- Welcome Back Message, anonymising last name depending on no. of words -->
+      <br><h1>
+        Welcome back<br>
+        <% if @donor.donor_name.split().size > 2 %>
+          <%= @donor.donor_name.split()[0] + " " + @donor.donor_name.split()[1] +
+          " " + @donor.donor_name.split()[2][0] + ("*" * @donor.donor_name.split()[2].length) %>
+        <% else %>
+          <%= @donor.donor_name.split()[0] + " " + @donor.donor_name.split()[1][0] + ("*" * @donor.donor_name.split()[1].length) %>
+        <% end %>
+     
+      <h3>Thank you for your on-going support to The Turing Trust and IT education in Ghana. Please click the link below to make another donation:</h3><br>
+      
+      <%= link_to "Donate", new_computer_path, class: "btn btn-lg btn-primary" %>
+      
+      <hr>
+      
+      <h3>Not you? Click below to re-enter your Donor ID:</h3><br>
+      <%= link_to "Retry", existingdonor_path, class: "btn btn-lg btn-warning" %>
+      
+    <% end %>
+    
+  </div>
+</div>

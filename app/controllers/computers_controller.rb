@@ -21,18 +21,29 @@ class ComputersController < ApplicationController
   def new
     @computer = Computer.new
     @computer.build_wipe
-    @computer.build_donor
+    @current_donor = Donor.find_by_id(session[:current_donor])
+    if @current_donor
+      @computer.donor = @current_donor
+    else
+      @computer.build_donor
+    end
   end
   
   def create
     @computer = Computer.new(computer_params)
-     #@computer.wipe.computer_id = Computer.find(params[:id])
+    # Set staff
     if logged_in?
       @computer.wipe.staff = current_user
     end
-    # Deals with different layouts and redirects for donors and staff
+    # Set donor (if current_donor session is avaliable)
+    current_donor = Donor.find_by_id(session[:current_donor])
+    if current_donor
+      @computer.donor = current_donor
+    end
+    # Upon submission of form
     if @computer.save
       flash[:success] = "You're computer's details have been submitted successfully!"
+      # Deals with different layouts and redirects for donors and staff
       if logged_in?
         redirect_to computers_path
       else

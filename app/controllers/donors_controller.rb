@@ -1,6 +1,6 @@
 class DonorsController < ApplicationController
   before_action :set_donor, only: [:edit, :update, :show]
-  before_action :require_user
+  before_action :require_user, except: :existingdonor
   before_action :admin_user, only: [:destroy, :edit, :update, :show, :index]
   
   def index
@@ -50,6 +50,22 @@ class DonorsController < ApplicationController
   
   def mailinglist
     @donors = Donor.all
+  end
+  
+  def existingdonor
+    # Find Exisiting Donor
+    if params[:search]
+      @donor = Donor.search(params[:search]).first
+    end
+    # Create Donor Session
+    if @donor
+     session[:current_donor] = @donor.id
+     #flash[:current_donor] = @donor.id
+    end
+  end
+  
+  def donor_expire
+    session.delete(:current_donor)
   end
 
   private

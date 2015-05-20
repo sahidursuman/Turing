@@ -22,6 +22,6 @@
 en:
   hello: "Hello world"
 
-en:
-  errors:
-    format: "%{message}"
+#en:
+#  errors:
+#    format: "%{message}"

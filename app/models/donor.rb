@@ -9,5 +9,11 @@ class Donor < ActiveRecord::Base
   validates :paper_cert, inclusion: { in: [true, false], message: "%{Please indicate whether you require a paper certificate of destruction.} " }
   
   default_scope -> { order(created_at: :desc) }
+  
+  private
+  
+    def self.search(search)
+      where("id = ?", search)
+    end
     
 end

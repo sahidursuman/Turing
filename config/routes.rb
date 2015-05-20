@@ -26,10 +26,11 @@ Rails.application.routes.draw do
   post '/login', to: 'logins#create'
   get '/logout', to: 'logins#destroy'
   
-  # Routes for computer table and dataoutput
+  # Routes for computer table, dataoutput, stockouput, existingdonor
   get 'computertable', to: 'computers#table'
   get 'dataoutput', to: 'computers#dataoutput'
   get 'stockoutput', to: 'stocks#stockoutput'
+  get 'existingdonor', to: 'donors#existingdonor'
   
   # Add member routes to computers resource
   resources :computers do
