@@ -18,10 +18,13 @@ class Decommission < ActiveRecord::Base
     
     # Ensures that decommissions can only be made for exisiting computers that don't already have decommissions and that have receipt records where received is true
     def existing_turingtrack
-      if !Computer.exists?(:id => (self.entertrack - 10000000))
-        errors.add(:base, "Please enter a valid TuringTrack ID.")
-      elsif !Receipt.exists?(:computer_id => (self.entertrack - 10000000), :received => true)
-        errors.add(:base, "Only computers that have been received can be decommissioned.")
+      begin
+        if !Computer.exists?(:id => (self.entertrack - 10000000))
+          errors.add(:base, "Please enter a valid TuringTrack ID.")
+        elsif !Receipt.exists?(:computer_id => (self.entertrack - 10000000), :received => true)
+          errors.add(:base, "Only computers that have been received can be decommissioned.")
+        end
+      rescue NoMethodError
       end
     end
     

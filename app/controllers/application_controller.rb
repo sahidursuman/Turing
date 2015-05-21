@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   # Make the functions below avaliable to all views
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :logged_in?, :wipe_staff, :wipe_staff?, :ship_staff, :ship_staff?, :rec_staff, :rec_staff?, :decom_staff, :decom_staff?
   
   # Only returns current user if session exists
   # Uses memoization to speed up accesor methods by saving/storing the call 
@@ -22,7 +22,6 @@ class ApplicationController < ActionController::Base
   
   # Checks whether any user is logged in
   # Note that an ! before a function means not, so if not true (false)
-  
   def require_user
     if !logged_in?
       flash[:danger] = "You must be logged in to perform that action."
@@ -41,9 +40,58 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
   end
   
-  #def wipe_staff
-  #  redirect_to computers_path unless current_user.admin? or current_user.types.department = "Wiping"
-  #end
+  # Assigning Departmental Privileges
+  def wipe_staff?
+    current_user.types.any? {|type| type.department.downcase == "wiping" or current_user.admin? }
+  end
+  
+  def wipe_staff
+    if !wipe_staff?
+      flash[:danger] = "You do not have the correct privileges to perform that action. Please see you sysadmin if you require access."
+      redirect_to :back
+    end
+    rescue ActionController::RedirectBackError
+      redirect_to root_path
+  end
+  
+  def ship_staff?
+    current_user.types.any? {|type| type.department.downcase == "shipping" or current_user.admin? }
+  end
+  
+  def ship_staff
+    if !ship_staff?
+      flash[:danger] = "You do not have the correct privileges to perform that action. Please see you sysadmin if you require access."
+      redirect_to :back
+    end
+    rescue ActionController::RedirectBackError
+      redirect_to root_path
+  end
+  
+  def rec_staff?
+    current_user.types.any? {|type| type.department.downcase == "receiving" or current_user.admin? }
+  end
+  
+  def rec_staff
+    if !rec_staff?
+      flash[:danger] = "You do not have the correct privileges to perform that action. Please see you sysadmin if you require access."
+      redirect_to :back
+    end
+    rescue ActionController::RedirectBackError
+      redirect_to root_path
+  end
+  
+  def decom_staff?
+    current_user.types.any? {|type| type.department.downcase == "Decommissioning" or current_user.admin? }
+  end
+  
+  def decom_staff
+    if !decom_staff?
+    flash[:danger] = "You do not have the correct privileges to perform that action. Please see you sysadmin if you require access."
+      redirect_to :back
+    end
+    rescue ActionController::RedirectBackError
+      redirect_to root_path
+  end
   
   # Barcode Requirements 
   require 'barby'
@@ -51,4 +99,3 @@ class ApplicationController < ActionController::Base
   require 'barby/outputter/html_outputter'
   
 end
-

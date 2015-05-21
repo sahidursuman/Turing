@@ -1,7 +1,8 @@
 class StocksController < ApplicationController
   before_action :set_stock, only: [:edit, :update, :show]
   before_action :require_user
-  before_action :admin_user, only: [:destroy, :edit, :update, :show, :index]
+  before_action :wipe_staff
+  before_action :admin_user, only: [:destroy]
   
   def index
     @stocks = Stock.all

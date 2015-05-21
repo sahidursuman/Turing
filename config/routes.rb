@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get 'dataoutput', to: 'computers#dataoutput'
   get 'stockoutput', to: 'stocks#stockoutput'
   get 'existingdonor', to: 'donors#existingdonor'
+  get 'donor_expire', to: 'donors#expiredonor'
   
   # Add member routes to computers resource
   resources :computers do

@@ -20,11 +20,11 @@
       <%= f.text_field :computer_type, :placeholder => "Laptop"%>
       <%= f.label :specification, "Specification (if known)" %> <!-- rows: 3 -->
       <%= f.text_area :specification, :placeholder => "Intel Celeron 1.1GHz, 256MB RAM 20GB HDD" %>
-      <%= f.label :model_no, "Model No." %>
+      <%= f.label :model_no, "Model No. (if known)" %>
       <%= f.text_field :model_no, :placeholder => "Satellite S1800-712" %>
-      <%= f.label :serial_no, "Serial No." %>
+      <%= f.label :serial_no, "Serial No. (if known)" %>
       <%= f.text_field :serial_no, :placeholder => "43564391D" %>
-      <%= f.label :product_key, "OS Product Key" %>
+      <%= f.label :product_key, "OS Product Key (if known)" %>
       <%= f.text_field :product_key, :placeholder => "Windows XP Professional QD464-ASF5F-VCF45-BV334-23DFS"%>
       
       <!-- Original picture uploader (to internal storage) now replaced with Dropbox
@@ -51,7 +51,9 @@
         <% if logged_in? %>
           <br><h3>Donor Details</h3><br>
         <% else %>
-          <br><h3>Your Details</h3><br>
+          <br><h3 class="float-left">Your Details</h3>
+          <p class="not_you">(Already a donor? Click <%= link_to "here", existingdonor_path %> to log in)</p>
+          <hr style="clear;both">
         <% end %>
         
         <%= f.fields_for :donor do |donor_form| %>
@@ -95,12 +97,14 @@
           <%= donor_form.label :paper_cert, class: "checkbox pull-left" do %> 
             <p class="pull-left">Send me a paper certificate of destruction</p>
             <%= donor_form.check_box :paper_cert, allow_blank: true %>
-          <% end %><br>
+          <% end %><br><br>
           
         <% end %>
       <!-- Exisiting Donor Details -->  
       <% else %>
-        <br><h3>Your Details</h3><br>
+        <br><h3 class="float-left">Your Details</h3>
+        <p class="not_you">(Not you? Click <%= link_to "here", donor_expire_path %> to log out)</p>
+        <hr style="clear;both">
         <h5>
           <strong>Name: </strong><%= @computer.donor.donor_name%><br><br> 
           <strong>Email: </strong><%= @computer.donor.donor_email %><br><br>
@@ -109,7 +113,7 @@
       <% end %>
       
       <!-- Dropdown Select for Exisiting Hubs -->
-      <br><h3>Hub Details</h3><br>
+      <h3>Hub Details</h3><br>
       
       <% if logged_in? %>
         <%= f.label :hub_id, "Hub" %>

@@ -1,8 +1,8 @@
 class DecommissionsController < ApplicationController
-
   before_action :set_decommission, only: [:edit, :update, :show]
-  before_action :require_user#, except [:show, :index]
-  before_action :admin_user, only: [:destroy, :index]
+  before_action :require_user
+  before_action :decom_staff
+  before_action :admin_user, only: [:destroy]
   
   def index
     #@decommissions = Decommission.paginate(page: params[:page], per_page: 50)

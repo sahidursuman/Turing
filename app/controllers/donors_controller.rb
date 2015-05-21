@@ -1,7 +1,9 @@
 class DonorsController < ApplicationController
   before_action :set_donor, only: [:edit, :update, :show]
-  before_action :require_user, except: :existingdonor
+  before_action :require_user, except: [:existingdonor, :expiredonor]
   before_action :admin_user, only: [:destroy, :edit, :update, :show, :index]
+  
+  layout 'layouts/existingdonor', only: :existingdonor
   
   def index
     @donors = Donor.all
@@ -64,8 +66,9 @@ class DonorsController < ApplicationController
     end
   end
   
-  def donor_expire
+  def expiredonor
     session.delete(:current_donor)
+    redirect_to new_computer_path
   end
 
   private

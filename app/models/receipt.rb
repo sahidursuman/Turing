@@ -19,10 +19,13 @@ class Receipt < ActiveRecord::Base
     
     # Ensures that receipts can only be made for exisiting computers that don't already have statuses and that have shipment records where shipped is true
     def existing_turingtrack
-      if !Computer.exists?(:id => (self.entertrack - 10000000))
-        errors.add(:base, "Please enter a valid TuringTrack ID.")
-      elsif !Shipment.exists?(:computer_id => (self.entertrack - 10000000), :shipped => true)
-        errors.add(:base, "Only computers that have been shipped can be received.")
+      begin
+        if !Computer.exists?(:id => (self.entertrack - 10000000))
+          errors.add(:base, "Please enter a valid TuringTrack ID.")
+        elsif !Shipment.exists?(:computer_id => (self.entertrack - 10000000), :shipped => true)
+          errors.add(:base, "Only computers that have been shipped can be received.")
+        end
+      rescue NoMethodError
       end
     end
     

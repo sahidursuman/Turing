@@ -1,8 +1,8 @@
 class StatusesController < ApplicationController
-
   before_action :set_status, only: [:edit, :update, :show]
-  before_action :require_user#, except [:show, :index]
-  before_action :admin_user, only: [:destroy, :index]
+  before_action :require_user
+  before_action :wipe_staff
+  before_action :admin_user, only: [:destroy]
   
   def index
     @statuses = Status.paginate(page: params[:page], per_page: 50)

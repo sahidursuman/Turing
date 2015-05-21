@@ -18,11 +18,14 @@ class Shipment < ActiveRecord::Base
     
     # Ensures that shipments can only be made for exisiting computers that don't already have statuses
     def existing_turingtrack
-      if !Computer.exists?(:id => (self.entertrack - 10000000))
-        errors.add(:base, "Please enter a valid TuringTrack ID.")
-      #elsif !Wipe.exists?(:computer_id => (self.entertrack - 10000000))
-      elsif !Wipe.exists?(['computer_id = ? AND length(action_taken) > ?', (self.entertrack - 10000000), 0])
-        errors.add(:base, "Only computers that have been wiped can be shipped.")
+      begin
+        if !Computer.exists?(:id => (self.entertrack - 10000000))
+          errors.add(:base, "Please enter a valid TuringTrack ID.")
+        #elsif !Wipe.exists?(:computer_id => (self.entertrack - 10000000))
+        elsif !Wipe.exists?(['computer_id = ? AND length(action_taken) > ?', (self.entertrack - 10000000), 0])
+          errors.add(:base, "Only computers that have been wiped can be shipped.")
+        end
+      rescue NoMethodError
       end
     end
     
