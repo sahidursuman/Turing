@@ -43,7 +43,7 @@
       redirect_to(:action => 'auth_start') and return
     end
     begin
-      @photo_url = client.media("WIPE_" + @computer.turingtrack + ".jpg")
+      @photo_url = client.media("WIPE_" + @computer.turingtrack + ".jpg") # For Show Page
       #render inline: 
         #client.metadata('/').inspect # List of all photos in folder
     rescue DropboxAuthError => e

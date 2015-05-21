@@ -1,5 +1,6 @@
 <%= render "shared/page_title", title: "Computer Index" %>
 
+<!-- Swtich between staff and computers indexes-->
 <% if current_user.admin? %>
   <ul class="nav nav-tabs">
     <li class="active">
@@ -8,7 +9,7 @@
     <li>
       <%= link_to "Staff", staffs_path %>
     </li>
-  </ul>
+  </ul><br>
 <% end %>
 
 <%= will_paginate %>
@@ -16,53 +17,67 @@
 <% @computers.each do |computer| %>
   <div class="row">
     
+    <!-- LHS block featuring computer lifecycle options --> 
     <div class="col-md-2 col-md-offset-1">
-      <section class="staff_info center">
+      <h5 class="vcenter center">
+        
         <% if computer.wipe.present? and computer.wipe.action_taken.length > 0 %>
-          <h5 class="vcenter">Computer Wiped!</h5>
+          Computer Wiped!<br><br>
         <% else %>
-          <h5 class="vcenter"><strong><%= link_to "Wipe this computer!", edit_computer_path(computer) %></strong></h5>
+          <strong><%= link_to "Wipe this computer!", edit_computer_path(computer) %></strong><br><br>
         <% end %>
         
-      <% unless computer.status and (computer.status.scrapped or computer.status.sold) %>
-        <br><h5><strong><%= link_to "Add a status", new_status_path %></strong></h5>
-      <% end %>
-      <% if computer.status and computer.status.scrapped %><br><strong>Computer has been scrapped</strong><br><% end %>
-      <% if computer.status and computer.status.sold %><br><strong>Computer has been sold</strong><br><% end %>
-      
-<!-- This is where to put a gravitar/avatar/photo if wanted -->
-      </section>
+        <% unless computer.status and (computer.status.scrapped or computer.status.sold) %>
+          <strong><%= link_to "Add a status", new_status_path %></strong><br><br>
+        <% end %>
+        <% if computer.status and computer.status.scrapped %><strong>Computer has been scrapped</strong><br><br><% end %>
+        <% if computer.status and computer.status.sold %><strong>Computer has been sold</strong><br><br><% end %>
+        
+        <% if computer.shipment and computer.shipment.shipped %>
+          Computer Shipped!<br><br>
+        <% else %>
+          <strong><%= link_to "Ship this computer!", new_shipment_path %></strong><br><br>
+        <% end %>
+                
+        <% if computer.receipt and computer.receipt.received %>
+          Computer Received!<br><br>
+        <% else %>
+          <strong><%= link_to "Confirm this computer's arrival!", new_receipt_path %></strong><br><br>
+        <% end %>
+        
+        <% if computer.decommission and computer.decommission.decommissioned %>
+          Computer Decommissioned!<br><br>
+        <% else %>
+          <strong><%= link_to "Confirm this computer's decommission!", new_decommission_path %></strong><br><br>
+        <% end %>
+        
+      </h5>
     </div>
     
+    <!-- Central Computer Details Block -->
     <div class="col-md-6 well">
       <h4><%= link_to "Turing Track No #" + computer.turingtrack, computer_path(computer) %></h4>
       <p>
         <%= computer.manufacturer %> <%= computer.computer_type %> donated by <%= computer.donor.donor_name %><br>
         Processing Hub <%= computer.hub.hub_location %>
       </p>
+      
+      <% if computer.wipe.present? and computer.wipe.action_taken.length > 0 %>
+        <p><%= render computer.wipe %></p>
+      <% else %>
+      <p> This computer is currently unprocessed. To process this computer, click the 'wipe' link to the LHS. 
+      If the computer has been scrapped or sold, please assign a status to it.</p>
+      <% end %>
+      
       <p>
         <span class="quiet"><small>Created <%= time_ago_in_words(computer.created_at) %> ago, </small></span>
         <span class="quiet"><small>updated <%= time_ago_in_words(computer.updated_at) %> ago</small></span>
       </p>
-      
-      <% if computer.wipe.present? and computer.wipe.action_taken.length > 0 %>
-        <p><%= render computer.wipe %></p>
-      <% end %>
-      
     </div>
    
+   <!-- RHS Block -->
     <div class="col-md-2">
-      <% if computer.shipment and computer.shipment.shipped %>
-        <h5 class="vcenter">Computer Shipped!</h5>
-      <% else %>
-        <h5 class="vcenter"><strong><%= link_to "Ship this computer!", new_shipment_path %></strong></h5>
-      <% end %><br>
-        
-      <% if computer.receipt and computer.receipt.received %>
-        <h5>Computer Received!</h5>
-      <% else %>
-        <h5><strong><%= link_to "Confirm this computer's arrival!", new_receipt_path %></strong></h5>
-      <% end %>
+
     </div>
     
     <!-- Original Non Dropbox Image Thumbnails, Removed to Reduce DB Transfer Useage 
@@ -71,7 +86,7 @@
     </div>-->
     
   </div>
-  <hr/>
+  <hr>
 <% end %>
 
 <%= will_paginate %> 

@@ -16,35 +16,33 @@
 </div>
 
 <br><br>
-<% @staffs.each do |staff| %>
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <table class="table table-bordered table-hover">
-        <thead>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Staff ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Department/s</th>
+          <th>Created At</th>
+          <th>Updated At</th>
+          <th>Admin</th>
+         </tr>
+      </thead>
+      <tbody>
+        <% @staffs.each do |staff| %>
           <tr>
-            <th>Staff ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Department/s</th>
-            <th>Created At</th>
-            <th>Updated At</th>
-            <th>Admin</th>
+            <td><%= "#" + staff.id.to_s %></td>
+            <td><%= link_to staff.staff_name, staff_path(staff) %></td>
+            <td><%= staff.staff_email %></td>
+            <td><%= render staff.types %></td>
+            <td><%= staff.created_at.strftime("%d/%m/%y") %></td>
+            <td><%= staff.updated_at.strftime("%d/%m/%y") %></td>
+            <td><%= staff.admin %></td>
           </tr>
-        </thead>
-        <tbody>
-            <tr>
-              <td><%= "#" + staff.id.to_s %></td>
-              <td><%= link_to staff.staff_name, staff_path(staff) %></td>
-              <td><%= staff.staff_email %></td>
-              <td><%= render staff.types %></td>
-              <td><%= staff.created_at.strftime("%d/%m/%y") %></td>
-              <td><%= staff.updated_at.strftime("%d/%m/%y") %></td>
-              <td><%= staff.admin %></td>
-            </tr>
-        </tbody>
-      </table>
-    </div>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-<% end %>
-
-<!-- To come back to, as currently a department title is generated for each staff member -->
+</div>

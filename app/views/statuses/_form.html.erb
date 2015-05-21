@@ -11,11 +11,16 @@
         <h3><%= "TuringTrack: #" + @status.computer.turingtrack %></h3><br>
       <% end %>
       
-      <%= f.label :scrapped, "Confirm the computer has been scrapped?" %>
-      <%= f.check_box :scrapped %>
+      <%= f.label :scrapped, class: "checkbox" do %>
+        Confirm the computer has been scrapped?
+        <%= f.check_box :scrapped %>
+      <% end %>
       
-      <%= f.label :sold, "Confirm the computer has been sold?" %>
-      <%= f.check_box :sold %>
+      
+      <%= f.label :sold, class: "checkbox" do %>
+        <span>Confirm the computer has been sold?</span>
+        <%= f.check_box :sold %>
+      <% end %><br>
        
       <%= f.submit(@status.new_record? ? "Submit Confirmation" : "Update Confirmation", class: "btn btn-success")%>
 

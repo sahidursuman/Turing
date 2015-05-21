@@ -1,7 +1,7 @@
 class ComputersController < ApplicationController
   before_action :set_computer, only: [:edit, :update, :show, :thankyou, :drop_upload]
   before_action :require_user, except: [:new, :create, :thankyou]
-  before_action :wipe_staff, except: [:new, :create, :thankyou]
+  before_action :wipe_staff, except: [:new, :create, :thankyou, :show]
   before_action :admin_user, only: [:destroy, :dataoutput]
   
   layout :new_layout, only: [:new, :update]

@@ -69,10 +69,17 @@
         <% if @computer.status and @computer.status.sold %><strong>Computer has been sold</strong><br><% end %>
       </p>
       
+      <!-- Add a status if there isn't one -->
+      <% unless @computer.status and (@computer.status.scrapped or @computer.status.sold) %>
+        <p><%= link_to "Add a status", new_status_path %><br></p>
+      <% end %>
+      
       <!-- If there is an associated wipe, render wipes/_wipe partial-->
       <p>
         <% if @computer.wipe and @computer.wipe.action_taken.length > 0 %>
           <%= render @computer.wipe %>
+        <% else %>
+          <%= link_to "Wipe this computer!", edit_computer_path(computer) %>
         <% end %>
       </p>
       
@@ -80,6 +87,8 @@
       <p>
         <% if @computer.shipment and @computer.shipment.shipped %>
           <%= render @computer.shipment %>
+        <% else %>
+          <%= link_to "Ship this computer!", new_shipment_path %>
         <% end %>
       </p>
       
@@ -87,6 +96,8 @@
       <p>
         <% if @computer.receipt and @computer.receipt.received %>
           <%= render @computer.receipt %>
+        <% else %>
+          <%= link_to "Confirm this computer's arrival!", new_receipt_path %>
         <% end %>
       </p>
       
@@ -94,6 +105,8 @@
       <p>
         <% if @computer.decommission and @computer.decommission.decommissioned %>
           <%= render @computer.decommission %>
+        <% else %>
+          <%= link_to "Confirm this computer's decommission!", new_decommission_path %>
         <% end %>
       </p>
         
