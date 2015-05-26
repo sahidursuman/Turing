@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  
+  <body>
+    
+    <%= image_tag 'https://www.dropbox.com/s/nvwrt89fem4j37e/tt_logo.png?raw=1', size: "250x90" %>
+
+    <h4>
+      Dear <%= @computer.donor.donor_name %>,
+    </h4>
+    
+    <p>
+      Thank you for your generous donation to The Turing Trust. We have successfully received
+      your donation form. Your unique donor ID is #<%= @computer.donor.id %> - please keep this 
+      safe as you will require it if you donate again in the future. Your computer's Turing Track
+      reference ID is #<%= @computer.turingtrack %> and its associated barcode is displayed below.<br>
+      <%= raw @barcode_for_html.to_html %><br>
+      
+      When shipping your donation, please print this barcode and attach it to your computer. 
+      Failing that, we ask that you please write your reference ID directly on your computer
+      with an indelible marker.<br><br>
+  
+      This helps us to trace the journey of your computer over its new life, so we can let you know exactly what impact 
+      it has had on the lives of aspiring technologists across rural Ghanaian schools. While your donation might seem 
+      like old tech to you, it has the capability to change the lives of its recipients. So thank you once again, for 
+      contributing to those in need.<br><br>
+     
+      The next thing to do is organise your courier, which can be done at the  <a href="http://www.p4d.co.uk/">following website</a>,
+      or through any other service provider that you might prefer to use. The address you’ll want to send it to is the following:<br><br>
+      
+      Simon Cleary (FAO Turing Trust), <br>
+      BiGGAR Economics, <br>
+      Midlothian Innovation Centre,  <br>
+      Roslin, <br>
+      Midlothian, <br>
+      EH25 9RE
+    </p>
+  
+    <h4>
+     All the best from your team at The Turing Trust<br>
+    </h4>
+      
+    <%= image_tag 'https://www.dropbox.com/s/qb9icro5s733x13/signature.png?raw=1', size: "250x90" %>
+    
+    <h5>
+      Want to donate further? For monetary donations, please visit our BT mydonate page by clicking on button below.
+    </h5>
+    <a href="https://mydonate.bt.com/charities/theturingtrust" target="_blank" data-slimstat-tracking="true" data-slimstat-callback="false">
+      <img class=" aligncenter" src="https://mydonate.bt.com/images/promotional/buttons/charities/160x125/black/button-5.gif" alt="" border="0">
+    </a>
+     
+    <h5>
+      If you have any additional queries or questions, please don't hesitate to contact us at 
+      recycle@turingtrust.co.uk<br>
+      For more infomation visit www.TuringTrust.co.uk -
+      UK Charity Number 1156687
+    </h5>
+    
+  </body>
+</html>

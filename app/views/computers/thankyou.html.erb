@@ -1,37 +1,79 @@
 <div class="row">
   <div class="col-md-12">
-    <h3>Dear <%= @computer.donor.donor_name %>, </h3>
+    <h3>Dear <%= @computer.donor.donor_name %>,</h3>
     
-    <h3>Thank you for your generous donation to The Turing Trust. 
-    Your unique donor ID is #<%= @computer.donor.id %>.</h3>
+    <h3>
+      Thank you for your generous donation to The Turing Trust. We have successfully received
+      your donation form. Your unique donor ID is #<%= @computer.donor.id %> - please keep this 
+      safe as you will require it if you donate again in the future. 
+    </h3>
     
-    <h3>Your computer's Turing Track reference ID is #<%= @computer.turingtrack %> 
-    and its associated barcode is displayed below.</h3>
+    <h3>
+      Your computer's Turing Track reference ID is #<%= @computer.turingtrack %> 
+      and its associated barcode is displayed below.
+    </h3>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-4 col-md-offset-4 center">
-    <br><%= raw @barcode_for_html.to_html %>
+  <div class="col-md-4 col-md-offset-4">
+    <div class="barcode_placement" >
+      <br><%= raw @barcode_for_html.to_html %>
+    </div>
   </div> 
 </div>
 
 <div class="row">
   <div class="col-md-12">
-    <h3>A email will shortly be sent to the address you specified containing
-    both your reference ID and barcode. When shipping your donation,
-    please either print the email/barcode and place the copy somewhere inside 
-    your package, or write your Turing Track no. on the package itself.</h3>
+    <h3>
+      A email will shortly be sent to the address you specified containing both your reference ID 
+      and barcode. When shipping your donation, please print this barcode and attach it to your computer. 
+      Failing that, we ask that you please write your reference ID directly on your computer with an indelible marker. 
+    </h3>
 
-    <h3>This helps us to trace the journey of your computer over its new life, 
-    so we can let you know exactly what impact it has had on the lives of aspiring
-    technologists in schools in Ghana. While your donation might seem like old tech to you, it has the capability
-    to change the lives of its recipients. So thank you once again, for contributing
-    to those in need.</h3>
+    <h3>
+      This helps us to trace the journey of your computer over its new life, so we can let you know exactly what impact 
+      it has had on the lives of aspiring technologists across rural Ghanaian schools. While your donation might seem 
+      like old tech to you, it has the capability to change the lives of its recipients. So thank you once again, for 
+      contributing to those in need.
+    </h3>
+    
+    <h3>
+      The next thing to do is organise your courier, which can be done at the <%= link_to "following website", "http://www.p4d.co.uk/" %>,
+      or through any other service provider that you might prefer to use. The address you’ll want to send it to is the following:<br><br>
+      
+      Simon Cleary (FAO Turing Trust), <br>
+      BiGGAR Economics, <br>
+      Midlothian Innovation Centre,  <br>
+      Roslin, <br>
+      Midlothian, <br>
+      EH25 9RE
+    </h3>
 
-    <h3>Oli, Jade, & your team at The Turing Trust</h3>
+    <h3>All the best from your team at The Turing Trust</h3>
+  </div>
+</div>
 
-    <br><h5 class="center">If you have any additional queries or questions, please don't hesitate to
-    contact us at recycle@turingtrust.co.uk</h5>
+<div class="row">
+  <div class="col-md-12">
+    <h3>Have another computer you'd like to donate? Click the blue button below to add another computer to your shipment. Simply want to give more? For monetary donations, please visit our BT mydonate page by clicking on the black button.</h3>
+  </div>
+
+  <div class="center">
+    <%= link_to "Add Another Computer", new_computer_path, class: "btn btn-primary "%><br><br>
+    <a href="https://mydonate.bt.com/charities/theturingtrust" target="_blank" data-slimstat-tracking="true" data-slimstat-callback="false">
+      <img class="" src="https://mydonate.bt.com/images/promotional/buttons/charities/160x125/black/button-5.gif" alt="" border="0">
+    </a>
+  </div>
+</div>
+
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <h5 class="center">If you have any additional queries or questions, please don't hesitate to contact us at 
+      <a href="mailto:recycle@theturingtrust.co.uk">
+        recycle@theturingtrust.co.uk
+      </a>
+    </h5>
   </div>
 </div>

@@ -15,7 +15,7 @@
       <%= f.label :school, "Which school is the computer being sent to?" %>
       <%= f.text_field :school, :placeholder => "Some School" %>
       <%= f.label :received, "Confirm the computer has been received?" %>
-      <%= f.check_box :received, value: 0 %>
+      <%= f.check_box :received %><br><br>
       
       <%= f.submit(@receipt.new_record? ? "Submit Confirmation" : "Update Confirmation", class: "btn btn-success")%>
 

@@ -13,7 +13,7 @@
       <% end %>
       
       <%= f.label :decommissioned, "Confirm the computer has been decommissioned?" %>
-      <%= f.check_box :decommissioned %>
+      <%= f.check_box :decommissioned %><br><br>
       
       <%= f.submit(@decommission.new_record? ? "Submit Confirmation" : "Update Confirmation", class: "btn btn-success")%>
 

@@ -44,12 +44,6 @@ $navbar-default-color: $mid-grey;
   font-weight: bold;
 }
 
-.nav_item {
-  margin-left: 25px;
-  float: left;
-  margin-top: 23px;
-  
-}
 
 .nav_item_right {
   padding-left: 0px;
@@ -214,7 +208,7 @@ img.computer_img {
 
 // Vertically align in center
 .vcenter {
-    margin-top: 25px;
+    margin-top: 22px;
 }
 
 // Barcode CSS
@@ -232,6 +226,11 @@ td.barby-cell {
 
 td.barby-cell.on { 
   background: #000; 
+}
+
+.barcode_placement {
+  position:relative;
+  left: 50px; 
 }
 
 // General Styling

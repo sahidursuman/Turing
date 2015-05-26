@@ -13,7 +13,7 @@
       <% end %>
       
       <%= f.label :shipped, "Confirm the computer has been shippped?" %>
-      <%= f.check_box :shipped, value: 0 %>
+      <%= f.check_box :shipped %><br><br>
       
       <%= f.submit(@shipment.new_record? ? "Submit Confirmation" : "Update Confirmation", class: "btn btn-success")%>
 

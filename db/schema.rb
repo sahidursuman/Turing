@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20150518151345) do
     t.integer  "entertrack"
     t.integer  "staff_id"
     t.integer  "computer_id"
-    t.boolean  "decommissioned", default: false
+    t.boolean  "decommissioned", default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end

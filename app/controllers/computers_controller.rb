@@ -44,6 +44,7 @@ class ComputersController < ApplicationController
     # Upon submission of form
     if @computer.save
       flash[:success] = "You're computer's details have been submitted successfully!"
+      DonorMailer.thankyou_email(@computer).deliver
       # Deals with different layouts and redirects for donors and staff
       if logged_in?
         redirect_to computers_path

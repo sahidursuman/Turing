@@ -79,7 +79,7 @@
         <% if @computer.wipe and @computer.wipe.action_taken.length > 0 %>
           <%= render @computer.wipe %>
         <% else %>
-          <%= link_to "Wipe this computer!", edit_computer_path(computer) %>
+          <%= link_to "Wipe this computer!", edit_computer_path(@computer) %>
         <% end %>
       </p>
       

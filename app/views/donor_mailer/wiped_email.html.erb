@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  
+  <body>
+    
+    <%= image_tag 'https://www.dropbox.com/s/nvwrt89fem4j37e/tt_logo.png?raw=1', size: "250x90" %>
+    
+    <h3>Certificate of Data Destruction</h3>
+    
+    <p>Date: <%= Time.now.strftime("%d/%m/%y") %></p>
+    
+    <p>
+      Dear <%= @donor.donor_name%>,<br><br>
+      
+      This is to certify on behalf of The Turing Trust that the user data on the hard drive of the computer 
+      detailed below has been irretrievably removed. This process has been carried out to an industry standard,
+      and meets the requirements laid out by the Information Commissioner’s Office.<br><br>
+      
+      The following actions were carried out:<br>
+      <%= @computer.wipe.action_taken %><br><br>
+      
+      On the following machine: <br>
+      Manufacturer: <%= @computer.manufacturer %><br>
+      Type of Computer: <%= @computer.computer_type %><br>
+      Model No: <%= @computer.model_no %><br>
+      Serial No: <%= @computer.serial_no %><br>
+      Turing Track No: #<%= @computer.turingtrack %><br>
+      Processed at: <%= @computer.hub.hub_location %><br><br>
+      
+      We thank you again for supporting The Turing Trust. Your contribution will change the lives of so many
+      afflicted by poverty and the lack of a good education. We encourage you to read on to find out more about what
+      has been achieved so far, and how else you can support those in need.<br><br>
+      
+      Oli<br>
+      
+      <%= image_tag 'https://www.dropbox.com/s/qb9icro5s733x13/signature.png?raw=1', size: "250x90" %>
+    </p>
+
+    <h5>
+      The Turing Trust is a registered charity in England and Wales; Registration number 1156687.<br>
+      Contact us at info@turingtrust.co.uk<br>
+		  www.TuringTrust.co.uk
+    </h5>
+    
+    <h5>
+      Want to donate further? For monetary donations, please visit our BT mydonate page by clicking on button below.
+    </h5>
+    <a href="https://mydonate.bt.com/charities/theturingtrust" target="_blank" data-slimstat-tracking="true" data-slimstat-callback="false">
+      <img class=" aligncenter" src="https://mydonate.bt.com/images/promotional/buttons/charities/160x125/black/button-5.gif" alt="" border="0">
+    </a>
+    
+  </body>
+</html>

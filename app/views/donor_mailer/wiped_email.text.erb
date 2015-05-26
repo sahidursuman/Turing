@@ -1,0 +1,31 @@
+Certificate of Data Destruction
+    
+Date: <%= Time.now.strftime("%d/%m/%y") %>
+
+Dear <%= @donor.donor_name %>,
+    
+This is to certify on behalf of The Turing Trust that the user data on the hard drive of the computer 
+detailed below has been irretrievably removed. This process has been carried out to an industry standard,
+and meets the requirements laid out by the Information Commissioner’s Office.
+
+The following actions were carried out: 
+<%= @computer.wipe.action_taken %>
+
+On the following machine: 
+
+Manufacturer: <%= @computer.manufacturer %>
+Type of Computer: <%= @computer.computer_type %>
+Model No: <%= @computer.model_no %>
+Serial No: <%= @computer.serial_no %>
+Turing Track No: #<%= @computer.turingtrack %>
+Processed at: <%= @computer.hub.hub_location %>
+
+We thank you again for supporting The Turing Trust. Your contribution will change the lives of so many
+afflicted by poverty and the lack of a good education. We encourage you to read on to find out more about what
+has been achieved so far, and how else you can support those in need.
+
+Oli
+
+The Turing Trust is a registered charity in England and Wales; Registration number 1156687.
+Contact us at info@turingtrust.co.uk
+www.TuringTrust.co.uk

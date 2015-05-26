@@ -4,7 +4,7 @@ class CreateShipments < ActiveRecord::Migration
       t.integer :entertrack
       t.integer :staff_id
       t.integer :computer_id
-      t.boolean :shipped, :default => false
+      t.boolean :shipped, :default => true
       t.timestamps
     end
   end

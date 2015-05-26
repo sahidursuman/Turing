@@ -4,7 +4,7 @@ class CreateDecommissions < ActiveRecord::Migration
       t.integer :entertrack
       t.integer :staff_id
       t.integer :computer_id
-      t.boolean :decommissioned, :default => false
+      t.boolean :decommissioned, :default => true
       t.timestamps
     end
   end

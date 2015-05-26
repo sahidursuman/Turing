@@ -26,11 +26,6 @@ class Computer < ActiveRecord::Base
   mount_uploader :picture, PictureUploader
 # %w(foo bar) is a shortcut for ["foo", "bar"], e.g. validates :initials_flag, inclusion: { in: %w(y n) }, length: { is: 1 }
   
-  # Original conversion function, doesn't output turingtrack to CSV's 
-  #def turingtrack
-  #  (id.to_i + 10000000).to_s
-  #end
-
   private
   
     def self.search(search)

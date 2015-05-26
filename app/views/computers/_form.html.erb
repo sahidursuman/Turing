@@ -12,19 +12,20 @@
       
       <p class = "donation_advice"><small>
         Please note that all greyed out writing is for exemplary purposes only - simply type over the top.
+        *s indicate manditory fields.
       </small></p>
     
-      <%= f.label :manufacturer %>
+      <%= f.label :manufacturer, "Manufacturer *" %>
       <%= f.text_field :manufacturer, :placeholder => "Toshiba" %>
-      <%= f.label :computer_type, "Computer Type" %>
+      <%= f.label :computer_type, "Computer Type *" %>
       <%= f.text_field :computer_type, :placeholder => "Laptop"%>
-      <%= f.label :specification, "Specification (if known)" %> <!-- rows: 3 -->
+      <%= f.label :specification, "Specification" %> <!-- rows: 3 -->
       <%= f.text_area :specification, :placeholder => "Intel Celeron 1.1GHz, 256MB RAM 20GB HDD" %>
-      <%= f.label :model_no, "Model No. (if known)" %>
+      <%= f.label :model_no, "Model No." %>
       <%= f.text_field :model_no, :placeholder => "Satellite S1800-712" %>
-      <%= f.label :serial_no, "Serial No. (if known)" %>
+      <%= f.label :serial_no, "Serial No." %>
       <%= f.text_field :serial_no, :placeholder => "43564391D" %>
-      <%= f.label :product_key, "OS Product Key (if known)" %>
+      <%= f.label :product_key, "OS Product Key" %>
       <%= f.text_field :product_key, :placeholder => "Windows XP Professional QD464-ASF5F-VCF45-BV334-23DFS"%>
       
       <!-- Original picture uploader (to internal storage) now replaced with Dropbox
@@ -39,6 +40,11 @@
       <!-- Wiping Details for staff -->
       <% if logged_in? %>
         <br><h3>Wiping Details<br><br></h3>
+        <p class = "donation_advice"><small>
+          Please note that any changes to this field will cause a new certificate of destruction
+          to be sent to the donor upon form submission.
+        </small></p>
+      
         <%= f.fields_for :wipe do |wipe_form| %>
           <%= wipe_form.label :action_taken %>
           <%= wipe_form.text_field :action_taken, :placeholder => "Wiped using Paragon Hard Disk Manger Version 15" %>
@@ -59,9 +65,9 @@
         <%= f.fields_for :donor do |donor_form| %>
         
           <% if logged_in? %>
-            <%= donor_form.label :donor_name %>
+            <%= donor_form.label :donor_name, "Donor Name *"%>
           <% else %>
-            <%= donor_form.label :donor_name, "Your Name" %>
+            <%= donor_form.label :donor_name, "Your Name *" %>
           <% end %>
           <%= donor_form.text_field :donor_name, :placeholder => "Mr. John Smith" %>
           <% if logged_in? %>
