@@ -7,9 +7,9 @@ class ShipmentsController < ApplicationController
   def index
     #@shipments = Shipment.paginate(page: params[:page], per_page: 50)
     if params[:search]
-      @shipments = Shipment.search(params[:search]).order("computer_id DESC")
+      @shipments = Shipment.search(params[:search]).order("computer_id DESC").paginate(page: params[:page], per_page: 50)
     else
-      @shipments = Shipment.all.order('computer_id DESC')
+      @shipments = Shipment.all.order('computer_id DESC').paginate(page: params[:page], per_page: 50)
     end
   end
   

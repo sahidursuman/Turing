@@ -7,9 +7,9 @@ class DecommissionsController < ApplicationController
   def index
     #@decommissions = Decommission.paginate(page: params[:page], per_page: 50)
     if params[:search]
-      @decommissions = Decommission.search(params[:search]).order("computer_id DESC")
+      @decommissions = Decommission.search(params[:search]).order("computer_id DESC").paginate(page: params[:page], per_page: 50)
     else
-      @decommissions = Decommission.all.order('computer_id DESC')
+      @decommissions = Decommission.all.order('computer_id DESC').paginate(page: params[:page], per_page: 50)
     end
   end
   

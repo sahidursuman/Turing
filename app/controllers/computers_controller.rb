@@ -86,9 +86,9 @@ class ComputersController < ApplicationController
   def table 
     #@computers = Computer.all
     if params[:search]
-      @computers = Computer.search(params[:search]).order("created_at DESC")
+      @computers = Computer.search(params[:search]).order("created_at DESC").paginate(page: params[:page], per_page: 50)
     else
-      @computers = Computer.all.order('created_at DESC')
+      @computers = Computer.all.order('created_at DESC').paginate(page: params[:page], per_page: 50)
     end
   end
   

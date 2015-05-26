@@ -5,7 +5,7 @@ class StatusesController < ApplicationController
   before_action :admin_user, only: [:destroy]
   
   def index
-    @statuses = Status.paginate(page: params[:page], per_page: 50)
+    @statuses = Status.paginate(page: params[:page], per_page: 50).paginate(page: params[:page], per_page: 50)
   end
   
   def show

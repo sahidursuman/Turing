@@ -6,7 +6,7 @@ class DonorsController < ApplicationController
   layout 'layouts/existingdonor', only: :existingdonor
   
   def index
-    @donors = Donor.all
+    @donors = Donor.all.paginate(page: params[:page], per_page: 100)
   end
   
   def show
