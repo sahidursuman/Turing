@@ -100,11 +100,10 @@
               
               <% if computer.wipe.present? and  computer.wipe.action_taken.length > 0  %>
                 <td><%= link_to "Yes", wipe_path(computer.wipe) %></td>
-                <td><%= link_to "#" + computer.wipe.operating_system.id.to_s, operating_system_path(computer.wipe.operating_system) %></td>
               <% else %>
                <td><%= link_to "No", edit_computer_path(computer) %></td>
-               <td><%= link_to "None", edit_computer_path(computer)%></td>
               <% end %>
+              <td><%= link_to "#" + computer.wipe.operating_system.id.to_s, operating_system_path(computer.wipe.operating_system) %></td>
               
               <% if computer.shipment.present? and computer.shipment.shipped %>
                 <td><%= link_to "Yes", shipment_path(computer.shipment) %>
