@@ -2,7 +2,7 @@ class ComputersController < ApplicationController
   before_action :set_computer, only: [:edit, :update, :show, :thankyou, :drop_upload]
   before_action :require_user, except: [:new, :create, :thankyou]
   before_action :wipe_staff, except: [:new, :create, :thankyou, :show]
-  before_action :admin_user, only: [:destroy, :dataoutput]
+  before_action :admin_user, only: [:destroy, :dataoutput, :import, :import_page]
 
   layout :new_layout, only: [:new, :update, :thankyou]
   
@@ -148,7 +148,7 @@ class ComputersController < ApplicationController
       params.require(:computer).permit(:manufacturer, :computer_type, :specification, 
                                        :model_no, :serial_no, :product_key, :hub_id,
                                        :turingtrack, :picture, wipe_attributes: 
-                                       [:id, :action_taken, :staff_id],
+                                       [:id, :action_taken, :staff_id, :operating_system_id],
                                        donor_attributes: [:id, :donor_name, 
                                        :donor_email, :allow_mail, :donor_address,
                                        :paper_cert])

@@ -38,14 +38,14 @@
 <hr>
 
 <div class="row">
-  <div class="col-md-8 col-md-offset-2 center">
+  <div class="col-md-4 col-md-offset-4 center">
     <h3>Wiped Computers:</h3>
     <%= will_paginate @wipes %>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-10 col-md-offset-1">
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
@@ -53,6 +53,7 @@
           <th>Wiped</th>
           <th>Wiping ID</th>
           <th>Wiped by</th>
+          <th>Reloaded OS</th>
           <th>Wiping Date</th>
           <th>Date Last Edited </th>
           <th>Hub ID</th>
@@ -67,6 +68,7 @@
             <td><% if wipe.action_taken.length > 0 %> Yes <% else %> No <% end %></td>
             <td><%= "#" + wipe.id.to_s %></td>
             <td><%= link_to wipe.staff.staff_name, staff_path(wipe.staff) %></td>
+            <td><%= link_to wipe.operating_system.os, operating_system_path(wipe.operating_system) %></td>
             <td><%= wipe.created_at.strftime("%d/%m/%y") %></td>
             <td><%= wipe.updated_at.strftime("%d/%m/%y") %></td>
             <td><%= link_to wipe.computer.hub.id, hub_path(wipe.computer.hub) %></td>
@@ -89,7 +91,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-10 col-md-offset-1">
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
@@ -129,7 +131,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-10 col-md-offset-1">
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
@@ -171,7 +173,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-10 col-md-offset-1">
     <table class="table table-bordered table-hover">
       <thead>
         <tr>

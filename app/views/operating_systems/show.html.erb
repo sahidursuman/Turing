@@ -1,0 +1,50 @@
+<%= render "shared/page_title", title: "#" + @operating_system.id.to_s + " - " + @operating_system.os %>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 center">
+    <%= link_to "New Operating System", new_operating_system_path(@operating_system), class: "btn btn-primary" %>
+    <%= link_to "Edit this Operating System", edit_operating_system_path(@operating_system), class: "btn btn-success" %>
+    <%= link_to "Go To OS Index", operating_systems_path, class: "btn btn-warning" %>
+    <%= link_to "Delete this Operating System", @operating_system, method: :delete, data: {confirm: "Delete this operating_system?" }, class: "btn btn-danger" %>
+  </div>
+</div>
+
+<hr>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 center">
+    
+    <h3>Computers reloaded with <%= @operating_system.os %></h3><br>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th class="text-center">Turing Track</th>
+          <th>Manufacturer</th>
+          <th>Computer Type</th>
+          <th>Serial No.</th>
+          <th>OS Product Key</th>
+          <th>Donor</th>
+          <th>Hub</th>
+          <th>Created At</th>
+          <th>Updated At</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @wipes.each do |w| %>
+          <tr>
+            <td><%= link_to "#" + w.computer.turingtrack, computer_path(w.computer) %></td>
+            <td><%= w.computer.manufacturer %></td>
+            <td><%= w.computer.computer_type %></td>
+            <td><%= w.computer.serial_no %></td>
+            <td><%= w.computer.product_key %></td>
+            <td><%= link_to w.computer.donor.donor_name, donor_path(w.computer.donor) %></td>
+            <td><%= link_to "#" + w.computer.hub.id.to_s, hub_path(w.computer.hub) %></td>
+            <td><%= w.computer.created_at.strftime("%d/%m/%y") %></td>
+            <td><%= w.computer.updated_at.strftime("%d/%m/%y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @wipes %>
+  
+  </div>
+</div>

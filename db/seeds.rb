@@ -15,3 +15,4 @@ Type.create(department: "Decommissioning")
 Type.first.staffs << Staff.first
 Type.first.staffs << Staff.second
 Hub.create(hub_location: "Midlothian Innovation Centre, Pentlandfield, Roslin, Midlothian, EH25 9RE")
+OperatingSystem.create(os: "No OS")

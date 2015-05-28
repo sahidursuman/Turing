@@ -10,8 +10,10 @@
           <th>Wiped</th>
           <th>Wiping ID</th>
           <th>Wiped by</th>
+          <th>Reloaded OS</th>
           <th>Wiping Date</th>
           <th>Date Last Edited </th>
+          <th>Hub ID</th>
         </tr>
       </thead>
       <tbody>
@@ -20,8 +22,10 @@
           <td><% if @wipe.action_taken.length > 0 %> Yes <% else %> No <% end %></td>
           <td><%= "#" + @wipe.id.to_s %></td>
           <td><%= link_to @wipe.staff.staff_name, staff_path(@wipe.staff) %></td>
+          <td><%= link_to @wipe.operating_system.os, operating_system_path(@wipe.operating_system) %></td>
           <td><%= @wipe.created_at.strftime("%d/%m/%y") %></td>
           <td><%= @wipe.updated_at.strftime("%d/%m/%y") %></td>
+          <td><%= link_to @wipe.computer.hub.id, hub_path(@wipe.computer.hub) %></td>
         </tr>
       </tbody>
     </table>

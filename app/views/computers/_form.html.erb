@@ -48,6 +48,9 @@
         <%= f.fields_for :wipe do |wipe_form| %>
           <%= wipe_form.label :action_taken %>
           <%= wipe_form.text_field :action_taken, :placeholder => "Wiped using Paragon Hard Disk Manger Version 15" %>
+          
+          <%= wipe_form.label :operating_system_id, "Operating System" %>
+          <%= wipe_form.collection_select :operating_system_id, OperatingSystem.all , :id, :os, selected: '1' %> <!-- ,include_blank: true -->
         <% end %>
       <% end %>
       

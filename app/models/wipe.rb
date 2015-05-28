@@ -1,6 +1,7 @@
 class Wipe < ActiveRecord::Base
-  belongs_to :computer#, dependent: destroy
+  belongs_to :computer
   belongs_to :staff
+  belongs_to :operating_system
   
   validates :staff_id, presence: true
   validates :computer_id, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_blank: true

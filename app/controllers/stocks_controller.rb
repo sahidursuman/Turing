@@ -2,7 +2,7 @@ class StocksController < ApplicationController
   before_action :set_stock, only: [:edit, :update, :show]
   before_action :require_user
   before_action :wipe_staff
-  before_action :admin_user, only: [:destroy]
+  before_action :admin_user, only: [:destroy, :import, :import_stock_page]
   
   def index
     @stocks = Stock.all.paginate(page: params[:page], per_page: 100)

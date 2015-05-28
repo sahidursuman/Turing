@@ -1,0 +1,13 @@
+<%= render "shared/errors", obj: @operating_system %>
+
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2">
+    <%= form_for @operating_system do |f| %>
+    
+      <%= f.label :os, "Operating System" %>
+      <%= f.text_field :os %>
+
+      <%= f.submit "Create Operating System", class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>
