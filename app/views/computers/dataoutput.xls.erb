@@ -39,12 +39,14 @@
         <Cell><Data ss:Type="String">Status Staff Email</Data></Cell>
         <Cell><Data ss:Type="String">Status Created At</Data></Cell>
         <Cell><Data ss:Type="String">Status Updated At</Data></Cell>
+        <Cell><Data ss:Type="String">Operating System OS</Data></Cell>
+        <Cell><Data ss:Type="String">Operating System ID</Data></Cell>
         <Cell><Data ss:Type="String">Wipe ID</Data></Cell>
         <Cell><Data ss:Type="String">Wiped</Data></Cell>
         <Cell><Data ss:Type="String">Wipe Staff ID</Data></Cell>
         <Cell><Data ss:Type="String">Wipe Staff Name</Data></Cell>
         <Cell><Data ss:Type="String">Wipe Staff Email</Data></Cell>
-        <Cell><Data ss:Type="String">Action Taken</Data></Cell>
+        <Cell><Data ss:Type="String">Wipe Action Taken</Data></Cell>
         <Cell><Data ss:Type="String">Wipe Created At</Data></Cell>
         <Cell><Data ss:Type="String">Wipe Updated At</Data></Cell>
         <Cell><Data ss:Type="String">Shipment ID</Data></Cell>
@@ -118,6 +120,13 @@
           <Cell><Data ss:Type="String"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
+        <% end %>
+        <% if computer.wipe and computer.wipe.operating_system %>
+          <Cell><Data ss:Type="String"><%= computer.wipe.operating_system.os %></Data></Cell>
+          <Cell><Data ss:Type="Number"><%= computer.wipe.operating_system.id %></Data></Cell>
+        <% else %>
+          <Cell><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="Number"></Data></Cell>
         <% end %>
         <% if computer.wipe and computer.wipe.action_taken.length > 0 %>
           <Cell><Data ss:Type="Number"><%= computer.wipe.id %></Data></Cell>

@@ -44,7 +44,7 @@ class Computer < ActiveRecord::Base
       end
     end
     
-    # Database reset upload
+    ############################### Database reset upload ################################
     def self.import(file)
       spreadsheet = open_spreadsheet(file)
       #header = spreadsheet.row(1)
@@ -52,7 +52,8 @@ class Computer < ActiveRecord::Base
       c_header = Array['id','turingtrack','manufacturer','computer_type','model_no','serial_no','product_key','specification','created_at','updated_at','hub_id','donor_id']
       d_header = Array['id','donor_name','donor_email','allow_mail','donor_address','paper_cert','created_at','updated_at']
       s_header = Array['id','has_status','scrapped','sold','customer','price','staff_id','staff_name','staff_email','created_at','updated_at']
-      w_header = Array['id','has_wipe','staff_id','staff_name','staff_email','action_taken','created_at','updated_at']
+      w_header = Array['operating_system_id','id','has_wipe','staff_id','staff_name','staff_email','action_taken','created_at','updated_at']
+      o_header = Array['os','id']
       sh_header = Array['id','shipped','staff_id','staff_name','staff_email','created_at','updated_at']
       r_header = Array['id','received','school','staff_id','staff_name','staff_email','created_at','updated_at']
       de_header = Array['id','decommissioned','staff_id','staff_name','staff_email','created_at','updated_at']
@@ -82,12 +83,14 @@ class Computer < ActiveRecord::Base
           computer.status.attributes = s_row
           computer.save!
         else
-          status = Status.create(s_row)
-          status.save!
+          unless s_row["id"] == 0
+            status = Status.create(s_row)
+            status.save!
+          end
         end
         
         @wipes = Wipe.all
-        wipe_row = Hash[[w_header, spreadsheet.row(i)[32..39]].transpose]
+        wipe_row = Hash[[w_header, spreadsheet.row(i)[33..41]].transpose]
         w_row = wipe_row.to_hash.except("has_wipe","staff_name","staff_email")
         w_row[:computer_id] = computer.id
         if @wipes.any? {|wipe| wipe.id == wipe_row["id"] }
@@ -98,8 +101,19 @@ class Computer < ActiveRecord::Base
           wipe.save!
         end
         
+         @operating_systems = OperatingSystem.all
+        oper_row = Hash[[o_header, spreadsheet.row(i)[32..33]].transpose]
+        o_row = oper_row.to_hash
+        if @operating_systems.any? {|oper| oper.id == o_row["id"] }
+          computer.wipe.operating_system.attributes = o_row
+          computer.save!
+        else
+          oper = OperatingSystem.create(o_row)
+          oper.save!
+        end
+        
         @shipments = Shipment.all
-        shipment_row = Hash[[sh_header, spreadsheet.row(i)[40..46]].transpose]
+        shipment_row = Hash[[sh_header, spreadsheet.row(i)[42..48]].transpose]
         sh_row = shipment_row.to_hash.except("staff_name","staff_email")
         sh_row[:computer_id] = computer.id
         sh_row[:entertrack] = (computer.id + 10000000)
@@ -107,14 +121,14 @@ class Computer < ActiveRecord::Base
           computer.shipment.attributes = sh_row
           computer.save!
         else
-          if computer.wipe.action_taken.length > 0
+          if computer.wipe.action_taken.length > 0 and sh_row["id"] != 0
             shipment = Shipment.create(sh_row)
             shipment.save!
           end
         end
         
         @receipts = Receipt.all
-        receipt_row = Hash[[r_header, spreadsheet.row(i)[47..54]].transpose]
+        receipt_row = Hash[[r_header, spreadsheet.row(i)[49..56]].transpose]
         r_row = receipt_row.to_hash.except("staff_name","staff_email")
         r_row[:computer_id] = computer.id
         r_row[:entertrack] = (computer.id + 10000000)
@@ -122,14 +136,14 @@ class Computer < ActiveRecord::Base
           computer.receipt.attributes = r_row
           computer.save!
         else
-          if computer.shipment and computer.shipment.shipped
+          if computer.shipment and computer.shipment.shipped and r_row["id"] != 0
             receipt = Receipt.create(r_row)
             receipt.save!
           end
         end
         
         @decommissions = Decommission.all
-        decommission_row = Hash[[de_header, spreadsheet.row(i)[55..61]].transpose]
+        decommission_row = Hash[[de_header, spreadsheet.row(i)[57..63]].transpose]
         de_row = decommission_row.to_hash.except("staff_name","staff_email")
         de_row[:computer_id] = computer.id
         de_row[:entertrack] = (computer.id + 10000000)
@@ -137,7 +151,7 @@ class Computer < ActiveRecord::Base
           computer.decommission.attributes = de_row
           computer.save!
         else
-          if computer.receipt and computer.receipt.received
+          if computer.receipt and computer.receipt.received and de_row["id"] != 0
             decommission = Decommission.create(de_row)
             decommission.save!
           end
@@ -145,7 +159,8 @@ class Computer < ActiveRecord::Base
       
       end
     end
-
+    #####################################################################################################
+    
     # Open spreadsheet
     def self.open_spreadsheet(file)
         case File.extname(file.original_filename)
