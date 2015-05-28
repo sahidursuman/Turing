@@ -55,18 +55,20 @@
     </div>
     
     <!-- Central Computer Details Block -->
-    <div class="col-md-6 well">
+    <div class="col-md-7 well">
       <h4><%= link_to "Turing Track No #" + computer.turingtrack, computer_path(computer) %></h4>
       <p>
         <%= computer.manufacturer %> <%= computer.computer_type %> donated by <%= computer.donor.donor_name %><br>
-        Processing Hub <%= computer.hub.hub_location %>
+        Processing Hub: <%= computer.hub.hub_location %>
       </p>
       
       <% if computer.wipe.present? and computer.wipe.action_taken.length > 0 %>
         <p><%= render computer.wipe %></p>
       <% else %>
-      <p> This computer is currently unprocessed. To process this computer, click the 'wipe' link to the LHS. 
-      If the computer has been scrapped or sold, please assign a status to it.</p>
+      <p> 
+        This computer is currently unprocessed. To process this computer, click the 'wipe' link to the LHS.<br>
+        If the computer has been scrapped or sold, please assign a status to it.
+      </p>
       <% end %>
       
       <p>

@@ -3,9 +3,9 @@ class ComputersController < ApplicationController
   before_action :require_user, except: [:new, :create, :thankyou]
   before_action :wipe_staff, except: [:new, :create, :thankyou, :show]
   before_action :admin_user, only: [:destroy, :dataoutput]
+
+  layout :new_layout, only: [:new, :update, :thankyou]
   
-  layout :new_layout, only: [:new, :update]
-  #layout :thankyou, only: [:thankyou]
   
   def index
     # Pagination of computers
@@ -111,6 +111,17 @@ class ComputersController < ApplicationController
     end
   end
   
+  def import_page
+    
+  end
+    
+  def import
+    # Stores as temp file on file system
+    Computer.import(params[:file])
+    redirect_to computertable_path
+    flash[:success] = "Your backup database has been successfully imported!"
+  end
+  
   ##########################################################################################
   # Dropbox Image Uploader
   include Dropboxer
@@ -148,7 +159,11 @@ class ComputersController < ApplicationController
     end
     
     def new_layout
-      logged_in? ? "application" : "donate"
+      if action_name == "thankyou"
+        return "thankyou"
+      else
+        logged_in? ? "application" : "donate"
+      end
     end
     
 end

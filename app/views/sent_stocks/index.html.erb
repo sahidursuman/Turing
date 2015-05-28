@@ -1,7 +1,7 @@
 <%= render "shared/page_title", title: "Confirmation of Sent Stock Index Table" %>
 
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-10 col-md-offset-1">
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
@@ -40,6 +40,7 @@
         <% end %>
       </tbody>
     </table>
+    <div class="center"><%= will_paginate %></div>
     
     <!-- Calculate Totals of Stock Items Donated -->
     <% ke_count = 0  %><% mi_count = 0%><% mo_count = 0%><% pr_count = 0%><% sp_count = 0 %>

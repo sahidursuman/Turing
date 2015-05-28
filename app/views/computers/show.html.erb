@@ -65,14 +65,22 @@
         OS Product Key: <%= @computer.product_key %> <br>
         Donor: <%= link_to @computer.donor.donor_name, donor_path(@computer.donor) %> <br>
         <% if @computer.donor.paper_cert %><strong> Requires a Paper Certificate of Destruction </strong><br><% end %>
-        <% if @computer.status and @computer.status.scrapped %><strong>Computer has been scrapped</strong><br><% end %>
-        <% if @computer.status and @computer.status.sold %><strong>Computer has been sold</strong><br><% end %>
       </p>
       
       <!-- Add a status if there isn't one -->
-      <% unless @computer.status and (@computer.status.scrapped or @computer.status.sold) %>
-        <p><%= link_to "Add a status", new_status_path %><br></p>
-      <% end %>
+      <p>
+        <% if @computer.status %>
+          <% if @computer.status.scrapped %><strong>
+            Computer has been <%= link_to "scrapped", status_path(@computer.status) %>
+          <% elsif @computer.status.sold %>
+            Computer has been <%= link_to "sold", status_path(@computer.status) %>
+          <% else %>
+            <%= link_to "Edit computer status", status_path(@computer.status) %>
+          <% end %></strong>
+        <% else %>
+          <%= link_to "Add a status", new_status_path %><br>
+        <% end %>
+      </p>
       
       <!-- If there is an associated wipe, render wipes/_wipe partial-->
       <p>

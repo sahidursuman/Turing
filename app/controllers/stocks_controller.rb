@@ -5,7 +5,7 @@ class StocksController < ApplicationController
   before_action :admin_user, only: [:destroy]
   
   def index
-    @stocks = Stock.all
+    @stocks = Stock.all.paginate(page: params[:page], per_page: 100)
     @sent_stocks = SentStock.all
   end
   

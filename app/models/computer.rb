@@ -44,6 +44,118 @@ class Computer < ActiveRecord::Base
       end
     end
     
+    # Database reset upload
+    def self.import(file)
+      spreadsheet = open_spreadsheet(file)
+      #header = spreadsheet.row(1)
+      #h = "'#{header.join("','")}'"
+      c_header = Array['id','turingtrack','manufacturer','computer_type','model_no','serial_no','product_key','specification','created_at','updated_at','hub_id','donor_id']
+      d_header = Array['id','donor_name','donor_email','allow_mail','donor_address','paper_cert','created_at','updated_at']
+      s_header = Array['id','has_status','scrapped','sold','staff_id','staff_name','staff_email','created_at','updated_at']
+      w_header = Array['id','has_wipe','staff_id','staff_name','staff_email','action_taken','created_at','updated_at']
+      sh_header = Array['id','shipped','staff_id','staff_name','staff_email','created_at','updated_at']
+      r_header = Array['id','received','school','staff_id','staff_name','staff_email','created_at','updated_at']
+      de_header = Array['id','decommissioned','staff_id','staff_name','staff_email','created_at','updated_at']
+      (2..spreadsheet.last_row).each do |i|
+        computer_row = Hash[[c_header, spreadsheet.row(i)[0..11]].transpose]
+        computer = find_by_id(computer_row["id"]) || new
+        computer.attributes = computer_row.to_hash
+        #computer.specification = h
+        computer.save!
+        
+        @donors = Donor.all
+        donor_row = Hash[[d_header, spreadsheet.row(i)[11..18]].transpose]
+        if @donors.any? {|donor| donor.id == donor_row["id"] }
+          computer.donor.attributes = donor_row.to_hash
+          computer.save!
+        else
+          donor = Donor.create(donor_row.to_hash)
+          donor.save!
+        end
+        
+        @statuses = Status.all
+        status_row = Hash[[s_header, spreadsheet.row(i)[21..29]].transpose]
+        s_row = status_row.to_hash.except("has_status","staff_name","staff_email")
+        s_row[:computer_id] = computer.id
+        s_row[:entertrack] = (computer.id + 10000000)
+        if @statuses.any? {|status| status.id == status_row["id"] }
+          computer.status.attributes = s_row
+          computer.save!
+        else
+          status = Status.create(s_row)
+          status.save!
+        end
+        
+        @wipes = Wipe.all
+        wipe_row = Hash[[w_header, spreadsheet.row(i)[30..37]].transpose]
+        w_row = wipe_row.to_hash.except("has_wipe","staff_name","staff_email")
+        w_row[:computer_id] = computer.id
+        if @wipes.any? {|wipe| wipe.id == wipe_row["id"] }
+          computer.wipe.attributes = w_row
+          computer.save!
+        else
+          wipe = Wipe.create(w_row)
+          wipe.save!
+        end
+        
+        @shipments = Shipment.all
+        shipment_row = Hash[[sh_header, spreadsheet.row(i)[38..44]].transpose]
+        sh_row = shipment_row.to_hash.except("staff_name","staff_email")
+        sh_row[:computer_id] = computer.id
+        sh_row[:entertrack] = (computer.id + 10000000)
+        if @shipments.any? {|shipment| shipment.id == shipment_row["id"] }
+          computer.shipment.attributes = sh_row
+          computer.save!
+        else
+          if computer.wipe.action_taken.length > 0
+            shipment = Shipment.create(sh_row)
+            shipment.save!
+          end
+        end
+        
+        @receipts = Receipt.all
+        receipt_row = Hash[[r_header, spreadsheet.row(i)[45..52]].transpose]
+        r_row = receipt_row.to_hash.except("staff_name","staff_email")
+        r_row[:computer_id] = computer.id
+        r_row[:entertrack] = (computer.id + 10000000)
+        if @receipts.any? {|receipt| receipt.id == receipt_row["id"] }
+          computer.receipt.attributes = r_row
+          computer.save!
+        else
+          if computer.shipment and computer.shipment.shipped
+            receipt = Receipt.create(r_row)
+            receipt.save!
+          end
+        end
+        
+        @decommissions = Decommission.all
+        decommission_row = Hash[[de_header, spreadsheet.row(i)[53..59]].transpose]
+        de_row = decommission_row.to_hash.except("staff_name","staff_email")
+        de_row[:computer_id] = computer.id
+        de_row[:entertrack] = (computer.id + 10000000)
+        if @decommissions.any? {|decommission| decommission.id == decommission_row["id"] }
+          computer.decommission.attributes = de_row
+          computer.save!
+        else
+          if computer.receipt and computer.receipt.received
+            decommission = Decommission.create(de_row)
+            decommission.save!
+          end
+        end
+      
+      end
+    end
+
+    # Open spreadsheet
+    def self.open_spreadsheet(file)
+        case File.extname(file.original_filename)
+          when '.csv' then Roo::Spreadsheet.open(file.path, extension: :csv)
+          when '.xls' then Roo::Spreadsheet.open(file.path, extension: :xls)
+          when '.xlsx' then Roo::Spreadsheet.open(file.path, extension: :xlsx)
+        else raise "Unknown file type: #{file.original_filename}"
+        end
+    end
+    
 #   Function to output computer table to CSV (without view template)  
 #    def self.to_csv(options = {})
 #      CSV.generate(options) do |csv|

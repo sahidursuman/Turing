@@ -26,15 +26,18 @@ Rails.application.routes.draw do
   post '/login', to: 'logins#create'
   get '/logout', to: 'logins#destroy'
   
-  # Routes for computer table, dataoutput, stockouput, existingdonor
+  # Routes for computer table, dataoutput, stockouput, existingdonor, import page
   get 'computertable', to: 'computers#table'
   get 'dataoutput', to: 'computers#dataoutput'
   get 'stockoutput', to: 'stocks#stockoutput'
   get 'existingdonor', to: 'donors#existingdonor'
   get 'donor_expire', to: 'donors#expiredonor'
+  get 'import', to: 'computers#import_page'
   
-  # Add member routes to computers resource
+  # Add member and collection routes to computers resources
   resources :computers do
+    # Database Reset Uploader
+    collection { post :import }
     member do
       # Thank you page
       get 'thankyou'
@@ -43,7 +46,7 @@ Rails.application.routes.draw do
     end
   end
   
-  # Route for mailing list
+  # Routes for mailing list
   get 'mailinglist', to: 'donors#mailinglist'
   post 'upload', to: 'computers#upload'
   

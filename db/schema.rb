@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20150518151345) do
     t.integer  "staff_id"
     t.integer  "computer_id"
     t.string   "school"
-    t.boolean  "received",    default: false
+    t.boolean  "received",    default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 20150518151345) do
     t.integer  "entertrack"
     t.integer  "staff_id"
     t.integer  "computer_id"
-    t.boolean  "shipped",     default: false
+    t.boolean  "shipped",     default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end

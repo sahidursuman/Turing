@@ -1,0 +1,19 @@
+<%= render "shared/page_title", title: "Import Data" %>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    
+    <p>
+      Please note that this feature is only to be used in the event of the database becoming corrupt. 
+      Prior to using this feature, please ensure that the database has been completely wiped of all exisiting
+      data, and that the upload file contains the most recent version of your database export.
+    </p>
+    <h4>
+      <%= form_tag import_computers_path, multipart: true do %>
+        <%= file_field_tag :file %>
+        <%= submit_tag "Import" %>
+      <% end %>
+    </h4>
+    
+  </div>
+</div>

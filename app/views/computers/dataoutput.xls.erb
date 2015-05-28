@@ -10,16 +10,20 @@
         <Cell><Data ss:Type="String">Computer ID</Data></Cell>
         <Cell><Data ss:Type="String">TuringTrack</Data></Cell>
         <Cell><Data ss:Type="String">Manufacturer</Data></Cell>
+        <Cell><Data ss:Type="String">Computer Type</Data></Cell>
         <Cell><Data ss:Type="String">Model No</Data></Cell>
         <Cell><Data ss:Type="String">Serial No</Data></Cell>
         <Cell><Data ss:Type="String">OS Product Key</Data></Cell>
         <Cell><Data ss:Type="String">Specification</Data></Cell>
         <Cell><Data ss:Type="String">Computer Created At</Data></Cell>
         <Cell><Data ss:Type="String">Computer Updated At</Data></Cell>
+        <Cell><Data ss:Type="String">Hub ID</Data></Cell>
         <Cell><Data ss:Type="String">Donor ID</Data></Cell>
         <Cell><Data ss:Type="String">Donor Name</Data></Cell>
         <Cell><Data ss:Type="String">Donor Email</Data></Cell>
         <Cell><Data ss:Type="String">Donor Mailing List</Data></Cell>
+        <Cell><Data ss:Type="String">Donor Address</Data></Cell>
+        <Cell><Data ss:Type="String">Donor Paper Certificate</Data></Cell>
         <Cell><Data ss:Type="String">Donor Created At</Data></Cell>
         <Cell><Data ss:Type="String">Donor Updated At</Data></Cell>
         <Cell><Data ss:Type="String">Hub ID</Data></Cell>
@@ -28,34 +32,38 @@
         <Cell><Data ss:Type="String">Status</Data></Cell>
         <Cell><Data ss:Type="String">Status Scrapped</Data></Cell>
         <Cell><Data ss:Type="String">Status Sold</Data></Cell>
-        <Cell><Data ss:Type="String">Status Staff</Data></Cell>
+        <Cell><Data ss:Type="String">Status Staff ID</Data></Cell>
+        <Cell><Data ss:Type="String">Status Staff Name</Data></Cell>
         <Cell><Data ss:Type="String">Status Staff Email</Data></Cell>
         <Cell><Data ss:Type="String">Status Created At</Data></Cell>
         <Cell><Data ss:Type="String">Status Updated At</Data></Cell>
         <Cell><Data ss:Type="String">Wipe ID</Data></Cell>
         <Cell><Data ss:Type="String">Wiped</Data></Cell>
-        <Cell><Data ss:Type="String">Wipe Staff</Data></Cell>
+        <Cell><Data ss:Type="String">Wipe Staff ID</Data></Cell>
+        <Cell><Data ss:Type="String">Wipe Staff Name</Data></Cell>
         <Cell><Data ss:Type="String">Wipe Staff Email</Data></Cell>
         <Cell><Data ss:Type="String">Action Taken</Data></Cell>
         <Cell><Data ss:Type="String">Wipe Created At</Data></Cell>
         <Cell><Data ss:Type="String">Wipe Updated At</Data></Cell>
         <Cell><Data ss:Type="String">Shipment ID</Data></Cell>
         <Cell><Data ss:Type="String">Shipped</Data></Cell>
-        <Cell><Data ss:Type="String">Shipment Staff</Data></Cell>
+        <Cell><Data ss:Type="String">Shipment Staff ID</Data></Cell>
+        <Cell><Data ss:Type="String">Shipment Staff Name</Data></Cell>
         <Cell><Data ss:Type="String">Shipment Staff Email</Data></Cell>
         <Cell><Data ss:Type="String">Shipment Created At</Data></Cell>
         <Cell><Data ss:Type="String">Shipment Updated At</Data></Cell>
         <Cell><Data ss:Type="String">Receipt ID</Data></Cell>
         <Cell><Data ss:Type="String">Received</Data></Cell>
         <Cell><Data ss:Type="String">School</Data></Cell>
-        <Cell><Data ss:Type="String">Receipt Staff</Data></Cell>
+        <Cell><Data ss:Type="String">Receipt Staff ID</Data></Cell>
+        <Cell><Data ss:Type="String">Receipt Staff Name</Data></Cell>
         <Cell><Data ss:Type="String">Receipt Staff Email</Data></Cell>
         <Cell><Data ss:Type="String">Receipt Created At</Data></Cell>
         <Cell><Data ss:Type="String">Receipt Updated At</Data></Cell>
-        
         <Cell><Data ss:Type="String">Decommission ID</Data></Cell>
         <Cell><Data ss:Type="String">Decommissioned</Data></Cell>
-        <Cell><Data ss:Type="String">Decommission Staff</Data></Cell>
+        <Cell><Data ss:Type="String">Decommission Staff ID</Data></Cell>
+        <Cell><Data ss:Type="String">Decommission Staff Name</Data></Cell>
         <Cell><Data ss:Type="String">Decommission Staff Email</Data></Cell>
         <Cell><Data ss:Type="String">Decommission Created At</Data></Cell>
         <Cell><Data ss:Type="String">Decommission Updated At</Data></Cell>
@@ -66,16 +74,20 @@
         <Cell><Data ss:Type="Number"><%= computer.id %></Data></Cell>
         <Cell><Data ss:Type="String"><%= computer.turingtrack %></Data></Cell>
         <Cell><Data ss:Type="String"><%= computer.manufacturer %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= computer.computer_type %></Data></Cell>
         <Cell><Data ss:Type="String"><%= computer.model_no %></Data></Cell>
         <Cell><Data ss:Type="String"><%= computer.serial_no %></Data></Cell>
         <Cell><Data ss:Type="String"><%= computer.product_key %></Data></Cell>
         <Cell><Data ss:Type="String"><%= computer.specification %></Data></Cell>
         <Cell><Data ss:Type="String"><%= computer.created_at %></Data></Cell>
         <Cell><Data ss:Type="String"><%= computer.updated_at %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= computer.hub_id %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= computer.donor.id %></Data></Cell>
         <Cell><Data ss:Type="String"><%= computer.donor.donor_name %></Data></Cell>
         <Cell><Data ss:Type="String"><%= computer.donor.donor_email %></Data></Cell>
         <Cell><Data ss:Type="String"><%= computer.donor.allow_mail %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= computer.donor.donor_address %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= computer.donor.paper_cert %></Data></Cell>
         <Cell><Data ss:Type="String"><%= computer.donor.created_at %></Data></Cell>
         <Cell><Data ss:Type="String"><%= computer.donor.updated_at %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= computer.hub.id %></Data></Cell>
@@ -85,6 +97,7 @@
           <Cell><Data ss:Type="String"><%= computer.status.present? %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.status.scrapped %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.status.sold %></Data></Cell>
+          <Cell><Data ss:Type="Number"><%= computer.status.staff.id %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.status.staff.staff_name %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.status.staff.staff_email %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.status.created_at %></Data></Cell>
@@ -94,6 +107,7 @@
           <Cell><Data ss:Type="String"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="Number"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
@@ -102,6 +116,7 @@
         <% if computer.wipe and computer.wipe.action_taken.length > 0 %>
           <Cell><Data ss:Type="Number"><%= computer.wipe.id %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.wipe.present? %></Data></Cell>
+          <Cell><Data ss:Type="Number"><%= computer.wipe.staff.id %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.wipe.staff.staff_name %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.wipe.staff.staff_email %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.wipe.action_taken %></Data></Cell>
@@ -110,6 +125,7 @@
         <% else %>
           <Cell><Data ss:Type="Number"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="Number"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
@@ -119,6 +135,7 @@
         <% if computer.shipment and computer.shipment.shipped %>
           <Cell><Data ss:Type="Number"><%= computer.shipment.id %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.shipment.shipped %></Data></Cell>
+          <Cell><Data ss:Type="Number"><%= computer.shipment.staff.id %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.shipment.staff.staff_name %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.shipment.staff.staff_email %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.shipment.created_at %></Data></Cell>
@@ -126,6 +143,7 @@
         <% else %>
           <Cell><Data ss:Type="Number"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="Number"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
@@ -135,6 +153,7 @@
           <Cell><Data ss:Type="Number"><%= computer.receipt.id %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.receipt.received %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.receipt.school %></Data></Cell>
+          <Cell><Data ss:Type="Number"><%= computer.receipt.staff.id %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.receipt.staff.staff_name %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.receipt.staff.staff_email %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.receipt.created_at %></Data></Cell>
@@ -143,6 +162,7 @@
           <Cell><Data ss:Type="Number"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="Number"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
@@ -152,6 +172,7 @@
         <% if computer.decommission and computer.decommission.decommissioned %>
           <Cell><Data ss:Type="Number"><%= computer.decommission.id %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.decommission.decommissioned %></Data></Cell>
+          <Cell><Data ss:Type="Number"><%= computer.decommission.staff.id %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.decommission.staff.staff_name %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.decommission.staff.staff_email %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.decommission.created_at %></Data></Cell>
@@ -159,6 +180,7 @@
         <% else %>
           <Cell><Data ss:Type="Number"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="Number"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>

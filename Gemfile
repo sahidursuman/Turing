@@ -36,6 +36,9 @@ gem 'bootstrap-will_paginate', '0.0.10'
 gem 'barby'
 # Dropbox Ruby DSK 
 gem 'dropbox-sdk'
+# Roo Excel Interface
+gem 'roo'
+gem 'roo-xls'
 
 # Use unicorn as the app server
 # gem 'unicorn'
