@@ -104,8 +104,10 @@ ActiveRecord::Schema.define(version: 20150518151345) do
     t.integer  "entertrack"
     t.integer  "staff_id"
     t.integer  "computer_id"
-    t.boolean  "scrapped",    default: false
-    t.boolean  "sold",        default: false
+    t.boolean  "scrapped",                            default: false
+    t.boolean  "sold",                                default: false
+    t.string   "customer"
+    t.decimal  "price",       precision: 8, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end

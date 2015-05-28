@@ -32,6 +32,8 @@
         <Cell><Data ss:Type="String">Status</Data></Cell>
         <Cell><Data ss:Type="String">Status Scrapped</Data></Cell>
         <Cell><Data ss:Type="String">Status Sold</Data></Cell>
+        <Cell><Data ss:Type="String">Status Customer</Data></Cell>
+        <Cell><Data ss:Type="String">Status Price</Data></Cell>
         <Cell><Data ss:Type="String">Status Staff ID</Data></Cell>
         <Cell><Data ss:Type="String">Status Staff Name</Data></Cell>
         <Cell><Data ss:Type="String">Status Staff Email</Data></Cell>
@@ -94,9 +96,11 @@
         <Cell><Data ss:Type="String"><%= computer.hub.hub_location %></Data></Cell>
         <% if computer.status %>
           <Cell><Data ss:Type="Number"><%= computer.status.id %></Data></Cell>
-          <Cell><Data ss:Type="String"><%= computer.status.present? %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= computer.status.present? and (computer.status.scrapped or computer.status.sold) %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.status.scrapped %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.status.sold %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= computer.status.customer %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= computer.status.price %></Data></Cell>
           <Cell><Data ss:Type="Number"><%= computer.status.staff.id %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.status.staff.staff_name %></Data></Cell>
           <Cell><Data ss:Type="String"><%= computer.status.staff.staff_email %></Data></Cell>
@@ -104,6 +108,8 @@
           <Cell><Data ss:Type="String"><%= computer.status.updated_at %></Data></Cell>
         <% else %>
           <Cell><Data ss:Type="Number"></Data></Cell>
+          <Cell><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="String"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>
           <Cell><Data ss:Type="String"></Data></Cell>

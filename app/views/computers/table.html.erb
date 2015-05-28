@@ -91,7 +91,7 @@
                 <% elsif computer.status.sold %>
                   <td><%= link_to "Sold", status_path(computer.status) %></td>
                 <% else %>
-                  <td><%= link_to "None", new_status_path %></td>
+                  <td><%= link_to "None", status_path(computer.status) %></td>
                 <% end %>
               <% else %>
                 <td><%= link_to "None", new_status_path %></td>

@@ -21,34 +21,40 @@
     <div class="col-md-2 col-md-offset-1">
       <h5 class="vcenter center">
         
-        <% if computer.wipe.present? and computer.wipe.action_taken.length > 0 %>
-          Computer Wiped!<br><br>
+        <% if computer.status %>
+          <% if computer.status.scrapped %>
+            <%= link_to "Computer Scrapped", status_path(computer.status) %>
+          <% elsif computer.status.sold %>
+            <%= link_to "Computer Sold", status_path(computer.status) %>
+          <% else %>
+            <strong><%= link_to "Assign computer status", status_path(computer.status) %></strong>
+          <% end %>
         <% else %>
-          <strong><%= link_to "Wipe this computer!", edit_computer_path(computer) %></strong><br><br>
-        <% end %>
+          <strong><%= link_to "Add a status", new_status_path %></strong>
+        <% end %><br><br>
         
-        <% unless computer.status and (computer.status.scrapped or computer.status.sold) %>
-          <strong><%= link_to "Add a status", new_status_path %></strong><br><br>
-        <% end %>
-        <% if computer.status and computer.status.scrapped %><strong>Computer has been scrapped</strong><br><br><% end %>
-        <% if computer.status and computer.status.sold %><strong>Computer has been sold</strong><br><br><% end %>
+        <% if computer.wipe and computer.wipe.action_taken.length > 0 %>
+           <%= link_to "Computer Wiped!", computer_path(computer) %>
+        <% else %>
+          <strong><%= link_to "Wipe this computer!", edit_computer_path(computer) %></strong>
+        <% end %><br><br>
         
         <% if computer.shipment and computer.shipment.shipped %>
-          Computer Shipped!<br><br>
+          <%= link_to "Computer Shipped!", shipment_path(computer.shipment) %>
         <% else %>
-          <strong><%= link_to "Ship this computer!", new_shipment_path %></strong><br><br>
-        <% end %>
+          <strong><%= link_to "Ship this computer!", new_shipment_path %></strong>
+        <% end %><br><br>
                 
         <% if computer.receipt and computer.receipt.received %>
-          Computer Received!<br><br>
+         <%= link_to "Computer Received!", receipt_path(computer.receipt) %>
         <% else %>
-          <strong><%= link_to "Confirm this computer's arrival!", new_receipt_path %></strong><br><br>
-        <% end %>
+          <strong><%= link_to "Confirm this computer's arrival!", new_receipt_path %></strong>
+        <% end %><br><br>
         
         <% if computer.decommission and computer.decommission.decommissioned %>
-          Computer Decommissioned!<br><br>
+          <%= link_to "Computer Decommissioned!", decommission_path(computer.decommission) %>
         <% else %>
-          <strong><%= link_to "Confirm this computer's decommission!", new_decommission_path %></strong><br><br>
+          <strong><%= link_to "Confirm this computer's decommission!", new_decommission_path %></strong>
         <% end %>
         
       </h5>

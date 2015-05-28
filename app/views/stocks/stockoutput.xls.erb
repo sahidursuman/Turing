@@ -19,7 +19,8 @@
         <Cell><Data ss:Type="String">Kettle Leads</Data></Cell>
         <Cell><Data ss:Type="String">Routers</Data></Cell>
         <Cell><Data ss:Type="String">LAN Switches</Data></Cell>
-        <Cell><Data ss:Type="String">Confirmed By</Data></Cell>
+        <Cell><Data ss:Type="String">Staff ID</Data></Cell>
+        <Cell><Data ss:Type="String">Staff Name</Data></Cell>
         <Cell><Data ss:Type="String">Staff Email</Data></Cell>
         <Cell><Data ss:Type="String">Created At</Data></Cell>
         <Cell><Data ss:Type="String">Updated At</Data></Cell>
@@ -38,6 +39,7 @@
         <Cell><Data ss:Type="String"><%= stock.kettle_leads %></Data></Cell>
         <Cell><Data ss:Type="String"><%= stock.routers %></Data></Cell>
         <Cell><Data ss:Type="String"><%= stock.lan_switches %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= stock.staff.id %></Data></Cell>
         <Cell><Data ss:Type="String"><%= stock.staff.staff_name %></Data></Cell>
         <Cell><Data ss:Type="String"><%= stock.staff.staff_email %></Data></Cell>
         <Cell><Data ss:Type="String"><%= stock.created_at %></Data></Cell>
@@ -61,7 +63,8 @@
         <Cell><Data ss:Type="String">Kettle Leads</Data></Cell>
         <Cell><Data ss:Type="String">Routers</Data></Cell>
         <Cell><Data ss:Type="String">LAN Switches</Data></Cell>
-        <Cell><Data ss:Type="String">Confirmed By</Data></Cell>
+        <Cell><Data ss:Type="String">Staff ID</Data></Cell>
+        <Cell><Data ss:Type="String">Staff Name</Data></Cell>
         <Cell><Data ss:Type="String">Staff Email</Data></Cell>
         <Cell><Data ss:Type="String">Created At</Data></Cell>
         <Cell><Data ss:Type="String">Updated At</Data></Cell>
@@ -80,6 +83,7 @@
         <Cell><Data ss:Type="String"><%= sent_stock.sent_kettle_leads %></Data></Cell>
         <Cell><Data ss:Type="String"><%= sent_stock.sent_routers %></Data></Cell>
         <Cell><Data ss:Type="String"><%= sent_stock.sent_lan_switches %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= sent_stock.staff.id %></Data></Cell>
         <Cell><Data ss:Type="String"><%= sent_stock.staff.staff_name %></Data></Cell>
         <Cell><Data ss:Type="String"><%= sent_stock.staff.staff_email %></Data></Cell>
         <Cell><Data ss:Type="String"><%= sent_stock.created_at %></Data></Cell>

@@ -26,17 +26,18 @@ Rails.application.routes.draw do
   post '/login', to: 'logins#create'
   get '/logout', to: 'logins#destroy'
   
-  # Routes for computer table, dataoutput, stockouput, existingdonor, import page
+  # Routes for computer table, dataoutput, stockouput, existingdonor, import pages
   get 'computertable', to: 'computers#table'
   get 'dataoutput', to: 'computers#dataoutput'
   get 'stockoutput', to: 'stocks#stockoutput'
   get 'existingdonor', to: 'donors#existingdonor'
   get 'donor_expire', to: 'donors#expiredonor'
   get 'import', to: 'computers#import_page'
+  get 'import_stock', to: 'stocks#import_stock_page'
   
   # Add member and collection routes to computers resources
   resources :computers do
-    # Database Reset Uploader
+    # Database Reset Importer
     collection { post :import }
     member do
       # Thank you page
@@ -44,6 +45,11 @@ Rails.application.routes.draw do
       # Dropbox uploads
       post 'drop_upload'
     end
+  end
+  
+  # Stock Data Importer
+  resources :stocks do
+    collection { post :import }
   end
   
   # Routes for mailing list

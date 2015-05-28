@@ -29,8 +29,8 @@ class Computer < ActiveRecord::Base
   private
   
     def self.search(search)
-      where("turingtrack = ? OR serial_no LIKE ? OR manufacturer LIKE ? 
-      Or product_key LIKE ?", search, "%#{search}%", "%#{search}%", "%#{search}%")
+      where("turingtrack = ? OR lower(serial_no) LIKE ? OR lower(manufacturer) LIKE ? 
+      Or lower(product_key) LIKE ?", search, "%#{search.downcase}%", "%#{search.downcase}%", "%#{search.downcase}%")
     end
   
     def id_to_track
@@ -51,7 +51,7 @@ class Computer < ActiveRecord::Base
       #h = "'#{header.join("','")}'"
       c_header = Array['id','turingtrack','manufacturer','computer_type','model_no','serial_no','product_key','specification','created_at','updated_at','hub_id','donor_id']
       d_header = Array['id','donor_name','donor_email','allow_mail','donor_address','paper_cert','created_at','updated_at']
-      s_header = Array['id','has_status','scrapped','sold','staff_id','staff_name','staff_email','created_at','updated_at']
+      s_header = Array['id','has_status','scrapped','sold','customer','price','staff_id','staff_name','staff_email','created_at','updated_at']
       w_header = Array['id','has_wipe','staff_id','staff_name','staff_email','action_taken','created_at','updated_at']
       sh_header = Array['id','shipped','staff_id','staff_name','staff_email','created_at','updated_at']
       r_header = Array['id','received','school','staff_id','staff_name','staff_email','created_at','updated_at']
@@ -74,7 +74,7 @@ class Computer < ActiveRecord::Base
         end
         
         @statuses = Status.all
-        status_row = Hash[[s_header, spreadsheet.row(i)[21..29]].transpose]
+        status_row = Hash[[s_header, spreadsheet.row(i)[21..31]].transpose]
         s_row = status_row.to_hash.except("has_status","staff_name","staff_email")
         s_row[:computer_id] = computer.id
         s_row[:entertrack] = (computer.id + 10000000)
@@ -87,7 +87,7 @@ class Computer < ActiveRecord::Base
         end
         
         @wipes = Wipe.all
-        wipe_row = Hash[[w_header, spreadsheet.row(i)[30..37]].transpose]
+        wipe_row = Hash[[w_header, spreadsheet.row(i)[32..39]].transpose]
         w_row = wipe_row.to_hash.except("has_wipe","staff_name","staff_email")
         w_row[:computer_id] = computer.id
         if @wipes.any? {|wipe| wipe.id == wipe_row["id"] }
@@ -99,7 +99,7 @@ class Computer < ActiveRecord::Base
         end
         
         @shipments = Shipment.all
-        shipment_row = Hash[[sh_header, spreadsheet.row(i)[38..44]].transpose]
+        shipment_row = Hash[[sh_header, spreadsheet.row(i)[40..46]].transpose]
         sh_row = shipment_row.to_hash.except("staff_name","staff_email")
         sh_row[:computer_id] = computer.id
         sh_row[:entertrack] = (computer.id + 10000000)
@@ -114,7 +114,7 @@ class Computer < ActiveRecord::Base
         end
         
         @receipts = Receipt.all
-        receipt_row = Hash[[r_header, spreadsheet.row(i)[45..52]].transpose]
+        receipt_row = Hash[[r_header, spreadsheet.row(i)[47..54]].transpose]
         r_row = receipt_row.to_hash.except("staff_name","staff_email")
         r_row[:computer_id] = computer.id
         r_row[:entertrack] = (computer.id + 10000000)
@@ -129,7 +129,7 @@ class Computer < ActiveRecord::Base
         end
         
         @decommissions = Decommission.all
-        decommission_row = Hash[[de_header, spreadsheet.row(i)[53..59]].transpose]
+        decommission_row = Hash[[de_header, spreadsheet.row(i)[55..61]].transpose]
         de_row = decommission_row.to_hash.except("staff_name","staff_email")
         de_row[:computer_id] = computer.id
         de_row[:entertrack] = (computer.id + 10000000)

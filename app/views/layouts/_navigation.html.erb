@@ -91,6 +91,7 @@
               <ul class="dropdown-menu">
                 <li><%= link_to "Stock Index", stocks_path %></li>
                 <li><%= link_to "Download Data", stockoutput_path %></li>
+                <li><%= link_to "Import Data", import_stock_path %></li>
                 <li class='divider'></li>
                 <li><%= link_to "New Stock Received", new_stock_path %></li>
                 <li><%= link_to "New Sent Confirmation", new_sent_stock_path %></li>
@@ -145,7 +146,7 @@
             <% end %>
             
             <ul class="dropdown-menu">
-              <li><%= link_to "View Profile", staff_path(current_user) %></li>
+              <li><%= link_to "View History", staff_path(current_user) %></li>
               <li><%= link_to "Edit Profile", edit_staff_path(current_user) %></li>
               <li class="divider"></li>
               <li><%= link_to "Log Out", logout_path %></li>

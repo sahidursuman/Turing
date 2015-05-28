@@ -4,13 +4,16 @@ class Status < ActiveRecord::Base
   
   before_save :track_to_id
   
-  validates :entertrack, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 10000000 }, uniqueness: { message: "There is already a status record for that TuringTrack ID." }
+  validates :entertrack, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 10000000 }, uniqueness: { message: "- There is already a status record for that TuringTrack ID." }
   validates :staff_id, presence: true
   validates :computer_id, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_blank: true
   validates :scrapped, inclusion: { in: [true, false], message: "%{Has the item been scrapped?}" }
   validates :sold, inclusion: { in: [true, false], message: "%{Has the item been sold?}" }
+  validates :customer, length: { minimum: 2, maximum: 50 }, allow_blank: true
+  validates :price, numericality: {greater_than_or_equal_to: 0 }, allow_blank: true
   validate :scrapped_or_sold
   validate :existing_turingtrack
+  validate :been_sold
    
   private
   
@@ -28,6 +31,13 @@ class Status < ActiveRecord::Base
       end
     end
     
+    # Ensures that a customer and price can only be assigned for sold computers
+    def been_sold
+      if (customer.present? or price.present?) and sold != true
+        errors.add(:base, "Only sold computers can have customers or prices.")
+      end
+    end
+    
     # Ensures that statuses can only be made for exisiting computers that don't already have statuses
     def existing_turingtrack
       if !Computer.exists?(:id => (self.entertrack - 10000000))
@@ -35,6 +45,7 @@ class Status < ActiveRecord::Base
       #elsif Status.exists?(:entertrack => self.entertrack)
       #  errors.add(:base, "There is already a status record for that TuringTrack ID.")
       end
+      rescue NoMethodError
     end
 
 end

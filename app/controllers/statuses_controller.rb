@@ -49,7 +49,7 @@ class StatusesController < ApplicationController
   private
   
     def status_params
-      params.require(:status).permit(:entertrack, :computer_id, :staff_id, :scrapped, :sold)
+      params.require(:status).permit(:entertrack, :computer_id, :staff_id, :scrapped, :sold, :customer, :price)
     end
     
     def set_status

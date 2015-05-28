@@ -67,6 +67,17 @@ class StocksController < ApplicationController
     end
   end
   
+  def import_stock_page
+    
+  end
+  
+  def import
+    # Stores as temp file on file system
+    Stock.import(params[:file])
+    redirect_to stocks_path
+    flash[:success] = "Your stock data has been successfully imported!"
+  end
+  
   private
   
   def set_stock

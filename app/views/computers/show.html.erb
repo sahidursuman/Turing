@@ -71,9 +71,9 @@
       <p>
         <% if @computer.status %>
           <% if @computer.status.scrapped %><strong>
-            Computer has been <%= link_to "scrapped", status_path(@computer.status) %>
+            Computer has been <%= link_to "scrapped", status_path(@computer.status) %>.
           <% elsif @computer.status.sold %>
-            Computer has been <%= link_to "sold", status_path(@computer.status) %>
+            Computer has been <%= link_to "sold", status_path(@computer.status) %>.
           <% else %>
             <%= link_to "Edit computer status", status_path(@computer.status) %>
           <% end %></strong>

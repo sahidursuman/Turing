@@ -10,6 +10,8 @@
           <th>Status ID</th>
           <th>Scrapped</th>
           <th>Sold</th>
+          <th>Customer</th>
+          <th>Price</th>
           <th>Created On</th>
           <th>Updated On</th>
           <th>Confirmed by</th>
@@ -21,6 +23,13 @@
           <td><%= "#" + @status.id.to_s %></td>
           <td><%= @status.scrapped %></td>
           <td><%= @status.sold %></td>
+          <% if @status.sold %>
+            <td><%= @status.customer %></td>
+            <td>£<%= @status.price %></td>
+          <% else %>
+            <td>n/a</td>
+            <td>n/a</td>
+          <% end %>
           <td><%= @status.created_at.strftime("%d/%m/%y") %></td>
           <td><%= @status.updated_at.strftime("%d/%m/%y") %></td>
           <td><%= link_to @status.staff.staff_name, staff_path(@status.staff) %></td>
