@@ -25,10 +25,12 @@
               <ul class="dropdown-menu">
                 <li><%= link_to "Computer Index", computers_path %></li>
                 <li><%= link_to "Computer Table", computertable_path %></li>
+                <li><%= link_to "Arrival Index", arrivals_path %></li>
                 <li><%= link_to "Status Index", statuses_path %></li>
                 <li><%= link_to "OS Index", operating_systems_path %></li>
                 <li class='divider'></li>
                 <li><%= link_to "New Computer", new_computer_path %></li>
+                <li><%= link_to "New Arrival", new_arrival_path %></li>
                 <li><%= link_to "New Status", new_status_path %></li>
                 <li><%= link_to "New OS", new_operating_system_path %></li>
                 <% if current_user.admin? %>

@@ -12,7 +12,7 @@
         <h3><%= "TuringTrack: #" + @shipment.computer.turingtrack %></h3><br>
       <% end %>
       
-      <%= f.label :shipped, "Confirm the computer has been shippped?" %>
+      <%= f.label :shipped, "Confirm the computer has been shipped?" %>
       <%= f.check_box :shipped %><br><br>
       
       <%= f.submit(@shipment.new_record? ? "Submit Confirmation" : "Update Confirmation", class: "btn btn-success")%>

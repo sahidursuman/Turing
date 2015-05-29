@@ -1,6 +1,7 @@
 class Computer < ActiveRecord::Base
   belongs_to :donor
   belongs_to :hub
+  has_one :arrival, dependent: :destroy
   has_one :shipment, dependent: :destroy
   has_one :receipt, dependent: :destroy
   has_one :status, dependent: :destroy

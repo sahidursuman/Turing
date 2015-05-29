@@ -34,27 +34,27 @@
         <% end %><br><br>
         
         <% if computer.wipe and computer.wipe.action_taken.length > 0 %>
-           <%= link_to "Computer Wiped!", computer_path(computer) %>
+           <%= link_to "Computer Wiped", computer_path(computer) %>
         <% else %>
-          <strong><%= link_to "Wipe this computer!", edit_computer_path(computer) %></strong>
+          <strong><%= link_to "Wipe this computer", edit_computer_path(computer) %></strong>
         <% end %><br><br>
         
         <% if computer.shipment and computer.shipment.shipped %>
-          <%= link_to "Computer Shipped!", shipment_path(computer.shipment) %>
+          <%= link_to "Computer Shipped", shipment_path(computer.shipment) %>
         <% else %>
-          <strong><%= link_to "Ship this computer!", new_shipment_path %></strong>
+          <strong><%= link_to "Ship this computer", new_shipment_path %></strong>
         <% end %><br><br>
                 
         <% if computer.receipt and computer.receipt.received %>
-         <%= link_to "Computer Received!", receipt_path(computer.receipt) %>
+         <%= link_to "Computer Received", receipt_path(computer.receipt) %>
         <% else %>
-          <strong><%= link_to "Confirm this computer's arrival!", new_receipt_path %></strong>
+          <strong><%= link_to "Confirm this computer's arrival", new_receipt_path %></strong>
         <% end %><br><br>
         
         <% if computer.decommission and computer.decommission.decommissioned %>
-          <%= link_to "Computer Decommissioned!", decommission_path(computer.decommission) %>
+          <%= link_to "Computer Decommissioned", decommission_path(computer.decommission) %>
         <% else %>
-          <strong><%= link_to "Confirm this computer's decommission!", new_decommission_path %></strong>
+          <strong><%= link_to "Confirm this computer's decommission", new_decommission_path %></strong>
         <% end %>
         
       </h5>

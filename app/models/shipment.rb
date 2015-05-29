@@ -16,7 +16,7 @@ class Shipment < ActiveRecord::Base
       self.computer_id = (entertrack - 10000000)
     end
     
-    # Ensures that shipments can only be made for exisiting computers that don't already have statuses
+    # Ensures that shipments can only be made for exisiting computers that have been wiped
     def existing_turingtrack
       begin
         if !Computer.exists?(:id => (self.entertrack - 10000000))

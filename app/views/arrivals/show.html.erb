@@ -1,0 +1,40 @@
+<%= render "shared/page_title", title: "Arrival Confirmation for TuringTrack #" + @arrival.computer.turingtrack %>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>TuringTrack</th>
+          <th>Arrived</th>
+          <th>Arrival ID</th>
+          <th>Confirmation by</th>
+          <th>Arrival Date</th>
+          <th>Date Last Edited </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= link_to "#" + @arrival.computer.turingtrack, computer_path(@arrival.computer) %></td>
+          <td><% if @arrival.arrived %> Yes <% else %> No <% end %></td>
+          <td><%= "#" + @arrival.id.to_s %></td>
+          <td><%= link_to @arrival.staff.staff_name, staff_path(@arrival.staff) %></td>
+          <td><%= @arrival.created_at.strftime("%d/%m/%y") %></td>
+          <td><%= @arrival.updated_at.strftime("%d/%m/%y") %></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="center">
+      <%= link_to "Create New confirmation", new_arrival_path(@arrival), class: "btn btn-primary" %>
+      <%= link_to "Edit this confirmation", edit_arrival_path(@arrival), class: "btn btn-success" %>
+      
+      <% if current_user.admin? %>
+        <%= link_to "Go To Hub Arrivals Index", arrivals_path, class: "btn btn-warning" %>
+        <%= link_to "Delete this confirmation", @arrival, method: :delete, data: {confirm: "Delete this confirmation?" }, class: "btn btn-danger" %>
+      <% end %>
+    </div>
+    
+  </div>
+</div>

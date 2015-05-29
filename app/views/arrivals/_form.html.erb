@@ -1,0 +1,22 @@
+<%= render "shared/errors", obj: @arrival %>
+
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2 form-group">
+    <%= form_for @arrival do |f| %>
+    
+      
+      <% if @arrival.new_record? %>
+        <%= f.label :entertrack, "TuringTrack" %>
+        <%= f.number_field :entertrack, :placeholder => 10000001 %>
+      <% else %>
+        <h3><%= "TuringTrack: #" + @arrival.computer.turingtrack %></h3><br>
+      <% end %>
+      
+      <%= f.label :arrived, "Confirm the computer has arrived at a processing hub?" %>
+      <%= f.check_box :arrived %><br><br>
+      
+      <%= f.submit(@arrival.new_record? ? "Submit Confirmation" : "Update Confirmation", class: "btn btn-success")%>
+
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+<span class="quiet">
+  <%= link_to "Arrival confirmed", arrival_path(arrival) %> by <%= link_to arrival.staff.staff_name, staff_path(arrival.staff) %>
+  on <%= arrival.created_at.strftime("%A, %d %B %Y") %> <br> 
+  Confirmation last updated on <%= arrival.updated_at.strftime("%A, %d %B %Y") %>
+</span>

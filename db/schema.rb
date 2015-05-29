@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150528135724) do
+ActiveRecord::Schema.define(version: 20150529165848) do
+
+  create_table "arrivals", force: true do |t|
+    t.integer  "entertrack"
+    t.integer  "staff_id"
+    t.integer  "computer_id"
+    t.boolean  "arrived",     default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "computers", force: true do |t|
     t.string   "manufacturer"

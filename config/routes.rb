@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :statuses
   resources :decommissions
   resources :operating_systems
+  resources :arrivals
   
   # Rename new_staff route to register
   get '/register', to: 'staffs#new'
