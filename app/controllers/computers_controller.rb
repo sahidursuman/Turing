@@ -32,10 +32,6 @@ class ComputersController < ApplicationController
   
   def create
     @computer = Computer.new(computer_params)
-    # Set staff
-    if logged_in?
-      @computer.wipe.staff = current_user
-    end
     # Set donor (if current_donor session is avaliable)
     current_donor = Donor.find_by_id(session[:current_donor])
     if current_donor
@@ -64,10 +60,10 @@ class ComputersController < ApplicationController
   
   def update
     if @computer.wipe 
-      @computer.wipe.staff = current_user
+      #@computer.wipe.staff = current_user
     else
       @computer.build_wipe
-      @computer.wipe.staff = current_user
+      #@computer.wipe.staff = current_user
     end
     if @computer.update(computer_params)
       flash[:success] = "The computer's details have been updated successfully!"

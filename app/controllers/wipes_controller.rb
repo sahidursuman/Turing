@@ -13,7 +13,7 @@ class WipesController < ApplicationController
   
   def create
     @wipe = Wipe.new(wipe_params)
-    @wipe.staff = current_user
+    #@wipe.staff = current_user
     if @wipe.save
       flash[:success] = "Thank you, your wipe has been saved."
       redirect_to computers_path

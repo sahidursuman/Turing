@@ -119,6 +119,10 @@
           
           <%= wipe_form.label :operating_system_id, "Operating System" %>
           <%= wipe_form.collection_select :operating_system_id, OperatingSystem.all , :id, :os, selected: '1' %> <!-- ,include_blank: true -->
+          
+          <%= wipe_form.label :staff_id, "Wiping Staff" %>
+          <%= wipe_form.collection_select :staff_id, Staff.joins(:types).where("types.department = 'Wiping'"), :id, :staff_name, selected: '1' %> 
+          
         <% end %>
       <% end %>
       
