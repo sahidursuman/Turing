@@ -3,7 +3,7 @@ class OperatingSystemsController < ApplicationController
   before_action :admin_user
   
   def index
-    @operating_systems = OperatingSystem.paginate(page: params[:page], per_page: 20)
+    @operating_systems = OperatingSystem.paginate(page: params[:page], per_page: 50)
   end
   
   def show
@@ -30,7 +30,12 @@ class OperatingSystemsController < ApplicationController
   end
   
   def update
-    
+        if @operating_system.update(operating_system_params)
+      flash[:success] = "Your operating system's details have been successfully updated."
+      redirect_to operating_system_path(@operating_system) 
+    else
+      render 'new'
+    end
   end
 
   def destroy

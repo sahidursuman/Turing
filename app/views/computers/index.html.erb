@@ -21,6 +21,16 @@
     <div class="col-md-2 col-md-offset-1">
       <h5 class="vcenter center">
         
+        <% if computer.arrival %>
+          <% if computer.arrival.arrived %>
+            <%= link_to "Arrived at Hub", arrival_path(computer.arrival) %>
+          <% else %>
+            <strong><%= link_to "Confirm Hub Arrival", edit_arrival_path(computer.arrival) %></strong>
+          <% end %>
+        <% else %>
+          <strong><%= link_to "Confirm Hub Arrival", new_arrival_path %></strong>
+        <% end %><br><br>
+        
         <% if computer.status %>
           <% if computer.status.scrapped %>
             <%= link_to "Computer Scrapped", status_path(computer.status) %>
@@ -34,25 +44,37 @@
         <% end %><br><br>
         
         <% if computer.wipe and computer.wipe.action_taken.length > 0 %>
-           <%= link_to "Computer Wiped", computer_path(computer) %>
+           <%= link_to "Computer Wiped", wipe_path(computer.wipe) %>
         <% else %>
           <strong><%= link_to "Wipe this computer", edit_computer_path(computer) %></strong>
         <% end %><br><br>
         
-        <% if computer.shipment and computer.shipment.shipped %>
-          <%= link_to "Computer Shipped", shipment_path(computer.shipment) %>
+        <% if computer.shipment %>
+          <% if computer.shipment.shipped %>
+            <%= link_to "Computer Shipped", shipment_path(computer.shipment) %>
+          <% else %>
+            <strong><%= link_to "Ship this computer", edit_shipment_path(computer.shipment) %></strong>
+          <% end %>
         <% else %>
           <strong><%= link_to "Ship this computer", new_shipment_path %></strong>
         <% end %><br><br>
                 
-        <% if computer.receipt and computer.receipt.received %>
-         <%= link_to "Computer Received", receipt_path(computer.receipt) %>
+        <% if computer.receipt %>
+          <% if computer.receipt.received %>
+            <%= link_to "Computer Received", receipt_path(computer.receipt) %>
+          <% else %>
+            <strong><%= link_to "Confirm Africa Arrival", edit_receipt_path(computer.receipt) %></strong>
+          <% end %>
         <% else %>
-          <strong><%= link_to "Confirm this computer's arrival", new_receipt_path %></strong>
+          <strong><%= link_to "Confirm Africa Arrival", new_receipt_path %></strong>
         <% end %><br><br>
         
-        <% if computer.decommission and computer.decommission.decommissioned %>
-          <%= link_to "Computer Decommissioned", decommission_path(computer.decommission) %>
+        <% if computer.decommission %>
+          <% if computer.decommission.decommissioned %>
+            <%= link_to "Computer Decommissioned", decommission_path(computer.decommission) %>
+          <% else %>
+            <strong><%= link_to "Confirm this computer's decommission", edit_decommission_path(computer.decommission) %></strong>
+          <% end %>
         <% else %>
           <strong><%= link_to "Confirm this computer's decommission", new_decommission_path %></strong>
         <% end %>

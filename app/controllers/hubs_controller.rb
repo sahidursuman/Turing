@@ -30,7 +30,12 @@ class HubsController < ApplicationController
   end
   
   def update
-    
+    if @hub.update(hub_params)
+      flash[:success] = "Your hub's details have been successfully updated."
+      redirect_to hub_path(@hub) 
+    else
+      render 'new'
+    end
   end
 
   def destroy

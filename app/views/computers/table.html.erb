@@ -65,6 +65,7 @@
             <th>Hub</th>
             <th>Created At</th>
             <th>Updated At</th>
+            <th>Arrived?</th>
             <th>Status</th>
             <th>Wiped?</th>
             <th>OS</th>
@@ -86,6 +87,16 @@
               <td><%= computer.created_at.strftime("%d/%m/%y") %></td>
               <td><%= computer.updated_at.strftime("%d/%m/%y") %></td>
               
+              <% if computer.arrival %>
+                <% if computer.arrival.arrived %>
+                  <td><%= link_to "Yes", arrival_path(computer.arrival) %></td>
+                <% else %>
+                  <td><%= link_to "No", arrival_path(computer.arrival) %></td>
+                <% end %>
+              <% else %>
+                <td><%= link_to "No", new_arrival_path %></td>
+              <% end %>
+              
               <% if computer.status %>
                 <% if computer.status.scrapped %>
                   <td><%= link_to "Scrapped", status_path(computer.status) %></td>
@@ -100,10 +111,11 @@
               
               <% if computer.wipe.present? and  computer.wipe.action_taken.length > 0  %>
                 <td><%= link_to "Yes", wipe_path(computer.wipe) %></td>
+                <td><%= link_to "#" + computer.wipe.operating_system.id.to_s, operating_system_path(computer.wipe.operating_system) %></td>
               <% else %>
                <td><%= link_to "No", edit_computer_path(computer) %></td>
+               <td><%= link_to "N/A", edit_computer_path(computer) %></td>
               <% end %>
-              <td><%= link_to "#" + computer.wipe.operating_system.id.to_s, operating_system_path(computer.wipe.operating_system) %></td>
               
               <% if computer.shipment.present? and computer.shipment.shipped %>
                 <td><%= link_to "Yes", shipment_path(computer.shipment) %>

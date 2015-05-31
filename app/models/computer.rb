@@ -52,6 +52,7 @@ class Computer < ActiveRecord::Base
       #h = "'#{header.join("','")}'"
       c_header = Array['id','turingtrack','manufacturer','computer_type','model_no','serial_no','product_key','specification','created_at','updated_at','hub_id','donor_id']
       d_header = Array['id','donor_name','donor_email','allow_mail','donor_address','paper_cert','created_at','updated_at']
+      a_header = Array['id','arrived','staff_id','staff_name','staff_email','created_at','updated_at']
       s_header = Array['id','has_status','scrapped','sold','customer','price','staff_id','staff_name','staff_email','created_at','updated_at']
       w_header = Array['operating_system_id','id','has_wipe','staff_id','staff_name','staff_email','action_taken','created_at','updated_at']
       o_header = Array['os','id']
@@ -75,8 +76,23 @@ class Computer < ActiveRecord::Base
           donor.save!
         end
         
+        @arrivals = Arrival.all
+        arrival_row = Hash[[a_header, spreadsheet.row(i)[21..27]].transpose]
+        a_row = arrival_row.to_hash.except("staff_name","staff_email")
+        a_row[:computer_id] = computer.id
+        a_row[:entertrack] = (computer.id + 10000000)
+        if @arrivals.any? {|arrival| arrival.id == a_row["id"] }
+          computer.arrival.attributes = a_row
+          computer.save!
+        else
+          if a_row["id"] != 0
+            arrival = Arrival.create(a_row)
+            arrival.save!
+          end
+        end
+        
         @statuses = Status.all
-        status_row = Hash[[s_header, spreadsheet.row(i)[21..31]].transpose]
+        status_row = Hash[[s_header, spreadsheet.row(i)[28..38]].transpose]
         s_row = status_row.to_hash.except("has_status","staff_name","staff_email")
         s_row[:computer_id] = computer.id
         s_row[:entertrack] = (computer.id + 10000000)
@@ -91,7 +107,7 @@ class Computer < ActiveRecord::Base
         end
         
         @wipes = Wipe.all
-        wipe_row = Hash[[w_header, spreadsheet.row(i)[33..41]].transpose]
+        wipe_row = Hash[[w_header, spreadsheet.row(i)[40..48]].transpose]
         w_row = wipe_row.to_hash.except("has_wipe","staff_name","staff_email")
         w_row[:computer_id] = computer.id
         if @wipes.any? {|wipe| wipe.id == wipe_row["id"] }
@@ -102,19 +118,21 @@ class Computer < ActiveRecord::Base
           wipe.save!
         end
         
-         @operating_systems = OperatingSystem.all
-        oper_row = Hash[[o_header, spreadsheet.row(i)[32..33]].transpose]
+        @operating_systems = OperatingSystem.all
+        oper_row = Hash[[o_header, spreadsheet.row(i)[39..40]].transpose]
         o_row = oper_row.to_hash
         if @operating_systems.any? {|oper| oper.id == o_row["id"] }
           computer.wipe.operating_system.attributes = o_row
           computer.save!
         else
-          oper = OperatingSystem.create(o_row)
-          oper.save!
+          if o_row["id"] != 0
+            oper = OperatingSystem.create(o_row)
+            oper.save!
+          end
         end
         
         @shipments = Shipment.all
-        shipment_row = Hash[[sh_header, spreadsheet.row(i)[42..48]].transpose]
+        shipment_row = Hash[[sh_header, spreadsheet.row(i)[49..55]].transpose]
         sh_row = shipment_row.to_hash.except("staff_name","staff_email")
         sh_row[:computer_id] = computer.id
         sh_row[:entertrack] = (computer.id + 10000000)
@@ -129,7 +147,7 @@ class Computer < ActiveRecord::Base
         end
         
         @receipts = Receipt.all
-        receipt_row = Hash[[r_header, spreadsheet.row(i)[49..56]].transpose]
+        receipt_row = Hash[[r_header, spreadsheet.row(i)[56..63]].transpose]
         r_row = receipt_row.to_hash.except("staff_name","staff_email")
         r_row[:computer_id] = computer.id
         r_row[:entertrack] = (computer.id + 10000000)
@@ -144,7 +162,7 @@ class Computer < ActiveRecord::Base
         end
         
         @decommissions = Decommission.all
-        decommission_row = Hash[[de_header, spreadsheet.row(i)[57..63]].transpose]
+        decommission_row = Hash[[de_header, spreadsheet.row(i)[64..70]].transpose]
         de_row = decommission_row.to_hash.except("staff_name","staff_email")
         de_row[:computer_id] = computer.id
         de_row[:entertrack] = (computer.id + 10000000)

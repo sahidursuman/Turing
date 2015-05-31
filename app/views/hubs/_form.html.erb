@@ -7,7 +7,7 @@
       <%= f.label :hub_location, "Hub Location" %>
       <%= f.text_field :hub_location %>
 
-      <%= f.submit "Create Hub", class: "btn btn-success" %>
+      <%= f.submit(@hub.new_record? ? "Create Hub" : "Update Hub", class: "btn btn-success")%>
     <% end %>
   </div>
 </div>

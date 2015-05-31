@@ -1,9 +1,28 @@
 <%= render "shared/page_title", title: "Operating System Index" %>
 
+<br>
 <div class="row">
-  <div class="col-md-6 col-md-offset-3 center">
-    <% @operating_systems.each do |operating_system| %>
-        <h4><strong><%= link_to "#" + operating_system.id.to_s + " - " + operating_system.os, operating_system_path(operating_system) %></strong></h4>
-    <% end %>
+  <div class="col-md-6 col-md-offset-3">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>OS ID</th>
+          <th>OS</th>
+          <th>Created At</th>
+          <th>Updated At</th>
+         </tr>
+      </thead>
+      <tbody>
+        <% @operating_systems.each do |operating_system| %>
+          <tr>
+            <td><%= link_to "#" + operating_system.id.to_s, operating_system_path(operating_system) %></td>
+            <td><%= operating_system.os %></td>
+            <td><%= operating_system.created_at.strftime("%d/%m/%y") %></td>
+            <td><%= operating_system.updated_at.strftime("%d/%m/%y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="center"><%= will_paginate %></div>
   </div>
 </div>

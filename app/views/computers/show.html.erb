@@ -67,6 +67,19 @@
         <% if @computer.donor.paper_cert %><strong> Requires a Paper Certificate of Destruction </strong><br><% end %>
       </p>
       
+      <!-- Confirm the computers arrival -->
+      <p>
+        <% if @computer.arrival %>
+          <% if @computer.arrival.arrived %>
+            <%= render @computer.arrival %>
+          <% else %>
+            <%= link_to "Confirm this computer's arrival at a hub", edit_arrival_path(@computer.arrival) %>
+          <% end %>
+        <% else %>
+          <%= link_to "Confirm this computer's arrival at a hub", new_arrival_path %>
+        <% end %>
+      </p>
+        
       <!-- Add a status if there isn't one -->
       <p>
         <% if @computer.status %>
@@ -88,34 +101,46 @@
           <%= render @computer.wipe %><br>
           Reloaded Operating System: <%= link_to @computer.wipe.operating_system.os, operating_system_path(@computer.wipe.operating_system) %>
         <% else %>
-          <%= link_to "Wipe this computer!", edit_computer_path(@computer) %>
+          <%= link_to "Wipe this computer", edit_computer_path(@computer) %>
         <% end %>
       </p>
       
       <!-- If the computer has been shipped, render shipments/_shipment partial -->
       <p>
-        <% if @computer.shipment and @computer.shipment.shipped %>
-          <%= render @computer.shipment %>
+        <% if @computer.shipment %>
+          <% if @computer.shipment.shipped %>
+            <%= render @computer.shipment %>
+          <% else %>
+            <%= link_to "Ship this computer", edit_shipment_path(@computer.shipment) %>
+          <% end %>
         <% else %>
-          <%= link_to "Ship this computer!", new_shipment_path %>
+          <%= link_to "Ship this computer", new_shipment_path %>
         <% end %>
       </p>
       
       <!-- If the computer has been received, render shipments/_receipt partial -->
       <p>
-        <% if @computer.receipt and @computer.receipt.received %>
-          <%= render @computer.receipt %>
+        <% if @computer.receipt %>
+          <% if @computer.receipt.received %>
+            <%= render @computer.receipt %>
+          <% else %>
+            <%= link_to "Confirm this computer's arrival in Africa", edit_receipt_path(@computer.receipt) %>
+          <% end %>
         <% else %>
-          <%= link_to "Confirm this computer's arrival!", new_receipt_path %>
+          <%= link_to "Confirm this computer's arrival in Africa", new_receipt_path %>
         <% end %>
       </p>
       
        <!-- If the computer has been decommissioned, render decommissions/_decommission partial -->
       <p>
-        <% if @computer.decommission and @computer.decommission.decommissioned %>
-          <%= render @computer.decommission %>
+        <% if @computer.decommission %>
+          <% if @computer.decommission.decommissioned %>
+            <%= render @computer.decommission %>
+          <% else %>
+            <%= link_to "Confirm this computer's decommission", edit_decommission_path(@computer.decommission) %>
+          <% end %>
         <% else %>
-          <%= link_to "Confirm this computer's decommission!", new_decommission_path %>
+          <%= link_to "Confirm this computer's decommission", new_decommission_path %>
         <% end %>
       </p>
         

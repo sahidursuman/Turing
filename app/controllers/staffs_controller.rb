@@ -9,6 +9,7 @@ class StaffsController < ApplicationController
   end
   
   def show
+    @arrivals = @staff.arrivals.paginate(page: params[:page], per_page: 50)
     @wipes = @staff.wipes.paginate(page: params[:page], per_page: 50)
     @shipments = @staff.shipments.paginate(page: params[:page], per_page: 50)
     @receipts = @staff.receipts.paginate(page: params[:page], per_page: 50)
