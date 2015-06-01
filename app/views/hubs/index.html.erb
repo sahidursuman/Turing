@@ -1,9 +1,30 @@
 <%= render "shared/page_title", title: "Hub Index" %>
 
+<br>
 <div class="row">
-  <div class="col-md-6 col-md-offset-3 center">
-    <% @hubs.each do |hub| %>
-        <h4><strong><%= link_to "#" + hub.id.to_s + " - " + hub.hub_location, hub_path(hub) %></strong></h4>
-    <% end %>
+  <div class="col-md-10 col-md-offset-1">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Hub ID</th>
+          <th>FAO</th>
+          <th>Location</th>
+          <th>Created At</th>
+          <th>Updated At</th>
+         </tr>
+      </thead>
+      <tbody>
+        <% @hubs.each do |hub| %>
+          <tr>
+            <td><%= link_to "#" + hub.id.to_s, hub_path(hub) %></td>
+            <td><% hub.hub_fao.split(",").each do |line| %><%= line %><br><% end %></td>
+            <td><% hub.hub_location.split(",").each do |line| %><%= line %><br><% end %></td>
+            <td><%= hub.created_at.strftime("%d/%m/%y") %></td>
+            <td><%= hub.updated_at.strftime("%d/%m/%y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="center"><%= will_paginate %></div>
   </div>
 </div>

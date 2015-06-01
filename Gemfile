@@ -32,8 +32,9 @@ gem 'bcrypt', '~> 3.1.7'
 # Pagination gems
 gem 'will_paginate', '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
-# Barcode Gem
+# Barcode Gem and prawn pdf generator
 gem 'barby'
+gem 'prawn'
 # Dropbox Ruby DSK 
 gem 'dropbox-sdk'
 # Roo Excel Interface

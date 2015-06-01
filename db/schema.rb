@@ -57,7 +57,10 @@ ActiveRecord::Schema.define(version: 20150529165848) do
   end
 
   create_table "hubs", force: true do |t|
-    t.string "hub_location"
+    t.string   "hub_location"
+    t.string   "hub_fao"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "operating_systems", force: true do |t|

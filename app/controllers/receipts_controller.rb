@@ -25,8 +25,8 @@ class ReceiptsController < ApplicationController
     @receipt = Receipt.new(receipt_params)
     @receipt.staff = current_user
     if @receipt.save
-      flash[:success] = "Your receipt has been successfully logged."
-      redirect_to receipt_path(@receipt)
+      flash[:success] = "Your receipt for ##{@receipt.entertrack} has been successfully logged."
+      redirect_to new_receipt_path
     else
       render 'new'
     end
@@ -38,7 +38,7 @@ class ReceiptsController < ApplicationController
   
   def update
     if @receipt.update(receipt_params)
-      flash[:success] = "Your receipts details have been successfully updated."
+      flash[:success] = "Your receipt details for ##{@receipt.entertrack} have been successfully updated."
       redirect_to receipt_path(@receipt) 
     else
       render 'new'
@@ -47,7 +47,7 @@ class ReceiptsController < ApplicationController
   
   def destroy
     Receipt.find(params[:id]).destroy
-    flash[:success] = "The receipts details have been successfully deleted."
+    flash[:success] = "The receipt details for ##{@receipt.entertrack} have been successfully deleted."
     redirect_to receipts_path
   end
   

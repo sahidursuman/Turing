@@ -20,7 +20,7 @@ class StatusesController < ApplicationController
     @status = Status.new(status_params)
     @status.staff = current_user
     if @status.save
-      flash[:success] = "Your computer's status details have been successfully logged."
+      flash[:success] = "The status details for ##{@status.entertrack} have been successfully logged."
       redirect_to status_path(@status)
     else
       render 'new'
@@ -33,7 +33,7 @@ class StatusesController < ApplicationController
   
   def update
     if @status.update(status_params)
-      flash[:success] = "Your computer's status details have been successfully updated."
+      flash[:success] = "The status details for ##{@status.entertrack} have been successfully updated."
       redirect_to status_path(@status) 
     else
       render 'new'
@@ -42,7 +42,7 @@ class StatusesController < ApplicationController
   
   def destroy
     Status.find(params[:id]).destroy
-    flash[:success] = "The computer's status details have been successfully deleted."
+    flash[:success] = "The status details for ##{@status.entertrack} have been successfully deleted."
     redirect_to statuses_path
   end
   

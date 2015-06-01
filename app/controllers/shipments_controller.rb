@@ -25,8 +25,8 @@ class ShipmentsController < ApplicationController
     @shipment = Shipment.new(shipment_params)
     @shipment.staff = current_user
     if @shipment.save
-      flash[:success] = "Your shipment has been successfully logged."
-      redirect_to shipment_path(@shipment)
+      flash[:success] = "Your shipment for ##{@shipment.entertrack} has been successfully logged."
+      redirect_to new_shipment_path
     else
       render 'new'
     end
@@ -38,7 +38,7 @@ class ShipmentsController < ApplicationController
   
   def update
     if @shipment.update(shipment_params)
-      flash[:success] = "Your shipments details have been successfully updated."
+      flash[:success] = "Your shipments details for ##{@shipment.entertrack} have been successfully updated."
       redirect_to shipment_path(@shipment) 
     else
       render 'new'
@@ -47,7 +47,7 @@ class ShipmentsController < ApplicationController
   
   def destroy
     Shipment.find(params[:id]).destroy
-    flash[:success] = "The shipments details have been successfully deleted."
+    flash[:success] = "The shipments details for ##{@shipment.entertrack} have been successfully deleted."
     redirect_to shipments_path
   end
   

@@ -25,8 +25,8 @@ class DecommissionsController < ApplicationController
     @decommission = Decommission.new(decommission_params)
     @decommission.staff = current_user
     if @decommission.save
-      flash[:success] = "Your decommission confirmation has been successfully logged."
-      redirect_to decommission_path(@decommission)
+      flash[:success] = "Your decommission confirmation for ##{@decommission.entertrack} has been successfully logged."
+      redirect_to new_decommission_path
     else
       render 'new'
     end
@@ -38,7 +38,7 @@ class DecommissionsController < ApplicationController
   
   def update
     if @decommission.update(decommission_params)
-      flash[:success] = "Your decommissions details have been successfully updated."
+      flash[:success] = "Your decommission confirmation for ##{@decommission.entertrack} have been successfully updated."
       redirect_to decommission_path(@decommission) 
     else
       render 'new'
@@ -47,7 +47,7 @@ class DecommissionsController < ApplicationController
   
   def destroy
     Decommission.find(params[:id]).destroy
-    flash[:success] = "The decommissions details have been successfully deleted."
+    flash[:success] = "The decommission confirmation for ##{@decommission.entertrack} have been successfully deleted."
     redirect_to decommissions_path
   end
   

@@ -25,8 +25,8 @@ class ArrivalsController < ApplicationController
     @arrival = Arrival.new(arrival_params)
     @arrival.staff = current_user
     if @arrival.save
-      flash[:success] = "Your computer's arrival has been successfully logged."
-      redirect_to arrival_path(@arrival)
+      flash[:success] = "The arrival confirmation for ##{@arrival.entertrack} has been successfully logged."
+      redirect_to new_arrival_path
     else
       render 'new'
     end
@@ -38,7 +38,7 @@ class ArrivalsController < ApplicationController
   
   def update
     if @arrival.update(arrival_params)
-      flash[:success] = "Your computer's arrival confirmation has been successfully updated."
+      flash[:success] = "The arrival confirmation for ##{@arrival.entertrack} has been successfully updated."
       redirect_to arrival_path(@arrival) 
     else
       render 'new'
@@ -47,7 +47,7 @@ class ArrivalsController < ApplicationController
   
   def destroy
     Arrival.find(params[:id]).destroy
-    flash[:success] = "The computer's arrival confirmation has been successfully deleted."
+    flash[:success] = "The arrival confirmation for ##{@arrival.entertrack} has been successfully deleted."
     redirect_to arrivals_path
   end
   

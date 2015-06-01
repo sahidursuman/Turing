@@ -1,23 +1,28 @@
 <%= render "shared/page_title", title: "Computer Index Table" %>
 
-<!-- Calculates the # of computers in stock, processed, & unprocessed, totals (ever), and  scrapped/sold -->
-<% total_c_count = 0 %><% total_p_count = 0 %><% current_c_count = 0 %><% current_p_count = 0 %><% s_count = 0%>
+<!-- Calculates the # of computers unarrived, in stock, processed, & unprocessed, totals (ever), and  scrapped/sold -->
+<% total_u_count = 0%><% total_c_count = 0 %><% total_p_count = 0 %><% current_c_count = 0 %><% current_p_count = 0 %><% s_count = 0%>
 <% @computers.each do |computer| %>
-  <% total_c_count += 1 %>
-  <% unless computer.status and (computer.status.scrapped or computer.status.sold) %>
-  
-    <% if computer.wipe and computer.wipe.action_taken.length > 0 %>
-      <% total_p_count += 1 %>
-    <% end %>
-    <% unless computer.shipment and computer.shipment.shipped %>
-      <% current_c_count += 1 %>
+  <% if computer.arrival and computer.arrival.arrived %>
+    <% total_c_count +=1 %>
+    
+    <% unless computer.status and (computer.status.scrapped or computer.status.sold) %>
       <% if computer.wipe and computer.wipe.action_taken.length > 0 %>
-        <% current_p_count += 1 %>
+        <% total_p_count += 1 %>
       <% end %>
+      <% unless computer.shipment and computer.shipment.shipped %>
+        <% current_c_count += 1 %>
+        <% if computer.wipe and computer.wipe.action_taken.length > 0 %>
+          <% current_p_count += 1 %>
+        <% end %>
+      <% end %>
+      
+    <% else %>
+      <% s_count +=1 %>
     <% end %>
     
   <% else %>
-    <% s_count +=1 %>
+    <% total_u_count += 1 %>
   <% end %>
   
 <% end %>
@@ -25,6 +30,7 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3 text-center">
     <p>
+      Computers unarrived at hub: <strong><%= total_u_count %></strong><br>
       Computers in stock: <strong><%= current_c_count %></strong> |
       Stock processed: <strong><%= current_p_count %></strong> |
       Stock unprocessed: <strong><%= current_c_count - current_p_count %></strong><br>
@@ -65,12 +71,12 @@
             <th>Hub</th>
             <th>Created At</th>
             <th>Updated At</th>
-            <th>Arrived?</th>
-            <th>Status</th>
-            <th>Wiped?</th>
+            <th>Arr?</th>
+            <th>Stat?</th>
+            <th>Wip?</th>
             <th>OS</th>
-            <th>Shipped?</th>
-            <th>Received?</th>
+            <th>Ship?</th>
+            <th>Rec?</th>
             <th>Decom?</th>
           </tr>
         </thead>

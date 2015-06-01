@@ -14,5 +14,5 @@ Type.create(department: "Receiving")
 Type.create(department: "Decommissioning")
 Type.first.staffs << Staff.first
 Type.first.staffs << Staff.second
-Hub.create(hub_location: "Midlothian Innovation Centre, Pentlandfield, Roslin, Midlothian, EH25 9RE")
+Hub.create(hub_location: "Midlothian Innovation Centre, Pentlandfield, Roslin, Midlothian, EH25 9RE", hub_fao: "FAO: Simon Cleary, Company: Malaptop / The Turing Trust, BiGGAR Economics")
 OperatingSystem.create(os: "No OS")

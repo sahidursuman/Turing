@@ -48,7 +48,7 @@ class HubsController < ApplicationController
   
     # Whitelisting variables
     def hub_params
-      params.require(:hub).permit(:hub_location)
+      params.require(:hub).permit(:hub_location, :hub_fao)
     end
     
     def set_hub

@@ -4,9 +4,12 @@
   <div class="well col-md-8 col-md-offset-2">
     <%= form_for @hub do |f| %>
     
+      <%= f.label :hub_fao, "Hub FAO" %>
+      <%= f.text_field :hub_fao %>
+    
       <%= f.label :hub_location, "Hub Location" %>
       <%= f.text_field :hub_location %>
-
+      
       <%= f.submit(@hub.new_record? ? "Create Hub" : "Update Hub", class: "btn btn-success")%>
     <% end %>
   </div>
