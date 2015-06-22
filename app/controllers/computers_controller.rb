@@ -6,7 +6,7 @@ class ComputersController < ApplicationController
 
   layout :new_layout, only: [:new, :update, :thankyou]
   
-  skip_before_filter :verify_authenticity_token, :only => [:new, :create]
+  #skip_before_filter :verify_authenticity_token, :only => [:new, :create]
   
   def index
     # Pagination of computers
@@ -123,12 +123,19 @@ class ComputersController < ApplicationController
   end
   
   def barcode_index
-    if params[:search]
-      @computers = Computer.search(params[:search]).order("created_at DESC").paginate(page: params[:page], per_page: 50)
+    if params[:barcode_lower] and params[:barcode_upper]
+      @computers = Computer.barcode_search( params[:barcode_lower], params[:barcode_upper] ).reorder("turingtrack").paginate(page: params[:page], per_page: 50)
+      set_barcode_session
     else
       @computers = Computer.all.order('created_at DESC').paginate(page: params[:page], per_page: 50)
     end
-  end 
+  end
+  
+  def barcode_index_pdf
+    decode_barcode_session
+    @staff = current_user
+    StaffMailer.barcode_index_email(@computers, @staff).deliver
+  end
   
   ##########################################################################################
   # Dropbox Image Uploader
@@ -172,6 +179,20 @@ class ComputersController < ApplicationController
       else
         logged_in? ? "application" : "donate"
       end
+    end
+    
+    # For use in generating barcode index pdfs
+    def set_barcode_session
+      ids = []
+      @computers.each do |computer|
+        ids.push(computer.id)
+      end
+      session[:barcode_ids] = "#{ids.join(',')}"
+    end
+    
+    def decode_barcode_session
+      ids = session[:barcode_ids].split(",")
+      @computers = Computer.reorder("turingtrack").find(ids)
     end
     
 end

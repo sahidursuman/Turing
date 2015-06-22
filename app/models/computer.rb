@@ -33,6 +33,10 @@ class Computer < ActiveRecord::Base
       where("turingtrack = ? OR lower(serial_no) LIKE ? OR lower(manufacturer) LIKE ? 
       Or lower(product_key) LIKE ?", search, "%#{search.downcase}%", "%#{search.downcase}%", "%#{search.downcase}%")
     end
+    
+    def self.barcode_search(lower, upper)
+      where("turingtrack >= ? AND turingtrack <= ?", lower, upper)
+    end
   
     def id_to_track
       self.turingtrack = (id.to_i + 10000000).to_s

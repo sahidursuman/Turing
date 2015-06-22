@@ -1,48 +1,57 @@
 <%= render "shared/page_title", title: "Computer Barcode Index" %>
 
-<!-- Search bar -->
+<!-- Barcode Search bar -->
 <div class="row">
   <div class="col-md-6 col-md-offset-3 center">
+    
     <%= form_tag(barcode_index_path, :method => "get", id: "search-form") do %>
-      <%= label_tag :search, "Search by TuringTrack, Serial No, Product Key, or Manufacturer" %>
-      <%= text_field_tag :search, params[:search], placeholder: "10000001" %>
+      <%= label_tag :barcode_search, "Please Enter the Lower and Upper TuringTrack ID Bounds" %>
+      <div class="col-md-6 center">
+        <%= text_field_tag :barcode_lower, params[:barcode_lower], placeholder: "10000001" %>
+      </div>
+      <div class="col-md-6 center">
+        <%= text_field_tag :barcode_upper, params[:barcode_upper], placeholder: "10000020" %>
+      </div>
       <strong><%= submit_tag "Search" %></strong>
     <% end %>
+
   </div>
 </div>
 <hr>
 
 <!-- Computer details table -->
 <% if @computers.present? %>
-
-  <% @computers.each do |computer| %>
   
-    <div class="col-md-4">
-      <% @barcode = Barby::Code128B.new(computer.turingtrack) %>
-      <% @barcode_for_html = Barby::HtmlOutputter.new(@barcode) %>
-      <%= "Turing Track: " + computer.turingtrack %>
-      <%= raw @barcode_for_html.to_html %>
-      <br><br>
-    </div>
+  <div class="row">
+    <% @computers.each do |computer| %>
+  
+      <div class="col-md-4">
+        <% @barcode = Barby::Code128B.new(computer.turingtrack) %>
+        <% @barcode_for_html = Barby::HtmlOutputter.new(@barcode) %>
+        <%= "Turing Track: " + computer.turingtrack %>
+        <%= raw @barcode_for_html.to_html %>
+        <br><br>
+      </div>
     
-    
-  <% end %>
+    <% end %>
+  </div>
 
 <% else %>
 
 <!-- Warning for empty search results -->
-<hr>
 <div class="row">
   <div class="col-md-6 col-md-offset-3 center">
     <h4>There are no records containing the term: <%= params[:search] %></h4>
   </div>
 </div>
-<hr>
   
 <% end %>
 
+<hr>
+
 <div class="row">
-  <div class="col-md-2 col-md-offset-5 center">
-     <%= link_to "Return to Barcode Index", barcode_index_path, class: "btn btn-primary" %>
+  <div class="col-md-5 col-md-offset-4">
+    <%= link_to "Create Barcode Index PDF", barcode_index_pdf_path, class: "btn btn-danger" %>
+    <%= link_to "Return to Barcode Index", barcode_index_path, class: "btn btn-primary" %>
   </div>
 </div>
