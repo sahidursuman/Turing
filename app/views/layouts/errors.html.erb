@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The Turing Trust</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body class="error_body">
+
+  <div class="container">
+    
+    <h1>
+      Oops, there appears to have been an error!
+    </h1>
+
+    <hr>
+    
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2 text-center">  
+        <h3>
+          Don't worry, help is at hand. To go back to The Turing Trust website, please click the blue button below. 
+          If you are a member of staff trying to access the staff site, please click the red button below. 
+          We apologise for the inconvience, sometimes our server can be a bit fragile. Have a great day.
+      </div>
+    </div>
+    
+    <hr>
+    
+    <div class="row">
+      <div class="col-md-8  col-md-offset-2 text-center"> 
+        <%= link_to "Back to The Turing Trust Homepage", "http://turingtrust.co.uk" , class: "btn btn-lg btn-primary error_btn" %>
+        <%= link_to "Back to The Turing Trust Staff Site", "http://turingtrust.co.uk" , class: "btn btn-lg btn-danger error_btn" %>
+      </div>
+    </div>
+
+  </div>
+  
+</body>
+</html>

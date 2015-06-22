@@ -17,7 +17,7 @@
         
         <p class = "donation_advice"><small>
           Please note that all greyed out writing is for exemplary purposes only - simply type over the top.
-          *s indicate manditory fields.
+          The *s indicate mandatory fields.
         </small></p>
       
         <%= f.fields_for :donor do |donor_form| %>
@@ -43,7 +43,7 @@
           
           <h4>
             Would you like to join our mailing list? Tick the box below to get updates
-            on how The Turing Trust is supporting education in Ghana. We promise not to 
+            on how The Turing Trust is supporting education in Africa. We promise not to 
             pass your details on to any 3rd parties! 
           </h4>
           
@@ -55,7 +55,7 @@
           <h4>
             Please check the following if you do not have an email address, and would rather receive a paper certificate
             of data destruction. We encourage you to only do this if an email really won’t suffice, as keeping postage to 
-            a minimum allows us to keep overheads to a minimum, helping us support more students in rural areas of Ghana.
+            a minimum allows us to keep overheads to a minimum, helping us support more students in rural areas of Africa.
           </h4>
           
           <%= donor_form.label :paper_cert, class: "checkbox pull-left" do %> 
@@ -64,9 +64,10 @@
           <% end %><br><br>
           
         <% end %>
+        
       <!-- Exisiting Donor Details -->  
       <% else %>
-        <br><h3 class="float-left">Your Details</h3>
+        <h3 class="float-left">Your Details</h3>
         <p class="not_you">(Not you? Click <%= link_to "here", donor_expire_path %> to log out)</p>
         <hr style="clear;both">
         <h5>

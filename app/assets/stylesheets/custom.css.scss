@@ -143,6 +143,18 @@ $navbar-default-color: $mid-grey;
   color:#545454;
 }
 
+// Error Page Styling
+
+.error_body {
+  background-color: #BE5555;
+  color: #FFFFFF;
+  border-color: #BE5555;
+}
+
+.error_btn {
+    border: 1px solid #FFFFFF;
+}
+
 // Table Styling
 
 .table th, td {

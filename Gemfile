@@ -51,8 +51,8 @@ gem 'roo-xls'
 # gem 'debugger', group: [:development, :test]
 
 group :development, :test do
-  # Use mysql2 as the database for Active Record
-  gem 'mysql2'
+#  gem 'mysql2'
+  gem 'sqlite3'
   gem 'pry'
 end
 

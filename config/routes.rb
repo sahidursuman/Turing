@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   get 'donor_expire', to: 'donors#expiredonor'
   get 'import', to: 'computers#import_page'
   get 'import_stock', to: 'stocks#import_stock_page'
+  get 'barcode_index', to: 'computers#barcode_index'
   
   # Add member and collection routes to computers resources
   resources :computers do
@@ -61,6 +62,11 @@ Rails.application.routes.draw do
   # Dropbox Authorisation
   get 'auth_start', to: 'computers#auth_start'
   get 'auth_finish', to: 'computers#auth_finish'
+
+  # Handle Errors
+  match '/404', to: 'errors#file_not_found', via: :all
+  match '/422', to: 'errors#unprocessable', via: :all
+  match '/500', to: 'errors#internal_server_error', via: :all
 
 end
 

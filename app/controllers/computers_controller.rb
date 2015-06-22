@@ -6,6 +6,7 @@ class ComputersController < ApplicationController
 
   layout :new_layout, only: [:new, :update, :thankyou]
   
+  skip_before_filter :verify_authenticity_token, :only => [:new, :create]
   
   def index
     # Pagination of computers
@@ -41,12 +42,15 @@ class ComputersController < ApplicationController
     if @computer.save
       flash[:success] = "You're computer's details have been submitted successfully!"
       DonorMailer.thankyou_email(@computer).deliver
-      # Deals with different layouts and redirects for donors and staff
+      # Redirects for donors and staff
       if logged_in?
         redirect_to computers_path
       else
+        # Assign donor session for use in multiple donations
+        session[:current_donor] = @computer.donor.id
         redirect_to thankyou_computer_path(@computer)
       end
+    # If submission fails
     else
       render :new, layout: new_layout
     end
@@ -117,6 +121,14 @@ class ComputersController < ApplicationController
     redirect_to computertable_path
     flash[:success] = "Your backup database has been successfully imported!"
   end
+  
+  def barcode_index
+    if params[:search]
+      @computers = Computer.search(params[:search]).order("created_at DESC").paginate(page: params[:page], per_page: 50)
+    else
+      @computers = Computer.all.order('created_at DESC').paginate(page: params[:page], per_page: 50)
+    end
+  end 
   
   ##########################################################################################
   # Dropbox Image Uploader

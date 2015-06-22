@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   
   # Make the functions below avaliable to all views
   helper_method :current_user, :logged_in?, :wipe_staff, :wipe_staff?, :ship_staff, :ship_staff?, :rec_staff, :rec_staff?, :decom_staff, :decom_staff?
-  
+
   # Only returns current user if session exists
   # Uses memoization to speed up accesor methods by saving/storing the call 
   # to a @current_user instance variable 

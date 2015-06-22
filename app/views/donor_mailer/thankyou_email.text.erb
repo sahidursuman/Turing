@@ -1,12 +1,13 @@
 Dear <%= @computer.donor.donor_name %>,
 
-Thank you for your generous donation to The Turing Trust. We have successfully received your donation form. Your unique donor ID is #<%= @computer.donor.id %> - please keep this safe as you will require it if you donate again in the future. Your computer's Turing Track reference ID is #<%= @computer.turingtrack %>.
+Thank you for your generous donation to The Turing Trust. We have successfully received your donation form. Your unique donor ID is #<%= @computer.donor.id %> - please keep this safe as you will require it if you donate again in the future. Your computer's Turing Track reference ID is #<%= @computer.turingtrack %>  and its associated barcode is attached in a PDF (Portable Document Format). You can open and print this attachment using Adobe Reader or any other suitable PDF reader. If you do not have one, Adobe Reader can be downloaded for free at https://get.adobe.com/uk/reader/ and then installed on your computer.
 
 When shipping your donation, please print this barcode and attach it to your computer. Failing that, we ask that you please write your reference ID directly on your computer with an indelible marker.
   
 This helps us to trace the journey of your computer over its new life, so we can let you know exactly what impact it has had on the lives of aspiring technologists across rural Ghanaian schools. While your donation might seem like old tech to you, it has the capability to change the lives of its recipients. So thank you once again, for contributing to those in need.
      
 The next thing to do is organise your courier, which can be done at http://www.p4d.co.uk, or through any other service provider that you might prefer to use. The address you’ll want to send it to is the following:
+(Note that a label for your packaging is included with the attached barcode for your convenience)
 
 <% @computer.hub.hub_fao.split(",").each do |e| %>
 <%= e %> <br>

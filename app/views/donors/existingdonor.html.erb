@@ -33,11 +33,16 @@
       <!-- Welcome Back Message, anonymising last name depending on no. of words -->
       <br><h1>
         Welcome back<br>
-        <% if @donor.donor_name.split().size > 2 %>
+        <% if @donor.donor_name.split().size > 3 %>
+         <%= @donor.donor_name.split()[0] + " " + @donor.donor_name.split()[1] +
+          " " +  @donor.donor_name.split()[2] + " " + @donor.donor_name.split()[3][0] + ("*" * @donor.donor_name.split()[3].length) %>
+        <% elsif @donor.donor_name.split().size > 2 %>
           <%= @donor.donor_name.split()[0] + " " + @donor.donor_name.split()[1] +
           " " + @donor.donor_name.split()[2][0] + ("*" * @donor.donor_name.split()[2].length) %>
-        <% else %>
+        <% elsif @donor.donor_name.split().size == 2 %>
           <%= @donor.donor_name.split()[0] + " " + @donor.donor_name.split()[1][0] + ("*" * @donor.donor_name.split()[1].length) %>
+        <% else %>
+          <%= @donor.donor_name %>
         <% end %>
      
       <h3>Thank you for your on-going support to The Turing Trust and IT education in Ghana. Please click the link below to make another donation:</h3><br>
