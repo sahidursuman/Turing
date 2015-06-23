@@ -137,7 +137,7 @@
       <% end %>
       <%= f.collection_select :hub_id, Hub.all , :id, :hub_location, selected: '1' %> <!-- ,include_blank: true -->
       <br><br>
-
+      
       <%= f.submit(@computer.new_record? ? "Submit Details" : "Submit Edited Details", class: "btn btn-success") %>
     <% end %>
     

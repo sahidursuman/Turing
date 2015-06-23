@@ -25,7 +25,7 @@
   <div class="row">
     <% @computers.each do |computer| %>
   
-      <div class="col-md-4">
+      <div class="col-md-4 barcode_shift_right">
         <% @barcode = Barby::Code128B.new(computer.turingtrack) %>
         <% @barcode_for_html = Barby::HtmlOutputter.new(@barcode) %>
         <%= "Turing Track: " + computer.turingtrack %>

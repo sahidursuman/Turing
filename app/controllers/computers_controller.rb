@@ -34,9 +34,9 @@ class ComputersController < ApplicationController
   def create
     @computer = Computer.new(computer_params)
     # Set donor (if current_donor session is avaliable)
-    current_donor = Donor.find_by_id(session[:current_donor])
-    if current_donor
-      @computer.donor = current_donor
+    @current_donor = Donor.find_by_id(session[:current_donor])
+    if @current_donor
+      @computer.donor = @current_donor
     end
     # Upon submission of form
     if @computer.save

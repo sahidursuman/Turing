@@ -12,24 +12,28 @@ class StaffMailer < ActionMailer::Base
     @computers = computers
     pdf = Prawn::Document.new
     i = 1 # Barcode Counter
-    y = 620 # Height on Page Barcode is Appended
+    y = 665 # Height on Page Barcode is Appended
     
     @computers.each do |computer|
       barcode = Barby::Code128B.new(computer.turingtrack)
       pdf_barcode = Barby::PrawnOutputter.new(barcode)
       
-      if i % 2 == 1
-        pdf_barcode.annotate_pdf(pdf, { :x => 50, :y => y, :xdim => 1.5, :height => 70 } )
-        pdf.draw_text "#{computer.turingtrack}", :at => [115, y + 75]
+      
+      if i % 3 == 0
+        pdf_barcode.annotate_pdf(pdf, { :x => 400, :y => y, :xdim => 1, :height => 50 } )
+        pdf.draw_text "#{computer.turingtrack}", :at => [435, y + 55]
+        y -= 112
+      elsif i % 2 == 0
+        pdf_barcode.annotate_pdf(pdf, { :x => 210, :y => y, :xdim => 1, :height => 50 } )
+        pdf.draw_text "#{computer.turingtrack}", :at => [245, y + 55]
       else
-        pdf_barcode.annotate_pdf(pdf, { :x => 300, :y => y, :xdim => 1.5, :height => 70 } )
-        pdf.draw_text "#{computer.turingtrack}", :at => [365, y + 75]
-        y -= 120
+        pdf_barcode.annotate_pdf(pdf, { :x => 20, :y => y, :xdim => 1, :height => 50 } )
+        pdf.draw_text "#{computer.turingtrack}", :at => [55, y + 55]
       end
       
-      if i % 12 == 0 
+      if i % 21 == 0 
         pdf.start_new_page
-        y = 620
+        y = 665
       end
       
       i += 1

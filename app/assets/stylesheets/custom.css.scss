@@ -56,7 +56,7 @@ $navbar-default-color: $mid-grey;
 }
 
 .nav_ul_item {
-  padding-left: 10px;
+  padding-left: 8px;
   float: left;
   margin-top: 23px;
 }
@@ -243,6 +243,11 @@ td.barby-cell.on {
 .barcode_placement {
   position:relative;
   left: 50px; 
+}
+
+.barcode_shift_right{
+  padding-left: 80px;
+  padding-right: 0px;
 }
 
 // General Styling
