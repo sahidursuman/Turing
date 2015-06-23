@@ -17,7 +17,7 @@ class LoginsController < ApplicationController
       session[:staff_id] = staff.id
       # Logging message and redirect
       flash[:success] = "You have successfully logged in"
-      redirect_to computers_path
+      redirect_to home_path
     else
       flash.now[:danger] = "Your email address or password does not match"
       render 'new'
