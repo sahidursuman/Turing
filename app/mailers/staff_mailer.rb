@@ -42,7 +42,7 @@ class StaffMailer < ActionMailer::Base
     pdf.render_file "#{Rails.root}/app/assets/images/barcode_index.pdf"
     
     attachments["barcode_index.pdf"] = File.read("#{Rails.root}/app/assets/images/barcode_index.pdf")
-    mail(to: "#{staff.staff_email}", subject: "Barcode Index PDF for Printing")
+    mail(to: "#{staff.barcode_pdf_email}", subject: "Barcode Index PDF for Printing")
   
   end
   

@@ -17,5 +17,7 @@ class Staff < ActiveRecord::Base
   validates :staff_email, presence: true, length: { minimum: 3, maximum: 50},
                           uniqueness: { case_sensitive: false },
                           format: { with: VALID_EMAIL_REGEX}
+  validates :barcode_pdf_email, allow_blank: true, length: { minimum: 3, maximum: 50},
+                          format: { with: VALID_EMAIL_REGEX}
   has_secure_password
 end

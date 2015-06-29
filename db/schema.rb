@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150529165848) do
+ActiveRecord::Schema.define(version: 20150625160100) do
 
   create_table "arrivals", force: true do |t|
     t.integer  "entertrack"
@@ -115,7 +115,8 @@ ActiveRecord::Schema.define(version: 20150529165848) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"
-    t.boolean  "admin",           default: false
+    t.boolean  "admin",             default: false
+    t.string   "barcode_pdf_email"
   end
 
   create_table "statuses", force: true do |t|

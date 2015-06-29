@@ -6,6 +6,7 @@
       <thead>
         <tr>
           <th>Email</th>
+          <th>Barcode PDF Email</th>
           <th>Department/s</th>
           <th>Created At</th>
           <th>Updated At</th>
@@ -15,6 +16,7 @@
       <tbody>
           <tr>
             <td><%= @staff.staff_email %></td>
+            <td><%= @staff.barcode_pdf_email %></td>
             <td><%= render @staff.types %></td>
             <td><%= @staff.created_at.strftime("%d/%m/%y") %></td>
             <td><%= @staff.updated_at.strftime("%d/%m/%y") %></td>
