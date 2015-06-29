@@ -137,6 +137,12 @@ class ComputersController < ApplicationController
     StaffMailer.barcode_index_email(@computers, @staff).deliver
   end
   
+  def barcode_single_pdf
+    decode_barcode_session
+    @staff = current_user
+    StaffMailer.barcode_single_email(@computers, @staff).deliver
+  end
+  
   ##########################################################################################
   # Dropbox Image Uploader
   include Dropboxer

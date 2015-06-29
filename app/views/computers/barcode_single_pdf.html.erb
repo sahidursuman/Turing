@@ -1,0 +1,27 @@
+<%= render "shared/page_title", title: "Barcode Single PDF" %>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 center">
+    
+    <h4>
+      An email has been sent to you with a PDF attachment of the requested barcode/s for the following TuringTrack ID/'s:
+    </h4><br>
+    
+    <% @computers.each do |computer| %>
+      #<%= computer.turingtrack %>, 
+    <% end %>
+    
+    <h4><br>
+      Please check your mail client, <br><br>Thank you
+    </h4>
+    
+  </div>
+</div>
+  
+<hr>
+
+<div class="row">
+  <div class="col-md-2 col-md-offset-5">
+    <%= link_to "Return to Barcode Index", barcode_index_path, class: "btn btn-primary" %>
+  </div>
+</div>

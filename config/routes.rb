@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   get 'import_stock', to: 'stocks#import_stock_page'
   get 'barcode_index', to: 'computers#barcode_index'
   get 'barcode_index_pdf', to: 'computers#barcode_index_pdf'
+  get 'barcode_single_pdf', to: 'computers#barcode_single_pdf'
   
   # Add member and collection routes to computers resources
   resources :computers do
