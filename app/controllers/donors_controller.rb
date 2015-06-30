@@ -62,7 +62,6 @@ class DonorsController < ApplicationController
     # Create Donor Session
     if @donor
      session[:current_donor] = @donor.id
-     #flash[:current_donor] = @donor.id
     end
   end
   
